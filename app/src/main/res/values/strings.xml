@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">BasicTesti</string>
+    <string name="app_name">Activity Logger</string>
     <string name="action_settings">Settings</string>
-    <string name="userWelcome">TERVE!\nValitse päiv, jota haluat muokata:</string>
+    <string name="userWelcome">HOWDY!\nChoose a day you want to edit:</string>
+    <string name="confirmPickedDay">Continue</string>
+
 </resources>
