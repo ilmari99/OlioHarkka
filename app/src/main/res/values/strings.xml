@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BasicTesti</string>
+    <string name="action_settings">Settings</string>
+    <string name="userWelcome">TERVE!\nValitse päiv, jota haluat muokata:</string>
+</resources>
