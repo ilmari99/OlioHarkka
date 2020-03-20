@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="404dp"
+        android:layout_height="297dp"
+        android:layout_marginTop="28dp"
+        android:clickable="false"
+        android:firstDayOfWeek="2"
+        android:hapticFeedbackEnabled="true"
+        android:showWeekNumber="true"
+        android:weekNumberColor="#000000"
+        android:weekSeparatorLineColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseDayText" />
+
+    <TextView
+        android:id="@+id/chooseDayText"
+        android:layout_width="301dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="@string/chooseDayText"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/daySelectButton"
+        android:layout_width="166dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="84dp"
+        android:onClick="selectDay"
+        android:text="@string/daySelectButton"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

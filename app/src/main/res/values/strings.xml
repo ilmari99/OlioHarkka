@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Activity Logger</string>
+    <string name="chooseDayText">Hi! Choose a day you want to edit:</string>
+    <string name="daySelectButton">Confirm</string>
+    <string name="selectedDate">Date: </string>
+    <string name="goBackButton">Back</string>
+    <string name="backButton">Back</string>
+    <string name="saveButton">Save</string>
+    <string name="deleteButton">Delete</string>
+    <string name="chooseActivityText">Choose activity:</string>
+</resources>
