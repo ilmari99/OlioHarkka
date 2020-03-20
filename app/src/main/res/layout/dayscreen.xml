@@ -10,27 +10,30 @@
         android:id="@+id/selectedDate"
         android:layout_width="266dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="680dp"
         android:gravity="center"
         android:text="@string/selectedDate"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.056" />
 
     <Button
         android:id="@+id/goBackButton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="86dp"
         android:layout_height="51dp"
-        android:layout_marginTop="8dp"
         android:onClick="goBack"
         android:text="@string/goBackButton"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
         android:id="@+id/saveButton"
@@ -69,21 +72,24 @@
         android:id="@+id/activityDropdown"
         android:layout_width="285dp"
         android:layout_height="42dp"
-        android:layout_marginTop="208dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293" />
 
     <TextView
         android:id="@+id/chooseActivityText"
         android:layout_width="326dp"
         android:layout_height="50dp"
-        android:layout_marginTop="120dp"
         android:gravity="center"
         android:text="@string/chooseActivityText"
         android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
