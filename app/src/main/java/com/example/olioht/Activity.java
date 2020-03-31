@@ -4,9 +4,8 @@ import android.view.View;
 import android.view.accessibility.AccessibilityRecord;
 
 public class Activity {
-    private String date, activityName;
+    private String date;
     private double rating, time;
-    // part TimeOfTheDay;
 
     public Activity() {
 
@@ -21,6 +20,7 @@ public class Activity {
 }
 
 class Drinking extends Activity {
+    private int doses;
 
 }
 

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                date = dayOfMonth + "." + month + "." + year;
+                date = dayOfMonth + "." + (month + 1) + "." + year;
             }
         });
     }

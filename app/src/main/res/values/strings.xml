@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Activity Logger</string>
     <string name="chooseDayText">Hi! Choose a day you want to edit:</string>
     <string name="daySelectButton">Confirm</string>
@@ -8,4 +9,8 @@
     <string name="saveButton">Save</string>
     <string name="deleteButton">Delete</string>
     <string name="chooseActivityText">Choose activity:</string>
+    <string name="rateDayText">Rate this day:</string>
+    <string name="socialTimeText">Social time (h):</string>
+    <string name="socialTimeAutofill">Number:</string>
+
 </resources>
