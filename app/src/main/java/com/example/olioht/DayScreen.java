@@ -51,8 +51,9 @@ public class DayScreen extends MainActivity{
         startActivity(goBackIntent);
     }
 
-    public int getDayRating(){
-        return dayRating;
+    public void getDayRating(View v){
+        dayRating = Integer.parseInt((String) dayRatingSpinner.getSelectedItem());
+        System.out.println(dayRating);
     }
 
     public int getSocialTime() {
