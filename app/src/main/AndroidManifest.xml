@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DayScreen"></activity>
+        <activity android:name=".DayScreen" />
+        <activity android:name=".ActivityScreen" />
+        <activity android:name=".ActivityClass" />
     </application>
 
 </manifest>

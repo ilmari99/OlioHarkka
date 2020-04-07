@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".DayScreen">
 
     <TextView
         android:id="@+id/selectedDate"
-        android:layout_width="266dp"
-        android:layout_height="37dp"
-        android:gravity="center"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:text="@string/selectedDate"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <Button
         android:id="@+id/goBackButton"
@@ -35,27 +34,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01" />
 
+
     <Button
         android:id="@+id/saveButton"
         android:layout_width="103dp"
         android:layout_height="56dp"
         android:layout_marginBottom="48dp"
+        android:onClick="saveData"
         android:text="@string/saveButton"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.301"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="103dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="48dp"
-        android:text="@string/backButton"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saveButton" />
 
     <Button
         android:id="@+id/deleteButton"
@@ -70,77 +61,122 @@
 
     <Spinner
         android:id="@+id/activityDropdown"
-        android:layout_width="285dp"
+        android:layout_width="160dp"
         android:layout_height="42dp"
+        android:layout_marginTop="32dp"
+        android:entries="@array/activities"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintTop_toBottomOf="@+id/chooseActivityText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/chooseActivityText"
-        android:layout_width="326dp"
-        android:layout_height="50dp"
+        android:layout_width="340dp"
+        android:layout_height="51dp"
         android:gravity="center"
         android:text="@string/chooseActivityText"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintTop_toBottomOf="@+id/socialTimeText"
+        app:layout_constraintVertical_bias="0.505" />
 
     <TextView
         android:id="@+id/rateDayText"
-        android:layout_width="158dp"
+        android:layout_width="160dp"
         android:layout_height="30dp"
         android:text="@string/rateDayText"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedDate"
+        app:layout_constraintVertical_bias="0.048" />
 
     <TextView
         android:id="@+id/socialTimeText"
-        android:layout_width="164dp"
-        android:layout_height="33dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:text="@string/socialTimeText"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintTop_toBottomOf="@+id/rateDayText"
+        app:layout_constraintVertical_bias="0.061" />
 
     <Spinner
         android:id="@+id/dayRatingDropdown"
-        android:layout_width="94dp"
-        android:layout_height="33dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:entries="@array/ratingChoices"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toEndOf="@+id/rateDayText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.168" />
 
     <EditText
         android:id="@+id/socialTimeTextBox"
-        android:layout_width="93dp"
-        android:layout_height="40dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:autofillHints="Hours"
         android:ems="10"
-        android:hint="@string/socialTimeAutofill"
+        android:hint="@string/SocialTimeAutofill"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toEndOf="@+id/socialTimeText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217" />
+        app:layout_constraintTop_toBottomOf="@+id/dayRatingDropdown"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/SleepTimeText"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:text="@string/SleepTimeText"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/socialTimeText"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <EditText
+        android:id="@+id/sleepTimeTextBox"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:autofillHints="Hours"
+        android:ems="10"
+        android:hint="@string/SocialTimeAutofill"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/socialTimeTextBox"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <Button
+        android:id="@+id/gotoActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addOrEditActivity"
+        android:text="@string/gotoActivityButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toEndOf="@+id/activityDropdown"
+        app:layout_constraintTop_toBottomOf="@+id/chooseActivityText"
+        app:layout_constraintVertical_bias="0.173" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,6 +63,7 @@
         android:id="@+id/activityDropdown"
         android:layout_width="160dp"
         android:layout_height="30dp"
+        android:entries="@array/activities"
         app:layout_constraintBottom_toTopOf="@+id/dayRatingDropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -89,7 +90,7 @@
         android:layout_height="30dp"
         android:text="@string/rateActivityText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/activityTime"
+        app:layout_constraintBottom_toTopOf="@+id/activityTimeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +109,7 @@
         app:layout_constraintVertical_bias="0.905" />
 
     <TextView
-        android:id="@+id/activityTime"
+        android:id="@+id/activityTimeText"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:text="@string/activityTimeText"
@@ -125,12 +126,14 @@
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:ems="10"
-        android:hint="@string/socialTimeAutofill"
+        android:hint="@string/SocialTimeAutofill"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/activityTime"
+        app:layout_constraintStart_toEndOf="@+id/activityTimeText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.298" />
+        app:layout_constraintVertical_bias="0.298"
+        android:autofillHints="Hours" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>

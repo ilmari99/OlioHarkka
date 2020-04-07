@@ -8,9 +8,78 @@
     <string name="backButton">Back</string>
     <string name="saveButton">Save</string>
     <string name="deleteButton">Delete</string>
-    <string name="chooseActivityText">Choose activity:</string>
+    <string name="chooseActivityText">Add or modify activities</string>
     <string name="rateDayText">Rate this day:</string>
     <string name="socialTimeText">Social time (h):</string>
-    <string name="socialTimeAutofill">Number:</string>
+    <string name="SocialTimeAutofill">Hours</string>
+    <string name="rateActivityText">Rate this activity:</string>
+    <string name="chosenActivityText">Chosen activity:</string>
+    <string name="activityTimeText">Time(h):</string>
+    <string name="SleepTimeText">Sleep:</string>
+    <string name="gotoActivityButton">Go to activity</string>
+
+    <string-array name="activities">
+        <item> </item>
+        <item>Studying</item>
+        <item>Exercise</item>
+        <item>Drinking</item>
+        <item>Friends</item>
+        <item>Relationship</item>
+        <item>Add</item>
+    </string-array>
+
+    <string-array name="subjects">
+        <item> </item>
+        <item>Math</item>
+        <item>Physics</item>
+        <item>Programming</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="exercisetypes">
+        <item> </item>
+        <item>Powerlifting</item>
+        <item>Jogging</item>
+        <item>Cycling</item>
+        <item>HIIT</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="activitywithFriends">
+        <item> </item>
+        <item>Drinking</item>
+        <item>Studying</item>
+        <item>Relaxing</item>
+        <item>Cottage</item>
+        <item>Other activity</item>
+    </string-array>
+
+    <string-array name="relationshipActivity">
+        <item> </item>
+        <item>Her place</item>
+        <item>My place</item>
+        <item>Restaurant</item>
+        <item>Bar</item>
+        <item>Cafe</item>
+        <item>Movie</item>
+        <item>Hangout</item>
+        <item>Outdoors</item>
+        <item>Other activity</item>
+    </string-array>
+
+    <string-array name="ratingChoices">
+        <item> </item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
 
 </resources>
