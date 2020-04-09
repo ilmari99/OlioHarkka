@@ -106,11 +106,12 @@ the data will be displayed on the EditText fields and the user can edit the info
             //Tallennetaan päivälle kuuluvat tiedot tiedostoon
         }
 
-        public void addOrEditActivity (View v, ActivityClass act, EditText socialTimeText, EditText
-        sleepTimeText){
+        public void addOrEditActivity (View v) {    //  TODO  näiden getterit editActivity ja addActivity-metodeihin: ActivityClass act, EditText socialTimeText, EditText, sleepTimeText
+
             if (getActivityFromDayScreen().equals("Add")) {
                 addActivity(v, socialTimeText, sleepTimeText);
-            } else {
+            }
+            else {
                 editActivity(v, act, socialTimeText, sleepTimeText);
             }
         }
