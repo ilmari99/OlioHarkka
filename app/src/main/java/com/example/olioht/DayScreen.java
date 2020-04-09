@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,12 +32,12 @@ the data will be displayed on the EditText fields and the user can edit the info
 //TODO lisää check-boxit boolean tyypin attribuuteille DayClassista.
     protected DayClass day = new DayClass(); //Luodaan uusi päivä TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
 
+    EditText socialTimeText = findViewById(R.id.socialTimeTextBox);
+    EditText sleepTimeText = findViewById(R.id.sleepTimeTextBox);
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
 
-        EditText socialTimeText = findViewById(R.id.socialTimeTextBox);
-        EditText sleepTimeText = findViewById(R.id.sleepTimeTextBox);
         TextView selectedDate = findViewById(R.id.selectedDate);
         selectedDate.setText(MainActivity.getDate());
         /*
@@ -87,7 +88,7 @@ the data will be displayed on the EditText fields and the user can edit the info
 
 
         public void goBack (View v){
-            //TODO lisätään tähän varoitus, että jos poistut tallentamatta menetät muutokset
+            //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
             day = null;
             Intent goBackIntent = new Intent(this, MainActivity.class);
             startActivity(goBackIntent);
@@ -95,10 +96,13 @@ the data will be displayed on the EditText fields and the user can edit the info
 
 
         //Jos nyt vasta tallennetaan kaikki day olion tiedot, niin ei tarvitse listenereja
-        public void saveData (View v, EditText socialTimeText, EditText sleepTimeText){
+        public void saveData (View v){
             day.socialTime = Integer.parseInt(socialTimeText.getText().toString());
             day.sleeptime = Integer.parseInt(sleepTimeText.getText().toString());
             day.dayRating = Integer.parseInt(getRating());
+            day.newPeople = newpeopleBool();
+            day.exercise = exerciseBool();
+            day.newExperience = experienceBool();
         }
         //TODO En saanut nappeja toimimaan
 
@@ -106,27 +110,27 @@ the data will be displayed on the EditText fields and the user can edit the info
             //Tallennetaan päivälle kuuluvat tiedot tiedostoon
         }
 
-        public void addOrEditActivity (View v, ActivityClass act, EditText socialTimeText, EditText
-        sleepTimeText){
+        public void addOrEditActivity (View v){
             if (getActivityFromDayScreen().equals("Add")) {
-                addActivity(v, socialTimeText, sleepTimeText);
+                addActivity(v);
             } else {
-                editActivity(v, act, socialTimeText, sleepTimeText);
+                editActivity(v);
             }
         }
 
 
         //TODO Kun muokataan aktiviteettia pitää saada suoraan auki kaikki vanhan aktiviteetin tiedot
         //Tässä täytyy siis avata suoraan ActivityScreen ja aktiviteetille kuuluva  fragmentti
-        public void editActivity (View v, ActivityClass act, EditText socialTimeText, EditText
-        sleepTimeText){
-            saveData(v, socialTimeText, sleepTimeText);
+        public void editActivity (View v){
+        //Avataan ActivityScreen ja activityn fragmentti
+            saveData(v);
             Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
             startActivity(activityScreenIntent);
         }
 
-        public void addActivity (View v, EditText socialTimeText, EditText sleepTimeText){
-            saveData(v, socialTimeText, sleepTimeText);
+        public void addActivity (View v){
+        //Avataan ActivityScreen
+            saveData(v);
             Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
             startActivity(activityScreenIntent);
         }
@@ -148,6 +152,23 @@ the data will be displayed on the EditText fields and the user can edit the info
             return String.valueOf(activitySpinner.getSelectedItem());
         }
 
+        protected boolean exerciseBool(){
+            CheckBox exerciseBox;
+            exerciseBox = findViewById(R.id.exerciseBox);
+            return exerciseBox.isSelected();
+        }
+
+    protected boolean experienceBool(){
+        CheckBox newexperienceBox;
+        newexperienceBox = findViewById(R.id.newexperienceBox);
+        return newexperienceBox.isSelected();
+    }
+
+    protected boolean newpeopleBool(){
+        CheckBox newpeopleBox;
+        newpeopleBox = findViewById(R.id.newexperienceBox);
+        return newpeopleBox.isSelected();
+    }
 
 
 }

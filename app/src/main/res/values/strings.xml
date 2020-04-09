@@ -17,6 +17,10 @@
     <string name="activityTimeText">Time(h):</string>
     <string name="SleepTimeText">Sleep:</string>
     <string name="gotoActivityButton">Go to activity</string>
+    <string name="newexperienceBoxText">New Experience</string>
+    <string name="exerciseBoxText">Exercise</string>
+    <string name="newpeopleBoxText">New people</string>
+
 
     <string-array name="activities">
         <item> </item>

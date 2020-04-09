@@ -7,7 +7,7 @@ public class DayClass extends DayScreen{
     Saa nähdä pystyykö tollasta olio -arrayta toisen olion sisällä tallentaa tekstitiedostoon.
      */
 
-    String date;
+    String date = getDate();
     int sleeptime,socialTime,dayRating;
     Boolean newExperience,newPeople,exercise;           //Tieto exercisesta haetaan Aktivitysta
     ActivityClass[] doneActitivities = new ActivityClass[10];                   //Array jossa on ActivityClass Olioita
@@ -15,7 +15,6 @@ public class DayClass extends DayScreen{
 
 
     DayClass(){
-        String date = MainActivity.getDate();
     }
 
 }

@@ -27,10 +27,10 @@ public class ActivityScreen  extends DayScreen {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
         String date = getDate();
+        ActivityClass activity = new ActivityClass();
         double actTime,actRating; //TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
-        //Timelle text input
-        //ratingille dropdown(?)
-        //Luokan voi luoda vasta valinnan jälkeen, koska ActivityClass ei voi periyttää ehdollisesti!
+        //TODO Timelle text input
+        //TODO ratingille dropdown(?)
 
         String valinta = getActivityFromMenu();
         System.out.println(valinta);
@@ -38,27 +38,27 @@ public class ActivityScreen  extends DayScreen {
             case ("Studying"):
                 //Avaa fragmentin ActivityClassin kysymyksillä
                 //Eli Drinking -luokan constructori luo fragmentin
-                Studying activity = new Studying();
+                activity = new Studying();
                 //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
                 //Näin vältytään monen Listenerin luonnilta
                 System.out.println(valinta); //Printit vain testausta varten
                 break;
             case ("Exercise"):
-                Exercise activity = new Exercise();
+                activity = new Exercise();
                 System.out.println(valinta);
                 day.exercise = true;
                 break;
             case ("Drinking"):
-                Drinking activity = new Drinking();
+                activity = new Drinking();
                 System.out.println(valinta);
                 break;
             case ("Friends"):
-                Friends activity = new Friends();
+                activity = new Friends();
                 System.out.println(valinta);
                 break;
             case ("Relationship"):
                 activity = null;
-                Relationship activity = new Relationship();
+                activity = new Relationship();
                 System.out.println(valinta);
                 break;
             default:
