@@ -7,6 +7,9 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class ActivityScreen  extends DayScreen {
     /*
@@ -27,10 +30,16 @@ public class ActivityScreen  extends DayScreen {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
         String date = getDate();
-        ActivityClass activity = new ActivityClass();
         double actTime,actRating; //TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
-        //TODO Timelle text input
-        //TODO ratingille dropdown(?)
+        ActivityClass activity = null;
+
+        //Timelle text input
+        //ratingille dropdown(?)
+        //Luokan voi luoda vasta valinnan jälkeen, koska ActivityClass ei voi periyttää ehdollisesti!
+
+        Fragment activityFragment;
+        FragmentManager activityFragmentManager = getSupportFragmentManager();
+        FragmentTransaction activityFragmentTransaction = activityFragmentManager.beginTransaction();
 
         String valinta = getActivityFromMenu();
         System.out.println(valinta);
@@ -42,6 +51,10 @@ public class ActivityScreen  extends DayScreen {
                 //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
                 //Näin vältytään monen Listenerin luonnilta
                 System.out.println(valinta); //Printit vain testausta varten
+                activityFragment = new ActivityFragment();
+                activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
+                activityFragmentTransaction.commit();
+
                 break;
             case ("Exercise"):
                 activity = new Exercise();
@@ -57,7 +70,6 @@ public class ActivityScreen  extends DayScreen {
                 System.out.println(valinta);
                 break;
             case ("Relationship"):
-                activity = null;
                 activity = new Relationship();
                 System.out.println(valinta);
                 break;
@@ -84,7 +96,7 @@ public class ActivityScreen  extends DayScreen {
 
     protected String getActivityFromMenu(){
         Spinner activitySpinner;
-        activitySpinner = (Spinner) findViewById(R.id.activityDropdown);
+        activitySpinner = findViewById(R.id.activityDropdown);
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
