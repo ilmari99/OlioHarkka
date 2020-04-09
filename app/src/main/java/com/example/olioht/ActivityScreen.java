@@ -9,12 +9,24 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 
 public class ActivityScreen  extends DayScreen {
+    /*
+    In this interface the user can look at a done activity or edit an existing one.
+
+    If the activity is empty (the user came by selecting "Add") the user can add values to attributes that are common for all Activities (time, rating).
+    After selecting activity type, a corresponding fragment will pop-up. The fragment should be an extension and time and rating should still be editable.
+
+    If the user is editing an activity (the user chose an activity from doneActivities -array in the DayClass) then the corresponding fragment will be shown instantly on this interface.
+    The attributes will be editable similar to DayClass. Except, if the user tries to edit the activity type from the dropdown, there will pop-up a Warning -fragment, similar to DayClass.
+
+    Also similar to DayClass, the data will only be saved by pressing the "Save" -button.
+
+
+     */
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
         String date = getDate();
-        Object activity;
         double actTime,actRating; //TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
         //Timelle text input
         //ratingille dropdown(?)
@@ -25,26 +37,22 @@ public class ActivityScreen  extends DayScreen {
         switch (valinta) {
             case ("Studying"):
                 //Avaa fragmentin ActivityClassin kysymyksillä
-                //Eli Drinking -luokan constructori tekee fragmentin
-                activity = null;
+                //Eli Drinking -luokan constructori luo fragmentin
                 Studying activity = new Studying();
                 //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
                 //Näin vältytään monen Listenerin luonnilta
                 System.out.println(valinta); //Printit vain testausta varten
                 break;
             case ("Exercise"):
-                activity = null;
                 Exercise activity = new Exercise();
                 System.out.println(valinta);
                 day.exercise = true;
                 break;
             case ("Drinking"):
-                activity = null;
                 Drinking activity = new Drinking();
                 System.out.println(valinta);
                 break;
             case ("Friends"):
-                activity = null;
                 Friends activity = new Friends();
                 System.out.println(valinta);
                 break;
@@ -59,7 +67,7 @@ public class ActivityScreen  extends DayScreen {
         }
     }
 
-    public void saveChanges(ActivityClass act) {
+    public void saveChanges(ActivityClass act) {//Tallennetaan Arrayhy
         int i = 0;
         while (i<10){
             if (day.doneActitivities[i] == null){

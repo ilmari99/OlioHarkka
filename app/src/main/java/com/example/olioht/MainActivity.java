@@ -12,6 +12,11 @@ import android.widget.CalendarView;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+    /*
+    In this interface we select the day to be edited or created. If the user chooses a day that already has information, the information is read from a text file containing previous day objects.
+    After choosing the date and pressing "Confirm" button the user will be redirected to the DayScreen -interface.
+     */
+    //TODO Selvitetään miten saadaan parametrit dropdown listojen sijasta. Esim. sleep(h) ei voi olla >24h ja rating on välillä [0,10]
 
     private static String date;
     private CalendarView calendar;

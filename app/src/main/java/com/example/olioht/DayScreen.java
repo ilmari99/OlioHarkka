@@ -16,7 +16,19 @@ import androidx.annotation.Nullable;
 import java.util.Collections;
 
 public class DayScreen extends MainActivity {
+/*
+In this interface we create a new DayClass or display editable attributes from a day that was already filled.
+In this screen the user can fill or edit information about a particular day. If there is no data about the day, then the EditText -fields will be blank, but if there was data about the day,
+the data will be displayed on the EditText fields and the user can edit the information easily.
+ The data is ONLY saved to a file after the user presses the "Save" -button. When overwriting, there will pop-up a "Warning" -fragment.
 
+ There will only be one instance of DayClass at a time. Others will be stored on the file.
+
+ In this interface, there will be a list of DoneActivities, where the user can select added activities or select "Add".
+ After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
+
+ */
+//TODO lisää check-boxit boolean tyypin attribuuteille DayClassista.
     protected DayClass day = new DayClass(); //Luodaan uusi päivä TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {

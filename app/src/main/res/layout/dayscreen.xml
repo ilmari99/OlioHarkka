@@ -179,4 +179,40 @@
         app:layout_constraintTop_toBottomOf="@+id/chooseActivityText"
         app:layout_constraintVertical_bias="0.173" />
 
+    <CheckBox
+        android:id="@+id/newexperienceBox"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:text="New Experience"
+        app:layout_constraintEnd_toStartOf="@+id/exerciseBox"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SleepTimeText" />
+
+    <CheckBox
+        android:id="@+id/exerciseBox"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Exercise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sleepTimeTextBox"
+        app:layout_constraintVertical_bias="0.002" />
+
+    <CheckBox
+        android:id="@+id/newpeopleBox"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:text="New people"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newexperienceBox"
+        app:layout_constraintVertical_bias="0.041" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
