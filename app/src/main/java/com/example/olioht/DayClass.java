@@ -7,14 +7,33 @@ public class DayClass extends DayScreen{
     Saa nähdä pystyykö tollasta olio -arrayta toisen olion sisällä tallentaa tekstitiedostoon.
      */
 
-    String date = getDate();
-    int sleeptime,socialTime,dayRating;
-    Boolean newExperience,newPeople,exercise;           //Tieto exercisesta haetaan Aktivitysta
-    ActivityClass[] doneActitivities = new ActivityClass[10];                   //Array jossa on ActivityClass Olioita
+    public static DayClass singletonDay;
+    String date = MainActivity.getDate();
+    int sleepTime, socialTime, dayRating;
+    Boolean newExperience, newPeople, exercise;                             //Tieto exercisesta haetaan Aktivitysta
+    ActivityClass[] doneActivities = new ActivityClass[10];                 //Array jossa on ActivityClass Olioita
     //Ei pysty siis lisäämään yli kymmentä aktiviteettia päivässä
 
 
-    DayClass(){
+
+
+    // For keeping DayClass as singleton
+    public DayClass() {
+        if (singletonDay == null) {
+            sleepTime = -1;
+            socialTime = -1;
+            dayRating = -1;
+            /*newExperience = false;
+            newPeople = false;
+            exercise = false;*/
+        }
+    }
+
+    public static DayClass getInstance() {
+        if (singletonDay == null) {
+            singletonDay = new DayClass();
+        }
+        return singletonDay;
     }
 
 }

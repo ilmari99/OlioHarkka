@@ -29,7 +29,8 @@ public class ActivityScreen  extends DayScreen {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
-        String date = getDate();
+
+        String date = MainActivity.getDate();
         double actTime,actRating; //TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
         ActivityClass activity = null;
 
@@ -37,9 +38,9 @@ public class ActivityScreen  extends DayScreen {
         //ratingille dropdown(?)
         //Luokan voi luoda vasta valinnan jälkeen, koska ActivityClass ei voi periyttää ehdollisesti!
 
-        Fragment activityFragment;
-        FragmentManager activityFragmentManager = getSupportFragmentManager();
-        FragmentTransaction activityFragmentTransaction = activityFragmentManager.beginTransaction();
+       // Fragment activityFragment;
+       //FragmentManager activityFragmentManager = getSupportFragmentManager();
+       // FragmentTransaction activityFragmentTransaction = activityFragmentManager.beginTransaction();
 
         String valinta = getActivityFromMenu();
         System.out.println(valinta);
@@ -51,15 +52,15 @@ public class ActivityScreen  extends DayScreen {
                 //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
                 //Näin vältytään monen Listenerin luonnilta
                 System.out.println(valinta); //Printit vain testausta varten
-                activityFragment = new ActivityFragment();
-                activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
-                activityFragmentTransaction.commit();
+                //activityFragment = new ActivityFragment();
+               // activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
+               // activityFragmentTransaction.commit();
 
                 break;
             case ("Exercise"):
                 activity = new Exercise();
                 System.out.println(valinta);
-                day.exercise = true;
+                //day.exercise = true;
                 break;
             case ("Drinking"):
                 activity = new Drinking();
@@ -79,7 +80,7 @@ public class ActivityScreen  extends DayScreen {
         }
     }
 
-    public void saveChanges(ActivityClass act) {//Tallennetaan Arrayhy
+    /*public void saveChanges(ActivityClass act) {//Tallennetaan Arrayhy
         int i = 0;
         while (i<10){
             if (day.doneActitivities[i] == null){
@@ -90,11 +91,11 @@ public class ActivityScreen  extends DayScreen {
                 i++;
             }
         }
-    }
+    }*/
 
 
 
-    protected String getActivityFromMenu(){
+    protected String getActivityFromMenu() {
         Spinner activitySpinner;
         activitySpinner = findViewById(R.id.activityDropdown);
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

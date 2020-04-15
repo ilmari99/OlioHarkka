@@ -3,16 +3,25 @@ package com.example.olioht;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 /*ActivityClassista tulee fragmentti ActivityScreeniin
 ActivityScreenin siis pitäisi olla interface, mutta "lisäkysymykset" tulevat fragmenttina ActivityScreenin päälle
 Entä, jos aukaisee fragmentin, niin pystyykö silloin samaan aikaan muokata interfacessa olevia tietoja?
  */
 
 public class ActivityClass extends ActivityScreen {
+
     protected double rating, time;
     String date;
     //Timelle text input
     //ratingille dropdown(?)
+
+    Fragment activityFragment;
+    FragmentManager activityFragmentManager = getSupportFragmentManager();
+    FragmentTransaction activityFragmentTransaction = activityFragmentManager.beginTransaction();
 
  /*Activity luokat: Kun valitaan Activitetti ActivityScreenissä olevasta activityDropdownlistasta
     Lisätään ActivityScreeniin valitun aktiviteetin luokan kysymykset esim. valitaan aktiviteetti Studying --> Kysytään dropdown listalla opiskeltu aine, opiskeltiinko yksin, jne.
@@ -54,7 +63,9 @@ public class ActivityClass extends ActivityScreen {
             return String.valueOf(studySpinner.getSelectedItem());
         }
         Studying() {
-            //Näissä constructoreissa pitäisi siis luoda fragmentti
+            activityFragment = new ActivityFragment();
+            activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
+            activityFragmentTransaction.commit();
         }
 
     }

@@ -30,16 +30,27 @@ the data will be displayed on the EditText fields and the user can edit the info
 
  */
 //TODO lisää check-boxit boolean tyypin attribuuteille DayClassista.
-    protected DayClass day = new DayClass(); //Luodaan uusi päivä TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
 
-    EditText socialTimeText = findViewById(R.id.socialTimeTextBox);
-    EditText sleepTimeText = findViewById(R.id.sleepTimeTextBox);
+    private DayClass day;                                               // TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
+    private EditText socialTimeText, sleepTimeText;
+    private String socialTime, sleepTime;
+    private int dayRating = -1;
+    private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
 
+        day = day.getInstance();
+        socialTimeText = findViewById(R.id.socialTimeTextBox);
+        sleepTimeText = findViewById(R.id.sleepTimeTextBox);
+        exerciseBox = findViewById(R.id.exerciseBox);
+        newExperienceBox = findViewById(R.id.newexperienceBox);
+        newPeopleBox = findViewById(R.id.newexperienceBox);
+
         TextView selectedDate = findViewById(R.id.selectedDate);
         selectedDate.setText(MainActivity.getDate());
+
         /*
         this.findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,104 +81,127 @@ the data will be displayed on the EditText fields and the user can edit the info
 */
     }
 
-        private String getRating () {
-            Spinner ratingSpinner;
-            ratingSpinner = (Spinner) findViewById(R.id.dayRatingDropdown);
-            ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            return String.valueOf(ratingSpinner.getSelectedItem());
-        }
-
-
-        public void goBack (View v){
-            //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
-            day = null;
-            Intent goBackIntent = new Intent(this, MainActivity.class);
-            startActivity(goBackIntent);
-        }
-
-
-        //Jos nyt vasta tallennetaan kaikki day olion tiedot, niin ei tarvitse listenereja
-        public void saveData (View v){
-            day.socialTime = Integer.parseInt(socialTimeText.getText().toString());
-            day.sleeptime = Integer.parseInt(sleepTimeText.getText().toString());
-            day.dayRating = Integer.parseInt(getRating());
-            day.newPeople = newpeopleBool();
-            day.exercise = exerciseBool();
-            day.newExperience = experienceBool();
-        }
-        //TODO En saanut nappeja toimimaan
-
-        public void saveDayToFile () {
-            //Tallennetaan päivälle kuuluvat tiedot tiedostoon
-        }
-
-        public void addOrEditActivity (View v){
-            if (getActivityFromDayScreen().equals("Add")) {
-                addActivity(v);
-            } else {
-                editActivity(v);
+    private int getRating () {
+        Spinner ratingSpinner;
+        ratingSpinner = findViewById(R.id.dayRatingDropdown);
+        ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             }
-        }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        //TODO Kun muokataan aktiviteettia pitää saada suoraan auki kaikki vanhan aktiviteetin tiedot
-        //Tässä täytyy siis avata suoraan ActivityScreen ja aktiviteetille kuuluva  fragmentti
-        public void editActivity (View v){
-        //Avataan ActivityScreen ja activityn fragmentti
-            saveData(v);
-            Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
-            startActivity(activityScreenIntent);
-        }
-
-        public void addActivity (View v){
-        //Avataan ActivityScreen
-            saveData(v);
-            Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
-            startActivity(activityScreenIntent);
-        }
-
-
-        protected String getActivityFromDayScreen () {
-            Spinner activitySpinner;
-            activitySpinner = (Spinner) findViewById(R.id.activityDropdown);
-            activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            return String.valueOf(activitySpinner.getSelectedItem());
-        }
-
-        protected boolean exerciseBool(){
-            CheckBox exerciseBox;
-            exerciseBox = findViewById(R.id.exerciseBox);
-            return exerciseBox.isSelected();
-        }
-
-    protected boolean experienceBool(){
-        CheckBox newexperienceBox;
-        newexperienceBox = findViewById(R.id.newexperienceBox);
-        return newexperienceBox.isSelected();
+            }
+        });
+        dayRating = Integer.parseInt(String.valueOf(ratingSpinner.getSelectedItem()));
+        return dayRating;
     }
 
-    protected boolean newpeopleBool(){
-        CheckBox newpeopleBox;
-        newpeopleBox = findViewById(R.id.newexperienceBox);
-        return newpeopleBox.isSelected();
+
+    public void goBack (View v){
+        //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
+        //day = null;
+        Intent goBackIntent = new Intent(this, MainActivity.class);
+        startActivity(goBackIntent);
+    }
+
+
+    // Setting general information for chosen day
+    //TODO Arvojen asettaminen toimii, tarvitaan vielä tyhjien arvojen tarkastus ja aktuaalinen tallennus
+   public void saveData (View v) {
+        socialTime = socialTimeText.getText().toString();
+        sleepTime = sleepTimeText.getText().toString();
+        System.out.println(getRating() + " " + socialTime + " " + sleepTime);
+
+        if (socialTime != null) {
+            day.socialTime = Integer.parseInt(socialTime);
+        }
+        if (socialTime != null) {
+            day.sleepTime = Integer.parseInt(sleepTime);
+        }
+        if (getRating() != -1) {
+            day.dayRating = dayRating;
+        }
+        day.newPeople = getNewPeopleBool();
+        day.exercise = getExerciseBool();
+        day.newExperience = getExperienceBool();
+       System.out.println(getActivityFromDayScreen());
+    }
+
+    public void saveDayToFile () {
+        //Tallennetaan päivälle kuuluvat tiedot tiedostoon
+    }
+
+    public void addOrEditActivity (View v) {
+        if (getActivityFromDayScreen().equals("Add")) {
+            addActivity(v);
+        }
+        else {
+            editActivity(v);
+        }
+    }
+
+
+    //TODO Kun muokataan aktiviteettia pitää saada suoraan auki kaikki vanhan aktiviteetin tiedot
+    //Tässä täytyy siis avata suoraan ActivityScreen ja aktiviteetille kuuluva  fragmentti
+
+    public void editActivity (View v) {
+        // Avataan ActivityScreen ja activityn fragmentti
+        saveData(v);
+        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
+        startActivity(activityScreenIntent);
+    }
+
+    public void addActivity (View v) {
+        // Avataan ActivityScreen
+        saveData(v);
+        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
+        startActivity(activityScreenIntent);
+    }
+
+    protected String getActivityFromDayScreen () {
+        Spinner activitySpinner;
+        activitySpinner = findViewById(R.id.activityDropdown);
+        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        return String.valueOf(activitySpinner.getSelectedItem());
+    }
+
+    // Boolean values for checkboxes
+    protected boolean getExperienceBool(){
+        if (newExperienceBox.isChecked() == false) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    protected boolean getExerciseBool(){
+        if (exerciseBox.isChecked() == false) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    protected boolean getNewPeopleBool(){
+        if (newPeopleBox.isChecked() == false) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
 
