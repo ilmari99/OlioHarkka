@@ -37,7 +37,7 @@ public class ActivityClass extends ActivityScreen {
         String activityname = "Drinking";
         int doses;
 
-        Drinking() {
+        public Drinking() {
 
         }
     }
@@ -45,51 +45,17 @@ public class ActivityClass extends ActivityScreen {
     class Studying extends ActivityClass {
         String activityactivityname = "Studying";
         Boolean alone;
-        String subject = getStudySubject();
+        // String subject = getStudySubject();
 
-        private String getStudySubject() {
-            Spinner studySpinner;
-            studySpinner = (Spinner) findViewById(R.id.studytypeDropdown); //TODO studytypeDropdown,exercisetypeDropdown yms. tulee luokan fragmenttiin.
-            studySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
+        public Studying() {
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            return String.valueOf(studySpinner.getSelectedItem());
         }
-        Studying() {
-            activityFragment = new ActivityFragment();
-            activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
-            activityFragmentTransaction.commit();
-        }
-
     }
 
     class Exercise extends ActivityClass {
         String activityname = "Exercise";
-        String exerciseType = getExerciseType();
 
-        private String getExerciseType() {
-            Spinner ExerciseSpinner;
-            ExerciseSpinner = (Spinner) findViewById(R.id.exercisetypeDropdown);
-            ExerciseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-            return String.valueOf(ExerciseSpinner.getSelectedItem());
-        }
-
-        Exercise() {
+        public Exercise() {
 
         }
 
@@ -98,7 +64,7 @@ public class ActivityClass extends ActivityScreen {
     class Friends extends ActivityClass {
         String activityname = "Friends";
         int numberofpeople;
-        String activitywithFriends = getActivitywithfriends();
+        /*String activitywithFriends = getActivitywithfriends();
 
         private String getActivitywithfriends() {
             Spinner ActivitywithfriendsSpinner;
@@ -113,7 +79,7 @@ public class ActivityClass extends ActivityScreen {
                 }
             });
             return String.valueOf(ActivitywithfriendsSpinner.getSelectedItem());
-        }
+        }*/
 
         Friends() {
 
@@ -125,7 +91,7 @@ public class ActivityClass extends ActivityScreen {
         String activityname = "Relationship";
         Boolean had_sex;
         int her_age;
-        String RelationshipActivity = getRelationshipActivity();
+        /*String RelationshipActivity = getRelationshipActivity();
 
         private String getRelationshipActivity() {
             Spinner relationshipSpinner;
@@ -141,8 +107,9 @@ public class ActivityClass extends ActivityScreen {
                 }
             });
             return String.valueOf(relationshipSpinner.getSelectedItem());
-        }
+        }*/
         Relationship(){
+
 
         }
 

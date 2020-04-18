@@ -28,13 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
         calendar = findViewById(R.id.calendarView);
 
+
+
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            // TODO Määritellään pvm tämänhetkiseksi jos pvm:ää ei erikseen muuteta kalenterissa
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
                 date = dayOfMonth + "." + (month + 1) + "." + year;
             }
         });
+
     }
 
     public void selectDay(View v) {

@@ -1,20 +1,15 @@
 package com.example.olioht;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-
-import java.util.Collections;
 
 public class DayScreen extends MainActivity {
 /*
@@ -83,7 +78,7 @@ the data will be displayed on the EditText fields and the user can edit the info
 
     private int getRating () {
         Spinner ratingSpinner;
-        ratingSpinner = findViewById(R.id.dayRatingDropdown);
+        ratingSpinner = findViewById(R.id.activityRatingDropdown);
         ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +103,7 @@ the data will be displayed on the EditText fields and the user can edit the info
 
 
     // Setting general information for chosen day
-    //TODO Arvojen asettaminen toimii, tarvitaan vielä tyhjien arvojen tarkastus ja aktuaalinen tallennus
+    //TODO Arvojen asettaminen toimii, tarvitaan vielä tyhjien arvojen tarkastus ja koko sivun aktuaalinen tallennus
    public void saveData (View v) {
         socialTime = socialTimeText.getText().toString();
         sleepTime = sleepTimeText.getText().toString();
@@ -126,14 +121,16 @@ the data will be displayed on the EditText fields and the user can edit the info
         day.newPeople = getNewPeopleBool();
         day.exercise = getExerciseBool();
         day.newExperience = getExperienceBool();
-       System.out.println(getActivityFromDayScreen());
+        // System.out.println(getActivityFromDayScreen());
+        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
+        startActivity(activityScreenIntent);
     }
 
     public void saveDayToFile () {
         //Tallennetaan päivälle kuuluvat tiedot tiedostoon
     }
 
-    public void addOrEditActivity (View v) {
+    /*public void addOrEditActivity (View v) {
         if (getActivityFromDayScreen().equals("Add")) {
             addActivity(v);
         }
@@ -174,7 +171,7 @@ the data will be displayed on the EditText fields and the user can edit the info
             }
         });
         return String.valueOf(activitySpinner.getSelectedItem());
-    }
+    } */
 
     // Boolean values for checkboxes
     protected boolean getExperienceBool(){
