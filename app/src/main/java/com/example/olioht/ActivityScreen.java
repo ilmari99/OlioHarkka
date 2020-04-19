@@ -1,11 +1,8 @@
 package com.example.olioht;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.accessibility.AccessibilityRecord;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
@@ -47,10 +44,14 @@ public class ActivityScreen  extends DayScreen {
 
         // Finding UI components
         activitySpinner = findViewById(R.id.activityDropdown);
+
         activityRatingSlider = findViewById(R.id.activityRatingSeekBar);
         activityTimeSlider = findViewById(R.id.activityTimeSeekBar);
+
         infoTextBox = findViewById(R.id.activityScreenInfoMessage);
-        activityRatingText = findViewById(R.id.activityRatingText);
+        activityRatingText = findViewById(R.id.activityRatingChanging);
+        activityTimeText = findViewById(R.id.activityTimeChanging);
+
         TextView selectedDate = findViewById(R.id.selectedDate);
         selectedDate.setText("Date: " + date);
 
@@ -131,7 +132,12 @@ public class ActivityScreen  extends DayScreen {
         activityRatingSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                activityRatingText.setText(progress + " hours");
+                if (progress == 6) {
+                    activityRatingText.setText(progress + "/5");
+                }
+                else {
+                    activityRatingText.setText(progress + "");
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -141,6 +147,18 @@ public class ActivityScreen  extends DayScreen {
             }
         }));
 
+        activityTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                activityTimeText.setText(progress + " hours");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
     }
 
     public void goBack (View v){
