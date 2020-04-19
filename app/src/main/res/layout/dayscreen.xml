@@ -43,10 +43,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectedDate"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
         android:id="@+id/socialTimeText"
@@ -56,89 +56,47 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rateDayText"
-        app:layout_constraintVertical_bias="0.061" />
-
-    <Spinner
-        android:id="@+id/activityRatingDropdown"
-        android:layout_width="166dp"
-        android:layout_height="42dp"
-        android:entries="@array/ratingChoices"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="@+id/rateDayText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
-
-    <EditText
-        android:id="@+id/socialTimeTextBox"
-        android:layout_width="158dp"
-        android:layout_height="45dp"
-        android:autofillHints="Hours"
-        android:ems="10"
-        android:hint="@string/SocialTimeAutofill"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toEndOf="@+id/socialTimeText"
-        app:layout_constraintTop_toBottomOf="@+id/activityRatingDropdown"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <TextView
-        android:id="@+id/SleepTimeText"
-        android:layout_width="158dp"
-        android:layout_height="41dp"
+        android:id="@+id/sleepTimeText"
+        android:layout_width="160dp"
+        android:layout_height="37dp"
         android:text="@string/SleepTimeText"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/socialTimeText"
-        app:layout_constraintVertical_bias="0.044" />
-
-    <EditText
-        android:id="@+id/sleepTimeTextBox"
-        android:layout_width="161dp"
-        android:layout_height="48dp"
-        android:autofillHints="Hours"
-        android:ems="10"
-        android:hint="@string/SocialTimeAutofill"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.912"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/socialTimeTextBox"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.038" />
 
     <CheckBox
         android:id="@+id/newexperienceBox"
         android:layout_width="160dp"
         android:layout_height="30dp"
-        android:layout_marginTop="32dp"
         android:text="@string/newexperienceBoxText"
-        app:layout_constraintEnd_toStartOf="@+id/exerciseBox"
-        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SleepTimeText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
 
     <CheckBox
         android:id="@+id/exerciseBox"
         android:layout_width="160dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
         android:text="@string/exerciseBoxText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sleepTimeTextBox"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
 
     <CheckBox
         android:id="@+id/newpeopleBox"
@@ -147,22 +105,94 @@
         android:text="@string/newpeopleBoxText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newexperienceBox"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
 
     <Button
         android:id="@+id/goToActivityScreenButton"
         android:layout_width="193dp"
         android:layout_height="94dp"
-        android:onClick="saveData"
+        android:onClick="saveDayData"
         android:text="@string/goToActivityScreenButton"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
+        app:layout_constraintVertical_bias="0.923" />
+
+    <SeekBar
+        android:id="@+id/sleepSeekBar"
+        android:layout_width="178dp"
+        android:layout_height="18dp"
+        android:max="24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401" />
+
+    <SeekBar
+        android:id="@+id/rateSeekBar"
+        android:layout_width="176dp"
+        android:layout_height="16dp"
+        android:max="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219" />
+
+    <SeekBar
+        android:id="@+id/socialSeekBar"
+        android:layout_width="178dp"
+        android:layout_height="17dp"
+        android:max="24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.317" />
+
+    <TextView
+        android:id="@+id/dayRating"
+        android:layout_width="89dp"
+        android:layout_height="18dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <TextView
+        android:id="@+id/sleepTime"
+        android:layout_width="96dp"
+        android:layout_height="17dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.819"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
+
+    <TextView
+        android:id="@+id/socialTime"
+        android:layout_width="97dp"
+        android:layout_height="18dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.287" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

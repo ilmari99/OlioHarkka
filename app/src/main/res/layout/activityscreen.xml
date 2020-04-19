@@ -58,9 +58,9 @@
         app:layout_constraintVertical_bias="0.189" />
 
     <TextView
-        android:id="@+id/rateActivityText"
+        android:id="@+id/activityRateText"
         android:layout_width="160dp"
-        android:layout_height="34dp"
+        android:layout_height="39dp"
         android:text="@string/rateActivityText"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,35 +70,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.261" />
 
-    <EditText
-        android:id="@+id/socialTimeTextBox"
-        android:layout_width="159dp"
-        android:layout_height="42dp"
-        android:autofillHints="Hours"
-        android:ems="10"
-        android:hint="@string/SocialTimeAutofill"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
-
-    <Spinner
-        android:id="@+id/activityRatingDropdown"
-        android:layout_width="160dp"
-        android:layout_height="34dp"
-        android:entries="@array/ratingChoices"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
-
     <TextView
-        android:id="@+id/selectedDate2"
+        android:id="@+id/selectedDate"
         android:layout_width="290dp"
         android:layout_height="37dp"
         android:text="@string/selectedDate"
@@ -159,5 +132,51 @@
         app:layout_constraintVertical_bias="0.784">
 
     </FrameLayout>
+
+    <SeekBar
+        android:id="@+id/activityRatingSeekBar"
+        android:layout_width="158dp"
+        android:layout_height="15dp"
+        android:max="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286" />
+
+    <SeekBar
+        android:id="@+id/activityTimeSeekBar"
+        android:layout_width="158dp"
+        android:layout_height="15dp"
+        android:max="24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371" />
+
+    <TextView
+        android:id="@+id/activityTimeTextChanging"
+        android:layout_width="64dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <TextView
+        android:id="@+id/activityRatingText"
+        android:layout_width="64dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.254" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

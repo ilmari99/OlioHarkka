@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 public class DayScreen extends MainActivity {
+
 /*
 In this interface we create a new DayClass or display editable attributes from a day that was already filled.
 In this screen the user can fill or edit information about a particular day. If there is no data about the day, then the EditText -fields will be blank, but if there was data about the day,
@@ -22,158 +24,116 @@ the data will be displayed on the EditText fields and the user can edit the info
 
  In this interface, there will be a list of DoneActivities, where the user can select added activities or select "Add".
  After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
+*/
 
- */
-//TODO lisää check-boxit boolean tyypin attribuuteille DayClassista.
+    // TODO No new DayCLass-object created, if info for selected day already exists; information is read from text file instead
 
-    private DayClass day;                                               // TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
-    private EditText socialTimeText, sleepTimeText;
-    private String socialTime, sleepTime;
-    private int dayRating = -1;
+    // Declaring variables for different UI components and values
+    private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
+    private TextView dayRatingText, socialTimeText, sleepTimeText;
+    private int sleepTime, socialTime, dayRating;
+    private Boolean experience, exercise, people;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
+    private static DayClass day;
+    private String date = MainActivity.getDate();
+
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
 
-        day = day.getInstance();
-        socialTimeText = findViewById(R.id.socialTimeTextBox);
-        sleepTimeText = findViewById(R.id.sleepTimeTextBox);
+        TextView selectedDate = findViewById(R.id.selectedDate);
+        selectedDate.setText("Date: " + date);
+
+        // Changing text boxes for sliders
+        dayRatingText = findViewById(R.id.dayRating);
+        socialTimeText = findViewById(R.id.socialTime);
+        sleepTimeText = findViewById(R.id.sleepTime);
+
+        // The sliders
+        socialTimeSlider = findViewById(R.id.socialSeekBar);
+        sleepTimeSlider = findViewById(R.id.sleepSeekBar);
+        rateDaySlider = findViewById(R.id.rateSeekBar);
+
+        // Checkboxes for boolean values
         exerciseBox = findViewById(R.id.exerciseBox);
         newExperienceBox = findViewById(R.id.newexperienceBox);
         newPeopleBox = findViewById(R.id.newexperienceBox);
 
-        TextView selectedDate = findViewById(R.id.selectedDate);
-        selectedDate.setText(MainActivity.getDate());
-
-        /*
-        this.findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
+        // Listeners for changing texts
+        socialTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                saveData(v,socialTimeText,sleepTimeText);
-            }
-        });
-        */
-
-
-
-
-        /*
-        final Spinner dayRatingSpinner = findViewById(R.id.dayRatingDropdown);
-        ArrayAdapter<String> ratingAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ratingChoices);
-        ratingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayRatingSpinner.setAdapter(ratingAdapter);
-
-        dayRatingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                socialTimeText.setText(progress + " hours");
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onStartTrackingTouch(SeekBar seekBar) {
             }
-        });
-    }
-*/
-    }
-
-    private int getRating () {
-        Spinner ratingSpinner;
-        ratingSpinner = findViewById(R.id.activityRatingDropdown);
-        ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onStopTrackingTouch(SeekBar seekBar) {
             }
+        }));
 
+        sleepTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sleepTimeText.setText(progress + " hours");
             }
-        });
-        dayRating = Integer.parseInt(String.valueOf(ratingSpinner.getSelectedItem()));
-        return dayRating;
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
+
+        rateDaySlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                dayRatingText.setText(progress + "");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
     }
 
 
-    public void goBack (View v){
-        //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
-        //day = null;
+    public void goBack (View v) {
+        //TODO Warning-screen if going back without saving
         Intent goBackIntent = new Intent(this, MainActivity.class);
         startActivity(goBackIntent);
     }
 
 
-    // Setting general information for chosen day
-    //TODO Arvojen asettaminen toimii, tarvitaan vielä tyhjien arvojen tarkastus ja koko sivun aktuaalinen tallennus
-   public void saveData (View v) {
-        socialTime = socialTimeText.getText().toString();
-        sleepTime = sleepTimeText.getText().toString();
-        System.out.println(getRating() + " " + socialTime + " " + sleepTime);
+    // Creating DayClass object for chosen day with all the info asked in DayScreen
+   public void saveDayData (View v) {
 
-        if (socialTime != null) {
-            day.socialTime = Integer.parseInt(socialTime);
-        }
-        if (socialTime != null) {
-            day.sleepTime = Integer.parseInt(sleepTime);
-        }
-        if (getRating() != -1) {
-            day.dayRating = dayRating;
-        }
-        day.newPeople = getNewPeopleBool();
-        day.exercise = getExerciseBool();
-        day.newExperience = getExperienceBool();
-        // System.out.println(getActivityFromDayScreen());
+        String savedDate = date.replaceAll(".", "");
+        socialTime = socialTimeSlider.getProgress();
+        sleepTime = sleepTimeSlider.getProgress();
+        dayRating = rateDaySlider.getProgress();
+        System.out.println(dayRating + " " + socialTime + " " + sleepTime);     // Testausta varten
+        experience = getExperienceBool();
+        people = getNewPeopleBool();
+        exercise = getExerciseBool();
+
+        day = new DayClass(savedDate, sleepTime, socialTime, dayRating, experience, people, exercise);
+
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
     }
+
 
     public void saveDayToFile () {
         //Tallennetaan päivälle kuuluvat tiedot tiedostoon
     }
 
-    /*public void addOrEditActivity (View v) {
-        if (getActivityFromDayScreen().equals("Add")) {
-            addActivity(v);
-        }
-        else {
-            editActivity(v);
-        }
-    }
 
-
-    //TODO Kun muokataan aktiviteettia pitää saada suoraan auki kaikki vanhan aktiviteetin tiedot
-    //Tässä täytyy siis avata suoraan ActivityScreen ja aktiviteetille kuuluva  fragmentti
-
-    public void editActivity (View v) {
-        // Avataan ActivityScreen ja activityn fragmentti
-        saveData(v);
-        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
-        startActivity(activityScreenIntent);
-    }
-
-    public void addActivity (View v) {
-        // Avataan ActivityScreen
-        saveData(v);
-        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
-        startActivity(activityScreenIntent);
-    }
-
-    protected String getActivityFromDayScreen () {
-        Spinner activitySpinner;
-        activitySpinner = findViewById(R.id.activityDropdown);
-        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        return String.valueOf(activitySpinner.getSelectedItem());
-    } */
-
-    // Boolean values for checkboxes
+    // Boolean value getters for checkboxes
     protected boolean getExperienceBool(){
         if (newExperienceBox.isChecked() == false) {
             return false;
@@ -182,6 +142,7 @@ the data will be displayed on the EditText fields and the user can edit the info
             return true;
         }
     }
+
 
     protected boolean getExerciseBool(){
         if (exerciseBox.isChecked() == false) {
@@ -192,6 +153,7 @@ the data will be displayed on the EditText fields and the user can edit the info
         }
     }
 
+
     protected boolean getNewPeopleBool(){
         if (newPeopleBox.isChecked() == false) {
             return false;
@@ -201,5 +163,7 @@ the data will be displayed on the EditText fields and the user can edit the info
         }
     }
 
-
+    public static DayClass getDayObject() {
+        return day;
+    }
 }
