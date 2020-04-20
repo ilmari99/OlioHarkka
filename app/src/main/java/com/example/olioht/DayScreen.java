@@ -116,7 +116,6 @@ the data will be displayed on the EditText fields and the user can edit the info
         socialTime = socialTimeSlider.getProgress();
         sleepTime = sleepTimeSlider.getProgress();
         dayRating = rateDaySlider.getProgress();
-        System.out.println(dayRating + " " + socialTime + " " + sleepTime);     // Testausta varten
         experience = getExperienceBool();
         people = getNewPeopleBool();
         exercise = getExerciseBool();
@@ -126,12 +125,6 @@ the data will be displayed on the EditText fields and the user can edit the info
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
     }
-
-
-    public void saveDayToFile () {
-        //Tallennetaan päivälle kuuluvat tiedot tiedostoon
-    }
-
 
     // Boolean value getters for checkboxes
     protected boolean getExperienceBool(){
@@ -143,7 +136,6 @@ the data will be displayed on the EditText fields and the user can edit the info
         }
     }
 
-
     protected boolean getExerciseBool(){
         if (exerciseBox.isChecked() == false) {
             return false;
@@ -152,7 +144,6 @@ the data will be displayed on the EditText fields and the user can edit the info
             return true;
         }
     }
-
 
     protected boolean getNewPeopleBool(){
         if (newPeopleBox.isChecked() == false) {

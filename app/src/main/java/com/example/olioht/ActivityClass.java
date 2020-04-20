@@ -7,34 +7,21 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-/*ActivityClassista tulee fragmentti ActivityScreeniin
-ActivityScreenin siis pitäisi olla interface, mutta "lisäkysymykset" tulevat fragmenttina ActivityScreenin päälle
-Entä, jos aukaisee fragmentin, niin pystyykö silloin samaan aikaan muokata interfacessa olevia tietoja?
- */
+
+
 
 public class ActivityClass extends ActivityScreen {
 
-    protected double rating, time;
-    String date;
-    //Timelle text input
-    //ratingille dropdown(?)
-
-    Fragment activityFragment;
-    FragmentManager activityFragmentManager = getSupportFragmentManager();
-    FragmentTransaction activityFragmentTransaction = activityFragmentManager.beginTransaction();
-
- /*Activity luokat: Kun valitaan Activitetti ActivityScreenissä olevasta activityDropdownlistasta
-    Lisätään ActivityScreeniin valitun aktiviteetin luokan kysymykset esim. valitaan aktiviteetti Studying --> Kysytään dropdown listalla opiskeltu aine, opiskeltiinko yksin, jne.
-    TODO Luo jokaiselle AktivityClass luokan sisäluokalle fragmentti, joka näytetään, kun käyttäjä valitsee aktiviteetin
-    Kun fragmentti avataan, täytyy activiteetin tietojen silti näkyä ja olla muokattavissa.
+    /* Class containing information for one particular activity, which will be added to chosen day's
+    doneActivities-array upon saving.
      */
 
- /*
+    protected int activityRating, activityTime;
+    // protected String activityName;
 
-  */
 }
     class Drinking extends ActivityClass {
-        String activityname = "Drinking";
+        String activityName = "Drinking";
         int doses;
 
         public Drinking() {
@@ -43,12 +30,13 @@ public class ActivityClass extends ActivityScreen {
     }
 
     class Studying extends ActivityClass {
-        String activityactivityname = "Studying";
-        Boolean alone;
-        // String subject = getStudySubject();
-
-        public Studying() {
-
+        private String subject;
+        private Boolean withFriends;
+        public Studying(String subject, int activityRating, int activityTime, Boolean withFriends) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.subject = subject;
+            this.withFriends = withFriends;
         }
     }
 

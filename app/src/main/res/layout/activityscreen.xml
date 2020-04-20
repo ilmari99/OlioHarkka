@@ -58,19 +58,6 @@
         app:layout_constraintVertical_bias="0.189" />
 
     <TextView
-        android:id="@+id/activityRateText"
-        android:layout_width="160dp"
-        android:layout_height="39dp"
-        android:text="@string/rateActivityText"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.199"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
-
-    <TextView
         android:id="@+id/selectedDate"
         android:layout_width="290dp"
         android:layout_height="37dp"
@@ -82,19 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/activityTimeText"
-        android:layout_width="164dp"
-        android:layout_height="41dp"
-        android:text="@string/activityTimeText"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
 
     <Spinner
         android:id="@+id/activityDropdown"
@@ -108,77 +82,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.188" />
 
-    <TextView
-        android:id="@+id/activityScreenInfoMessage"
-        android:layout_width="374dp"
-        android:layout_height="124dp"
-        android:layout_marginBottom="180dp"
-        android:gravity="center"
-        android:text="@string/activityScreenInfoMessage"
-        android:textSize="26sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activityFrame"
+        android:layout_width="414dp"
+        android:layout_height="288dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386">
+
+        <TextView
+            android:id="@+id/activityScreenInfoMessage"
+            android:layout_width="374dp"
+            android:layout_height="124dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="@string/activityScreenInfoMessage"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/activityFrame"
-        android:layout_width="413dp"
-        android:layout_height="355dp"
+        android:id="@+id/ratingFrame"
+        android:layout_width="407dp"
+        android:layout_height="177dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784">
+        app:layout_constraintVertical_bias="0.826">
 
     </FrameLayout>
-
-    <SeekBar
-        android:id="@+id/activityRatingSeekBar"
-        android:layout_width="158dp"
-        android:layout_height="15dp"
-        android:max="10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
-
-    <SeekBar
-        android:id="@+id/activityTimeSeekBar"
-        android:layout_width="158dp"
-        android:layout_height="15dp"
-        android:max="24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
-
-    <TextView
-        android:id="@+id/activityTimeChanging"
-        android:layout_width="64dp"
-        android:layout_height="19dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.821"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
-
-    <TextView
-        android:id="@+id/activityRatingChanging"
-        android:layout_width="64dp"
-        android:layout_height="19dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.821"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.254" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
