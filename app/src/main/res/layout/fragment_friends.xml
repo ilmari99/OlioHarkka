@@ -9,49 +9,61 @@
 
     <EditText
         android:id="@+id/friendCountInput"
-        android:layout_width="148dp"
-        android:layout_height="58dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:autofillHints="Hours"
+        android:background="#FFFFFF"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/friendInput"
         android:inputType="number"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618" />
-
-    <TextView
-        android:id="@+id/friendsText"
-        android:layout_width="221dp"
-        android:layout_height="58dp"
-        android:gravity="center"
-        android:text="@string/friendText"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518" />
-
-    <EditText
-        android:id="@+id/friendsTextInput"
-        android:layout_width="376dp"
-        android:layout_height="97dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/friendsText"
-        android:inputType="textMultiLine"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toEndOf="@+id/friendsText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627" />
+
+    <TextView
+        android:id="@+id/friendsText"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/friendText"
+        android:textColor="@android:color/background_dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.627" />
+
+    <TextView
+        android:id="@+id/activityWithFriendsText"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:text="@string/friendsText"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/friendsText"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <Spinner
+        android:id="@+id/activityWithFriendsDropdown"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="28dp"
+        android:entries="@array/activitywithFriends"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toEndOf="@+id/activityWithFriendsText"
+        app:layout_constraintTop_toBottomOf="@+id/friendCountInput"
+        app:layout_constraintVertical_bias="0.123" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

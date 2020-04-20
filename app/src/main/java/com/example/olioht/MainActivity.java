@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static String date;
     private CalendarView calendar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

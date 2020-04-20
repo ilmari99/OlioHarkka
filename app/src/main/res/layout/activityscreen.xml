@@ -11,6 +11,7 @@
         android:id="@+id/saveButton"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
+        android:onClick="saveChanges"
         android:text="@string/saveButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,91 +50,99 @@
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:text="@string/chosenActivityText"
+        android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintTop_toBottomOf="@+id/dateText"
+        app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/rateActivityText"
         android:layout_width="160dp"
-        android:layout_height="34dp"
+        android:layout_height="30dp"
         android:text="@string/rateActivityText"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chosenActivityText"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <EditText
+        android:id="@+id/socialTimeTextBox"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:autofillHints="Hours"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:gravity="bottom"
+        android:hint="@string/SocialTimeAutofill"
+        android:inputType="number"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintStart_toEndOf="@+id/activityTimeText"
+        app:layout_constraintTop_toBottomOf="@+id/activityRatingDropdown"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <Spinner
+        android:id="@+id/activityRatingDropdown"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:entries="@array/ratingChoices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintStart_toEndOf="@+id/rateActivityText"
+        app:layout_constraintTop_toBottomOf="@+id/activityDropdown"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:text="@string/selectedDate"
+        android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
-
-    <EditText
-        android:id="@+id/socialTimeTextBox"
-        android:layout_width="159dp"
-        android:layout_height="42dp"
-        android:autofillHints="Hours"
-        android:ems="10"
-        android:hint="@string/SocialTimeAutofill"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
-
-    <Spinner
-        android:id="@+id/activityRatingDropdown"
-        android:layout_width="160dp"
-        android:layout_height="34dp"
-        android:entries="@array/ratingChoices"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
-
-    <TextView
-        android:id="@+id/selectedDate2"
-        android:layout_width="290dp"
-        android:layout_height="37dp"
-        android:text="@string/selectedDate"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.413"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.114" />
 
     <TextView
         android:id="@+id/activityTimeText"
-        android:layout_width="164dp"
-        android:layout_height="41dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:text="@string/activityTimeText"
+        android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
+        app:layout_constraintTop_toBottomOf="@+id/rateActivityText"
+        app:layout_constraintVertical_bias="0.044" />
 
     <Spinner
         android:id="@+id/activityDropdown"
-        android:layout_width="159dp"
-        android:layout_height="31dp"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:entries="@array/activities"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintStart_toEndOf="@+id/chosenActivityText"
+        app:layout_constraintTop_toBottomOf="@+id/currentDateTextBox"
+        app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/activityScreenInfoMessage"
@@ -159,5 +168,16 @@
         app:layout_constraintVertical_bias="0.784">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/currentDateTextBox"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintStart_toEndOf="@+id/dateText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.114" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

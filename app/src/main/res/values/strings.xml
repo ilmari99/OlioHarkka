@@ -14,7 +14,7 @@
     <string name="SocialTimeAutofill">Hours</string>
     <string name="rateActivityText">Rate this activity:</string>
     <string name="chosenActivityText">Chosen activity:</string>
-    <string name="activityTimeText">Time(h):</string>
+    <string name="activityTimeText">Time:</string>
     <string name="SleepTimeText">Sleep:</string>
     <string name="gotoActivityButton">Go to activity</string>
     <string name="newexperienceBoxText">New Experience</string>
@@ -23,16 +23,20 @@
     <string name="goToActivityScreenButton">Continue</string>
     <string name="activityScreenInfoMessage">Select activity from the dropdown menu above</string>
     <string name="subjectText">Study subject:</string>
-    <string name="friendsYesNo">With friends?</string>
+    <string name="friendsYesNo">Studied alone</string>
     <string name="subjectInput">Subject</string>
-    <string name="dosesText">Number of doses:</string>
+    <string name="dosesText">Estimate of alcohol doses:</string>
     <string name="dosesInput">Doses</string>
-    <string name="passedOut">Passed out?</string>
-    <string name="sportType">Type of sports:</string>
+    <string name="passedOut">Passed out</string>
+    <string name="sportType">Exercise type:</string>
     <string name="sportInput">Sports</string>
     <string name="friendText">Number of friends:</string>
     <string name="friendInput">Amount</string>
-    <string name="friendsText">What did you do with friends?</string>
+    <string name="friendsText">Activity with friends:</string>
+    <string name="relationshipActivityText">What did you do together:</string>
+    <string name="hadsexText">Had sex</string>
+    <string name="nameOfTheDateText">Who were you out with:</string>
+    <string name="ageOfTheDateText">Age of the other person:</string>
 
 
     <string-array name="activities">

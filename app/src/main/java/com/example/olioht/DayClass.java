@@ -1,5 +1,9 @@
 package com.example.olioht;
 
+import android.view.View;
+
+import java.lang.reflect.Array;
+
 public class DayClass extends DayScreen{
     /*
     In this class we only have the attributes of one day. Changing and setting of values happens in DayScreen.
@@ -8,7 +12,7 @@ public class DayClass extends DayScreen{
      */
 
     public static DayClass singletonDay;
-    String date = MainActivity.getDate();
+    String date;
     int sleepTime, socialTime, dayRating;
     Boolean newExperience, newPeople, exercise;                             //Tieto exercisesta haetaan Aktivitysta
     ActivityClass[] doneActivities = new ActivityClass[10];                 //Array jossa on ActivityClass Olioita
@@ -26,6 +30,7 @@ public class DayClass extends DayScreen{
             /*newExperience = false;
             newPeople = false;
             exercise = false;*/
+            date = MainActivity.getDate();
         }
     }
 
@@ -37,3 +42,4 @@ public class DayClass extends DayScreen{
     }
 
 }
+

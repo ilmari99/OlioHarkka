@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.accessibility.AccessibilityRecord;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,11 +32,14 @@ public class ActivityScreen  extends DayScreen {
 
     private ActivityClass activity = null;
     private Spinner activitySpinner, actRatingSpinner;
-    private Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
+    Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
     private String valinta;
-    private TextView infoTextBox;
+    protected TextView infoTextBox;
     private FrameLayout activityFrame;
     private int activityCounter = 0;
+    String date = MainActivity.getDate();
+    private String hours, activityRating;//TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
+    TextView currentDate;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,8 @@ public class ActivityScreen  extends DayScreen {
         activitySpinner = findViewById(R.id.activityDropdown);
         actRatingSpinner = findViewById(R.id.activityRatingDropdown);
         infoTextBox = findViewById(R.id.activityScreenInfoMessage);
+        currentDate = findViewById(R.id.currentDateTextBox);
+        currentDate.setText(MainActivity.getDate()); //Todo miks tämä ei toimi
 
         // Grounds for fragments
 
@@ -54,22 +60,17 @@ public class ActivityScreen  extends DayScreen {
         exerciseFrag = new ExerciseFragment();
         friendsFrag = new FriendsFragment();
         relationFrag = new RelationshipFragment();
-        //studyFrag = new StudyFragment();
+        studyFrag = new StudyFragment();
 
-        String date = MainActivity.getDate();
-        double actTime, actRating;      //TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
-
-        //Timelle text input
-        //ratingille dropdown(?)
         //Luokan voi luoda vasta valinnan jälkeen, koska ActivityClass ei voi periyttää ehdollisesti!
 
-         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //Valittu activity dropdownista
+        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 valinta = String.valueOf(activitySpinner.getSelectedItem());
                 activityFrame = findViewById(R.id.activityFrame);
-
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction drinkingFragmentTransaction = fragmentManager.beginTransaction();
                 FragmentTransaction exerciseFragmentTransaction = fragmentManager.beginTransaction();
@@ -78,45 +79,48 @@ public class ActivityScreen  extends DayScreen {
                 FragmentTransaction studyFragmentTransaction = fragmentManager.beginTransaction();
 
                 switch (valinta) {
+                    //todo tänne jonnekin joku ehto, että jos on täyttänyt esim. Friends tietoja ja sen jälkeen vaihtaa aktiviteettia Studying --> tiedot katoaa. Eli joku varoitus
                     case ("Studying"):
-                        // Avaa fragmentin ActivityClassin kysymyksillä
-                        // Eli Drinking -luokan constructori luo fragmentin
-                        activity = new Studying();
                         //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
                         //Näin vältytään monen Listenerin luonnilta
+                        //todo kaikki ActivityClassin subclassien (Drinking,Studying....) constructorit heittää nullikan kun täällä tulee "activity = new Studying();" yms.
                         studyFrag = new StudyFragment();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
+
+                        activity = new ActivityClass.Studying();
                         break;
                     case ("Exercise"):
-                        activity = new Exercise();
+                        activity = new ActivityClass.Exercise();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         exerciseFrag = new ExerciseFragment();
                         exerciseFragmentTransaction.replace(R.id.activityFrame, exerciseFrag);
                         exerciseFragmentTransaction.commit();
                         break;
                     case ("Drinking"):
-                        activity = new Drinking();
+                        activity = new ActivityClass.Drinking();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         drinkingFrag = new DrinkingFragment();
                         drinkingFragmentTransaction.replace(R.id.activityFrame, drinkingFrag);
                         drinkingFragmentTransaction.commit();
                         break;
                     case ("Friends"):
-                        activity = new Friends();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         friendsFrag = new FriendsFragment();
                         friendsFragmentTransaction.replace(R.id.activityFrame, friendsFrag);
                         friendsFragmentTransaction.commit();
+                        activity = new ActivityClass.Friends();
                         break;
                     case ("Relationship"):
-                        activity = new Relationship();
+                        activity = new ActivityClass.Relationship();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         relationFrag = new RelationshipFragment();
                         relationFragmentTransaction.replace(R.id.activityFrame, relationFrag);
                         relationFragmentTransaction.commit();
                         break;
+
+
                     default:
                         break;
                 }
@@ -130,86 +134,88 @@ public class ActivityScreen  extends DayScreen {
         });
     }
 
-    public void goBack (View v){
+    String getActivityRating() {
+        return String.valueOf(actRatingSpinner.getSelectedItem());
+    }
+
+    void saveToActivity() {
+        //todo ehto: jos getActivityRating ei ole integer (eli se on tyhjä), niin tulee fragmentti tai ilmoitus joka pyytää käyttäjää antamaan ratingin.
+        activity.rating = getActivityRating();
+        activity.hours = hours;
+    }
+
+    public void goBack(View v) {
         //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
-        //day = null;
         Intent goBackIntent = new Intent(this, DayScreen.class);
         startActivity(goBackIntent);
     }
 
-
-
-
-
-}
-
-        // String valinta = getActivityFromMenu();
-        //System.out.println(valinta);
-
-        /*switch (valinta) {
-            case ("Studying"):
-                //Avaa fragmentin ActivityClassin kysymyksillä
-                //Eli Drinking -luokan constructori luo fragmentin
-                activity = new Studying();
-                //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
-                //Näin vältytään monen Listenerin luonnilta
-                System.out.println(valinta); //Printit vain testausta varten
-                activityFragment = new ActivityFragment();
-                activityFragmentTransaction.replace(R.id.activityFrame, activityFragment);
-                activityFragmentTransaction.commit();
-
-                break;
-            case ("Exercise"):
-                activity = new Exercise();
-                System.out.println(valinta);
-                //day.exercise = true;
-                break;
-            case ("Drinking"):
-                activity = new Drinking();
-                System.out.println(valinta);
-                break;
-            case ("Friends"):
-                activity = new Friends();
-                System.out.println(valinta);
-                break;
-            case ("Relationship"):
-                activity = new Relationship();
-                System.out.println(valinta);
-                break;
-            default:
-                System.out.println("Tyhjä");
-                break;
-        }
-    }
-
-    /*public void saveChanges(ActivityClass act) {//Tallennetaan Arrayhy
+    public void saveChanges(View v) {//Tallennetaan Arrayhyn
+        saveToActivity();
         int i = 0;
-        while (i<10){
-            if (day.doneActitivities[i] == null){
-                day.doneActitivities[i] = act;
+        while (i < 10) {
+            if (day.doneActivities[i] == null) {
+                day.doneActivities[i] = activity;
                 break;
-            }
-            else{
+            } else {
                 i++;
             }
         }
-    }*/
+        printAttributes();
+    }
 
-
-
-   /* protected String getActivityFromMenu() {
-        Spinner activitySpinner;
-        activitySpinner = findViewById(R.id.activityDropdown);
-        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    void printAttributes() { //todo jostain syystä tässä aliohjelmassa kun kutsuu "getAttributes()" -> IllegalStateException
+        int i = 0;
+        while (day.doneActivities[i] != null) {
+            ActivityClass act = day.doneActivities[i];
+            int n = 0;
+            if(act instanceof ActivityClass.Drinking) {
+                String[] attributes = ((ActivityClass.Drinking) act).getAttributes();
+                int numberofattributes = attributes.length;
+                while(n<numberofattributes) {
+                    System.out.println(attributes[n]);
+                    n++;
+                }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            else if(act instanceof ActivityClass.Studying) {
+                String[] attributes = ((ActivityClass.Studying) act).getAttributes();
+                int numberofattributes = attributes.length;
+                while (n < numberofattributes) {
+                    System.out.println(attributes[n]);
+                    n++;
+                }
             }
-        });
-        return String.valueOf(activitySpinner.getSelectedItem());
-    }*/
+            else if(act instanceof ActivityClass.Exercise) {
+                String[] attributes = ((ActivityClass.Exercise) act).getAttributes();
+                int numberofattributes = attributes.length;
+                while (n < numberofattributes) {
+                    System.out.println(attributes[n]);
+                    n++;
+                }
+            }
+            else if(act instanceof ActivityClass.Friends) {
+                String[] attributes = ((ActivityClass.Friends) act).getAttributes();
+                int numberofattributes = attributes.length;
+                while (n < numberofattributes) {
+                    System.out.println(attributes[n]);
+                    n++;
+
+                }
+            }
+            else if(act instanceof ActivityClass.Relationship) {
+                String[] attributes = ((ActivityClass.Relationship) act).getAttributes();
+                int numberofattributes = attributes.length;
+                while (n < numberofattributes) {
+                    System.out.println(attributes[n]);
+                    n++;
+                }
+            }
+                i++;
+            }
+        }
+    }
+
+
+
 
 
