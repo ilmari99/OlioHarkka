@@ -44,25 +44,37 @@ public class ActivityClass extends ActivityScreen {
     }
 
     class Exercise extends ActivityClass {
+        private String sportsType, notes;
 
-        public Exercise(int activityRating, int activityTime) {
-
+        public Exercise(int activityRating, int activityTime, String sportsType, String notes) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.sportsType = sportsType;
+            this.notes = notes;
         }
 
     }
 
     class Friends extends ActivityClass {
+        private int friendsNumber;
+        private String friendsText;
 
-        public Friends(int activityRating, int activityTime) {
-
+        public Friends(int activityRating, int activityTime, int friendsNumber, String friendsText) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.friendsNumber = friendsNumber;
+            this.friendsText = friendsText;
         }
-
     }
 
     class Relationship extends ActivityClass {
+        private
 
         public Relationship(int activityRating, int activityTime) {
-
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.subject = subject;
+            this.withFriends = withFriends;
         }
 
     }

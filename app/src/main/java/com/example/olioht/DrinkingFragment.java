@@ -73,8 +73,6 @@ public class DrinkingFragment extends Fragment {
 
                 day = DayScreen.getDayObject();
                 day.doneActivities.add(drinking);
-
-                System.out.println("#### "+doses+" ## "+passedOut+" ## "+rating+" ## "+time+" ###");
             }
         });
 

@@ -17,6 +17,7 @@ import android.widget.EditText;
 
 public class StudyFragment extends Fragment {
 
+    // Declaring variables for UI components and values
     private String subject;
     private int rating, time;
     private Boolean withFriends;
@@ -52,8 +53,6 @@ public class StudyFragment extends Fragment {
 
                 day = DayScreen.getDayObject();
                 day.doneActivities.add(studying);
-
-                System.out.println("#### "+subject+" ## "+withFriends+" ## "+rating+" ## "+time+" ###");
             }
         });
 
