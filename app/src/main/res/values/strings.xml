@@ -33,6 +33,7 @@
     <string name="friendText">Number of friends:</string>
     <string name="friendInput">Amount</string>
     <string name="friendsText">What did you do with friends?</string>
+    <string name="saveActivityToList">Save this activity</string>
 
 
     <string-array name="activities">

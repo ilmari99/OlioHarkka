@@ -35,12 +35,15 @@ public class ActivityScreen  extends DayScreen {
     private SeekBar activityRatingSlider, activityTimeSlider;
     private FrameLayout activityFrame;
     private int activityRating, activityTime;
+    private Bundle dataBundle;
     private String date = MainActivity.getDate();
     private DayClass day = DayScreen.getDayObject();
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
+
+        dataBundle = new Bundle();
 
         // Finding UI components
         activitySpinner = findViewById(R.id.activityDropdown);
@@ -133,10 +136,10 @@ public class ActivityScreen  extends DayScreen {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress == 6) {
-                    activityTimeText.setText(progress + "/5");
+                    activityRatingText.setText(progress + "/5");
                 }
                 else {
-                    activityTimeText.setText(progress + "");
+                    activityRatingText.setText(progress + "");
                 }
             }
             @Override
@@ -170,5 +173,13 @@ public class ActivityScreen  extends DayScreen {
 
     public void saveChanges(View v) {
 
+    }
+
+    public Bundle sendDataToFragment() {
+        activityRating = activityRatingSlider.getProgress();
+        activityTime = activityTimeSlider.getProgress();
+        dataBundle.putInt("rating", activityRating);
+        dataBundle.putInt("time", activityTime);
+        return dataBundle;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.olioht;
 
+import java.util.ArrayList;
+
 public class DayClass extends DayScreen{
 
     /*
@@ -11,7 +13,7 @@ public class DayClass extends DayScreen{
     private String date;
     private int sleepTime, socialTime, dayRating;
     private Boolean newExperience, newPeople, exercise;
-    ActivityClass[] doneActivities;
+    ArrayList<ActivityClass> doneActivities;
 
     public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise) {
         this.date = date;
@@ -21,6 +23,6 @@ public class DayClass extends DayScreen{
         this.newExperience = experience;
         this.newPeople = people;
         this.exercise = exercise;
-        doneActivities = new ActivityClass[9];     // Maximum of 10 activities a day
+        doneActivities = new ArrayList<>();
     }
 }
