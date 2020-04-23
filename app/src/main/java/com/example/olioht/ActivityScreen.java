@@ -9,13 +9,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ActivityScreen extends DayScreen {
+public class ActivityScreen  extends DayScreen {
 
     /*
     In this interface user can add different activities to selected date. Activities are saved as objects into an array.
@@ -30,12 +29,11 @@ public class ActivityScreen extends DayScreen {
     // Declaring variables for different UI components and values
     private ActivityClass activity = null;
     private Spinner activitySpinner;
-    private Fragment ratingFrag, drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
-    private String choice, subject;
-    private TextView infoTextBox; // activityRatingText, activityTimeText;
-    // private SeekBar activityRatingSlider, activityTimeSlider;
-    private Boolean withFriends;
-    private FrameLayout activityFrame, ratingFrame;
+    private Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
+    private String choice;
+    private TextView infoTextBox, activityRatingText, activityTimeText;
+    private SeekBar activityRatingSlider, activityTimeSlider;
+    private FrameLayout activityFrame;
     private int activityRating, activityTime;
     private String date = MainActivity.getDate();
     private DayClass day = DayScreen.getDayObject();
@@ -47,12 +45,12 @@ public class ActivityScreen extends DayScreen {
         // Finding UI components
         activitySpinner = findViewById(R.id.activityDropdown);
 
-        /*activityRatingSlider = findViewById(R.id.activityRatingSeekBar);
-        activityTimeSlider = findViewById(R.id.activityTimeSeekBar);*/
+        activityRatingSlider = findViewById(R.id.activityRatingSeekBar);
+        activityTimeSlider = findViewById(R.id.activityTimeSeekBar);
 
         infoTextBox = findViewById(R.id.activityScreenInfoMessage);
-       /* activityRatingText = findViewById(R.id.activityRatingChanging);
-        activityTimeText = findViewById(R.id.activityTimeChanging);*/
+        activityRatingText = findViewById(R.id.activityRatingChanging);
+        activityTimeText = findViewById(R.id.activityTimeChanging);
 
         TextView selectedDate = findViewById(R.id.selectedDate);
         selectedDate.setText("Date: " + date);
@@ -63,8 +61,7 @@ public class ActivityScreen extends DayScreen {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 choice = String.valueOf(activitySpinner.getSelectedItem());
-               /* activityFrame = findViewById(R.id.activityFrame);
-                ratingFrame = findViewById(R.id.ratingFrame);*/
+                activityFrame = findViewById(R.id.activityFrame);
 
                 // Setting up usage of fragments
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -73,27 +70,19 @@ public class ActivityScreen extends DayScreen {
                 FragmentTransaction friendsFragmentTransaction = fragmentManager.beginTransaction();
                 FragmentTransaction relationFragmentTransaction = fragmentManager.beginTransaction();
                 FragmentTransaction studyFragmentTransaction = fragmentManager.beginTransaction();
-                FragmentTransaction ratingFragmentTransaction = fragmentManager.beginTransaction();
 
-                ratingFrag = new generalInfo();
-                ratingFragmentTransaction.replace(R.id.ratingFrame, ratingFrag);
-                ratingFragmentTransaction.commit();
-
-                // TODO When creating new activity object, give it right parameters (eg. activity = new Studying(SUBJECT, TIME))
                 switch (choice) {
                     case ("Studying"):
+                        // Avaa fragmentin ActivityClassin kysymyksillä
+                        // Eli Drinking -luokan constructori luo fragmentin
+                        //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
+                        //Näin vältytään monen Listenerin luonnilta
                         studyFrag = new StudyFragment();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
 
-                        // TODO Find a way to call methods from fragment
-                        /*String subject = StudyFragment.getSubject;
-                        int rating = StudyFragment.getRating;
-                        int time = StudyFragment.getTime;
-                        Boolean friends = studyFrag.getF*/
-
-                        //activity = new Studying(subject, rating, time, friends);
+                        // activity = new Studying();
                         break;
                     case ("Exercise"):
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -130,25 +119,24 @@ public class ActivityScreen extends DayScreen {
                     default:
                         break;
                 }
+                System.out.println(choice);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-        Intent getDataIntent = getIntent();
-        withFriends = getDataIntent.getBooleanExtra("withFriends", false);
-        subject = getDataIntent.getStringExtra("subject");
-    }
-        /*// Listeners for changing texts
+
+        // Listeners for changing texts
         activityRatingSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress == 6) {
-                    activityRatingText.setText(progress + "/5");
+                    activityTimeText.setText(progress + "/5");
                 }
                 else {
-                    activityRatingText.setText(progress + "");
+                    activityTimeText.setText(progress + "");
                 }
             }
             @Override
@@ -171,10 +159,11 @@ public class ActivityScreen extends DayScreen {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
-    }*/
+    }
 
     public void goBack (View v){
-        // TODO Add warning if trying to leave without saving
+        //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
+        //day = null;
         Intent goBackIntent = new Intent(this, DayScreen.class);
         startActivity(goBackIntent);
     }
