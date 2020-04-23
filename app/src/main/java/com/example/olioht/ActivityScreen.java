@@ -26,18 +26,17 @@ public class ActivityScreen  extends DayScreen {
     Also similar to DayClass, the data will only be saved by pressing the "Save" -button.
      */
 
-    // Declaring variables for different UI components and values
+    // Declaring variables for UI components and values
     private ActivityClass activity = null;
     private Spinner activitySpinner;
     private Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
     private String choice;
     private TextView infoTextBox, activityRatingText, activityTimeText;
     private SeekBar activityRatingSlider, activityTimeSlider;
-    private FrameLayout activityFrame;
     private int activityRating, activityTime;
     private Bundle dataBundle;
     private String date = MainActivity.getDate();
-    private DayClass day = DayScreen.getDayObject();
+
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class ActivityScreen  extends DayScreen {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 choice = String.valueOf(activitySpinner.getSelectedItem());
-                activityFrame = findViewById(R.id.activityFrame);
 
                 // Setting up usage of fragments
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -76,53 +74,38 @@ public class ActivityScreen  extends DayScreen {
 
                 switch (choice) {
                     case ("Studying"):
-                        // Avaa fragmentin ActivityClassin kysymyksillä
-                        // Eli Drinking -luokan constructori luo fragmentin
-                        //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
-                        //Näin vältytään monen Listenerin luonnilta
                         studyFrag = new StudyFragment();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
-
-                        // activity = new Studying();
                         break;
                     case ("Exercise"):
                         infoTextBox.setVisibility(View.INVISIBLE);
                         exerciseFrag = new ExerciseFragment();
                         exerciseFragmentTransaction.replace(R.id.activityFrame, exerciseFrag);
                         exerciseFragmentTransaction.commit();
-
-                        activity = new Exercise();
                         break;
                     case ("Drinking"):
                         infoTextBox.setVisibility(View.INVISIBLE);
                         drinkingFrag = new DrinkingFragment();
                         drinkingFragmentTransaction.replace(R.id.activityFrame, drinkingFrag);
                         drinkingFragmentTransaction.commit();
-
-                        activity = new Drinking();
                         break;
                     case ("Friends"):
                         infoTextBox.setVisibility(View.INVISIBLE);
                         friendsFrag = new FriendsFragment();
                         friendsFragmentTransaction.replace(R.id.activityFrame, friendsFrag);
                         friendsFragmentTransaction.commit();
-
-                        activity = new Friends();
                         break;
                     case ("Relationship"):
                         infoTextBox.setVisibility(View.INVISIBLE);
                         relationFrag = new RelationshipFragment();
                         relationFragmentTransaction.replace(R.id.activityFrame, relationFrag);
                         relationFragmentTransaction.commit();
-
-                        activity = new Relationship();
                         break;
                     default:
                         break;
                 }
-                System.out.println(choice);
             }
 
             @Override
@@ -172,7 +155,7 @@ public class ActivityScreen  extends DayScreen {
     }
 
     public void saveChanges(View v) {
-
+        // TODO Implement the whole method
     }
 
     public Bundle sendDataToFragment() {

@@ -26,16 +26,16 @@ the data will be displayed on the EditText fields and the user can edit the info
  After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
 */
 
-    // TODO No new DayCLass-object created, if info for selected day already exists; information is read from text file instead
+    // TODO No new DayCLass-object is created, if info for selected day already exists; information is read from file instead
 
     // Declaring variables for different UI components and values
-    private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
-    private TextView dayRatingText, socialTimeText, sleepTimeText;
     private int sleepTime, socialTime, dayRating;
     private Boolean experience, exercise, people;
+    private String date;
+    private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
+    private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
-    private String date = MainActivity.getDate();
 
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ the data will be displayed on the EditText fields and the user can edit the info
         setContentView(R.layout.dayscreen);
 
         TextView selectedDate = findViewById(R.id.selectedDate);
+        date = MainActivity.getDate();
         selectedDate.setText("Date: " + date);
 
         // Changing text boxes for sliders

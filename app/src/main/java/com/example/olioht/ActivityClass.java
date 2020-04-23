@@ -17,22 +17,25 @@ public class ActivityClass extends ActivityScreen {
      */
 
     protected int activityRating, activityTime;
-    // protected String activityName;
 
 }
     class Drinking extends ActivityClass {
-        String activityName = "Drinking";
-        int doses;
+        private int doses;
+        private Boolean passedOut;
 
-        public Drinking() {
-
+        public Drinking(int activityRating, int activityTime, int doses, Boolean passedOut) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.doses = doses;
+            this.passedOut = passedOut;
         }
     }
 
     class Studying extends ActivityClass {
         private String subject;
         private Boolean withFriends;
-        public Studying(String subject, int activityRating, int activityTime, Boolean withFriends) {
+
+        public Studying(int activityRating, int activityTime, String subject, Boolean withFriends) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
             this.subject = subject;
@@ -41,63 +44,24 @@ public class ActivityClass extends ActivityScreen {
     }
 
     class Exercise extends ActivityClass {
-        String activityname = "Exercise";
 
-        public Exercise() {
+        public Exercise(int activityRating, int activityTime) {
 
         }
 
     }
 
     class Friends extends ActivityClass {
-        String activityname = "Friends";
-        int numberofpeople;
-        /*String activitywithFriends = getActivitywithfriends();
 
-        private String getActivitywithfriends() {
-            Spinner ActivitywithfriendsSpinner;
-            ActivitywithfriendsSpinner = (Spinner) findViewById(R.id.activitywithfriendsDropdown);
-            ActivitywithfriendsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-            return String.valueOf(ActivitywithfriendsSpinner.getSelectedItem());
-        }*/
-
-        Friends() {
+        public Friends(int activityRating, int activityTime) {
 
         }
 
     }
 
-    class Relationship extends ActivityClass{
-        String activityname = "Relationship";
-        Boolean had_sex;
-        int her_age;
-        /*String RelationshipActivity = getRelationshipActivity();
+    class Relationship extends ActivityClass {
 
-        private String getRelationshipActivity() {
-            Spinner relationshipSpinner;
-            relationshipSpinner = (Spinner) findViewById(R.id.relationshipActivityDropdown);
-            relationshipSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            return String.valueOf(relationshipSpinner.getSelectedItem());
-        }*/
-        Relationship(){
-
+        public Relationship(int activityRating, int activityTime) {
 
         }
 

@@ -37,7 +37,6 @@
 
 
     <string-array name="activities">
-        <item> </item>
         <item>Studying</item>
         <item>Exercise</item>
         <item>Drinking</item>
@@ -46,7 +45,6 @@
     </string-array>
 
     <string-array name="subjects">
-        <item> </item>
         <item>Math</item>
         <item>Physics</item>
         <item>Programming</item>
@@ -54,7 +52,6 @@
     </string-array>
 
     <string-array name="exerciseTypes">
-        <item> </item>
         <item>Powerlifting</item>
         <item>Jogging</item>
         <item>Cycling</item>
@@ -63,7 +60,6 @@
     </string-array>
 
     <string-array name="activityWithFriends">
-        <item> </item>
         <item>Drinking</item>
         <item>Studying</item>
         <item>Relaxing</item>
@@ -72,7 +68,6 @@
     </string-array>
 
     <string-array name="relationshipActivity">
-        <item> </item>
         <item>Her place</item>
         <item>My place</item>
         <item>Restaurant</item>

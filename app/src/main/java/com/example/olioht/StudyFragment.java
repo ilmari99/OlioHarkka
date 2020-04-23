@@ -18,12 +18,12 @@ import android.widget.EditText;
 public class StudyFragment extends Fragment {
 
     private String subject;
-    private Boolean withFriends;
     private int rating, time;
+    private Boolean withFriends;
+    private Bundle dataBundle;
     private EditText subjectText;
     private CheckBox friendsCheckBox;
     private Button saveActivityButton;
-    private Bundle dataBundle;
     private ActivityClass studying;
     private DayClass day;
 
@@ -48,7 +48,7 @@ public class StudyFragment extends Fragment {
                 rating = dataBundle.getInt("rating");
                 time = dataBundle.getInt("time");
 
-                studying = new Studying(subject, rating, time, withFriends);
+                studying = new Studying(rating, time, subject, withFriends);
 
                 day = DayScreen.getDayObject();
                 day.doneActivities.add(studying);

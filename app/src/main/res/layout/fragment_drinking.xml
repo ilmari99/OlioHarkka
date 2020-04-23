@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".DrinkingFragment">
 
+    <Button
+        android:id="@+id/saveActivityButton"
+        android:layout_width="137dp"
+        android:layout_height="64dp"
+        android:text="@string/saveActivityToList"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.854" />
+
     <CheckBox
         android:id="@+id/passedOutCheck"
         android:layout_width="197dp"
@@ -17,35 +29,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
-
-    <EditText
-        android:id="@+id/dosesInput"
-        android:layout_width="216dp"
-        android:layout_height="64dp"
-        android:autofillHints="Hours"
-        android:ems="10"
-        android:hint="@string/dosesInput"
-        android:inputType="number"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <TextView
         android:id="@+id/dosesText"
-        android:layout_width="146dp"
-        android:layout_height="63dp"
+        android:layout_width="203dp"
+        android:layout_height="61dp"
         android:gravity="center"
         android:text="@string/dosesText"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintVertical_bias="0.162" />
+
+    <TextView
+        android:id="@+id/dosesTextChanging"
+        android:layout_width="287dp"
+        android:layout_height="47dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <SeekBar
+        android:id="@+id/doseSeekBar"
+        android:layout_width="365dp"
+        android:layout_height="48dp"
+        android:max="50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434" />
 </androidx.constraintlayout.widget.ConstraintLayout>
