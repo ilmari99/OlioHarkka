@@ -32,7 +32,7 @@ public class ExerciseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_study, container, false);
+        View v = inflater.inflate(R.layout.fragment_exercise, container, false);
         exerciseType = v.findViewById(R.id.sportsTypeInput);
         notesBox = v.findViewById(R.id.notesTextInput);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
@@ -45,6 +45,8 @@ public class ExerciseFragment extends Fragment {
             notes = getNotes();
             rating = dataBundle.getInt("rating");
             time = dataBundle.getInt("time");
+
+            System.out.print(notes);
 
             exercising = new Exercise(rating, time, exercise, notes);
 

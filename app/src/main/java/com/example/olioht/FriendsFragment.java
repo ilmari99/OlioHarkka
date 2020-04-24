@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +23,7 @@ public class FriendsFragment extends Fragment {
     private Button saveActivityButton;
     private int rating, time, friendsNumber;
     private SeekBar friendSlider;
+    private TextView friendNumberChanging;
     private EditText friendsTextInput;
     private Bundle dataBundle;
     private ActivityClass friends;
@@ -34,10 +36,24 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_study, container, false);
+        View v = inflater.inflate(R.layout.fragment_friends, container, false);
         friendSlider = v.findViewById(R.id.friendsSeekBar);
         friendsTextInput = v.findViewById(R.id.notesTextInput);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        friendNumberChanging = v.findViewById(R.id.friendsTextView);
+
+        friendSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    friendNumberChanging.setText(progress + "");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override

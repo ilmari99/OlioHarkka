@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintVertical_bias="0.896" />
 
     <TextView
         android:id="@+id/sportType"
@@ -36,46 +36,33 @@
 
     <EditText
         android:id="@+id/notesTextInput"
-        android:layout_width="370dp"
-        android:layout_height="189dp"
+        android:layout_width="384dp"
+        android:layout_height="146dp"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/exerciseNotes"
         android:inputType="textMultiLine"
-        android:text="@string/exerciseNotes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.584" />
 
     <EditText
         android:id="@+id/sportsTypeInput"
         android:layout_width="360dp"
         android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="@string/sportsInput"
         android:inputType="textPersonName"
-        android:text="@string/sportsInput"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.236" />
 
-    <TextView
-        android:id="@+id/sportsTypeText"
-        android:layout_width="308dp"
-        android:layout_height="34dp"
-        android:gravity="center"
-        android:text="@string/typeOfSports"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
 </androidx.constraintlayout.widget.ConstraintLayout>

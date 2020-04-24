@@ -17,7 +17,7 @@ public class ActivityClass extends ActivityScreen {
      */
 
     protected int activityRating, activityTime;
-
+    
 }
     class Drinking extends ActivityClass {
         private int doses;
