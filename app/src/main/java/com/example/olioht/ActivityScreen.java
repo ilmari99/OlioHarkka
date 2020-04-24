@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ActivityScreen  extends DayScreen {
+public class ActivityScreen extends  DayScreen {
 
     /*
     In this interface the user can look at a done activity or edit an existing one.
@@ -30,12 +30,12 @@ public class ActivityScreen  extends DayScreen {
     Also similar to DayClass, the data will only be saved by pressing the "Save" -button.
      */
 
-    private ActivityClass activity = null;
+    public ActivityClass activity = null;
     private Spinner activitySpinner, actRatingSpinner;
     Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
     private String valinta;
     protected TextView infoTextBox;
-    private FrameLayout activityFrame;
+    public FrameLayout activityFrame;
     private int activityCounter = 0;
     String date = MainActivity.getDate();
     private String hours, activityRating;//TODO ActivityScreenissä näytetään arvoja jo ennen valitun luokan luontia. Arvoja pystyy myös muuttamaan ja kun luokka on valittu, annetut tiedot kopioidaan
@@ -53,7 +53,6 @@ public class ActivityScreen  extends DayScreen {
 
         // Grounds for fragments
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
 
         drinkingFrag = new DrinkingFragment();
@@ -81,25 +80,20 @@ public class ActivityScreen  extends DayScreen {
                 switch (valinta) {
                     //todo tänne jonnekin joku ehto, että jos on täyttänyt esim. Friends tietoja ja sen jälkeen vaihtaa aktiviteettia Studying --> tiedot katoaa. Eli joku varoitus
                     case ("Studying"):
-                        //Sitten kysytään käyttäjältä arvoja, ja tallennetaan arvot vasta kun käyttäjä painaa tallenna
-                        //Näin vältytään monen Listenerin luonnilta
-                        //todo kaikki ActivityClassin subclassien (Drinking,Studying....) constructorit heittää nullikan kun täällä tulee "activity = new Studying();" yms.
-                        studyFrag = new StudyFragment();
+                        activity = new Studying();
                         infoTextBox.setVisibility(View.INVISIBLE);
-                        studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
-
-                        activity = new ActivityClass.Studying();
+                        studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         break;
                     case ("Exercise"):
-                        activity = new ActivityClass.Exercise();
+                        activity = new Exercise();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         exerciseFrag = new ExerciseFragment();
                         exerciseFragmentTransaction.replace(R.id.activityFrame, exerciseFrag);
                         exerciseFragmentTransaction.commit();
                         break;
                     case ("Drinking"):
-                        activity = new ActivityClass.Drinking();
+                        activity = new Drinking();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         drinkingFrag = new DrinkingFragment();
                         drinkingFragmentTransaction.replace(R.id.activityFrame, drinkingFrag);
@@ -110,10 +104,10 @@ public class ActivityScreen  extends DayScreen {
                         friendsFrag = new FriendsFragment();
                         friendsFragmentTransaction.replace(R.id.activityFrame, friendsFrag);
                         friendsFragmentTransaction.commit();
-                        activity = new ActivityClass.Friends();
+                        activity = new Friends();
                         break;
                     case ("Relationship"):
-                        activity = new ActivityClass.Relationship();
+                        activity = new Relationship();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         relationFrag = new RelationshipFragment();
                         relationFragmentTransaction.replace(R.id.activityFrame, relationFrag);
@@ -169,32 +163,36 @@ public class ActivityScreen  extends DayScreen {
         while (day.doneActivities[i] != null) {
             ActivityClass act = day.doneActivities[i];
             int n = 0;
-            if(act instanceof ActivityClass.Drinking) {
-                String[] attributes = ((ActivityClass.Drinking) act).getAttributes();
+
+            if(act instanceof Drinking) {
+                String[] attributes = ((Drinking) act).getAttributes();
                 int numberofattributes = attributes.length;
                 while(n<numberofattributes) {
                     System.out.println(attributes[n]);
                     n++;
                 }
             }
-            else if(act instanceof ActivityClass.Studying) {
-                String[] attributes = ((ActivityClass.Studying) act).getAttributes();
+
+            else if(act instanceof Studying) {
+                String[] attributes = ((Studying) act).getAttributes();
                 int numberofattributes = attributes.length;
                 while (n < numberofattributes) {
                     System.out.println(attributes[n]);
                     n++;
                 }
             }
-            else if(act instanceof ActivityClass.Exercise) {
-                String[] attributes = ((ActivityClass.Exercise) act).getAttributes();
+
+            else if(act instanceof Exercise) {
+                String[] attributes = ((Exercise) act).getAttributes();
                 int numberofattributes = attributes.length;
                 while (n < numberofattributes) {
                     System.out.println(attributes[n]);
                     n++;
                 }
             }
-            else if(act instanceof ActivityClass.Friends) {
-                String[] attributes = ((ActivityClass.Friends) act).getAttributes();
+
+            else if(act instanceof Friends) {
+                String[] attributes = ((Friends) act).getAttributes();
                 int numberofattributes = attributes.length;
                 while (n < numberofattributes) {
                     System.out.println(attributes[n]);
@@ -202,16 +200,18 @@ public class ActivityScreen  extends DayScreen {
 
                 }
             }
-            else if(act instanceof ActivityClass.Relationship) {
-                String[] attributes = ((ActivityClass.Relationship) act).getAttributes();
+
+            else if(act instanceof Relationship) {
+                String[] attributes = ((Relationship) act).getAttributes();
                 int numberofattributes = attributes.length;
                 while (n < numberofattributes) {
                     System.out.println(attributes[n]);
                     n++;
                 }
             }
+
                 i++;
-            }
+        }
         }
     }
 
