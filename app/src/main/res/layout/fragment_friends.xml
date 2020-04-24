@@ -7,63 +7,71 @@
     android:layout_height="match_parent"
     tools:context=".FriendsFragment">
 
-    <EditText
-        android:id="@+id/friendCountInput"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:autofillHints="Hours"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/friendInput"
-        android:inputType="number"
-        android:textSize="20sp"
+    <Button
+        android:id="@+id/saveActivityButton"
+        android:layout_width="137dp"
+        android:layout_height="64dp"
+        android:text="@string/saveActivityToList"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.724"
-        app:layout_constraintStart_toEndOf="@+id/friendsText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.866" />
+
+    <SeekBar
+        android:id="@+id/friendsSeekBar"
+        android:layout_width="365dp"
+        android:layout_height="48dp"
+        android:max="50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386" />
+
+    <TextView
+        android:id="@+id/friendsTextView"
+        android:layout_width="287dp"
+        android:layout_height="47dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305" />
 
     <TextView
         android:id="@+id/friendsText"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
+        android:layout_width="221dp"
+        android:layout_height="58dp"
         android:gravity="center"
         android:text="@string/friendText"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.154" />
 
-    <TextView
-        android:id="@+id/activityWithFriendsText"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:text="@string/friendsText"
-        android:textColor="@android:color/background_dark"
+    <EditText
+        android:id="@+id/friendsTextInput"
+        android:layout_width="361dp"
+        android:layout_height="188dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/friendsText"
+        android:inputType="textMultiLine"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/friendsText"
-        app:layout_constraintVertical_bias="0.211" />
-
-    <Spinner
-        android:id="@+id/activityWithFriendsDropdown"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        android:entries="@array/activitywithFriends"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.724"
-        app:layout_constraintStart_toEndOf="@+id/activityWithFriendsText"
-        app:layout_constraintTop_toBottomOf="@+id/friendCountInput"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.646" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

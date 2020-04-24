@@ -9,41 +9,56 @@
 
     <TextView
         android:id="@+id/subjectText"
-        android:layout_width="130dp"
-        android:layout_height="30dp"
+        android:layout_width="175dp"
+        android:layout_height="59dp"
         android:gravity="center"
         android:text="@string/subjectText"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.113" />
+
+    <EditText
+        android:id="@+id/subjectInput"
+        android:layout_width="393dp"
+        android:layout_height="60dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/subjectInput"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329" />
 
     <CheckBox
-        android:id="@+id/studiedAloneBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/withFriendsCheck"
+        android:layout_width="183dp"
+        android:layout_height="31dp"
         android:text="@string/friendsYesNo"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectText"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
 
-    <Spinner
-        android:id="@+id/studySubjectDropdown"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:entries="@array/subjects"
+    <Button
+        android:id="@+id/saveActivityButton"
+        android:layout_width="137dp"
+        android:layout_height="64dp"
+        android:text="@string/saveActivityToList"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toEndOf="@+id/subjectText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.884" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

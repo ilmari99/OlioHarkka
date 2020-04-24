@@ -7,30 +7,75 @@
     android:layout_height="match_parent"
     tools:context=".ExerciseFragment">
 
-    <TextView
-        android:id="@+id/sportType"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="@string/sportType"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
+    <Button
+        android:id="@+id/saveActivityButton"
+        android:layout_width="137dp"
+        android:layout_height="64dp"
+        android:text="@string/saveActivityToList"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.86" />
 
-    <Spinner
-        android:id="@+id/exerciseTypeDropdown"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:entries="@array/exercisetypes"
+    <TextView
+        android:id="@+id/sportType"
+        android:layout_width="164dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="@string/sportType"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toEndOf="@+id/sportType"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.134" />
+
+    <EditText
+        android:id="@+id/notesTextInput"
+        android:layout_width="370dp"
+        android:layout_height="189dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/exerciseNotes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.612"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/sportsTypeInput"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/sportsInput"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/sportsTypeText"
+        android:layout_width="308dp"
+        android:layout_height="34dp"
+        android:gravity="center"
+        android:text="@string/typeOfSports"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281" />
 </androidx.constraintlayout.widget.ConstraintLayout>
