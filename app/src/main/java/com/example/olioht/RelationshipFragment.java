@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,9 +18,13 @@ import android.widget.Button;
 public class RelationshipFragment extends Fragment {
 
     // Declaring variables for UI components and values
+    private String relShipActivity, relShipNotes;
+    private int rating, time;
+    private Spinner relShipDropdown;
+    private EditText relShipNotesBox;
     private Button saveActivityButton;
     private Bundle dataBundle;
-    private ActivityClass friends;
+    private ActivityClass relationship;
     private DayClass day;
 
     public RelationshipFragment() {
@@ -29,9 +35,36 @@ public class RelationshipFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_study, container, false);
+        relShipDropdown = v.findViewById(R.id.relShipSpinner);
+        relShipNotesBox = v.findViewById(R.id.relShipNotes);
 
+        saveActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBundle = ((ActivityScreen) getActivity()).sendDataToFragment();
+                relShipActivity = getRelShipActivity();
+                relShipNotes = getRelShipNotes();
+                rating = dataBundle.getInt("rating");
+                time = dataBundle.getInt("time");
+
+                relationship = new Relationship(rating, time, relShipActivity, relShipNotes);
+
+                day = DayScreen.getDayObject();
+                day.doneActivities.add(relationship);
+            }
+        });
 
         // Inflate the layout for this fragment
         return v;
+    }
+
+    public String getRelShipActivity() {
+        relShipActivity = relShipDropdown.getSelectedItem().toString();
+        return relShipActivity;
+    }
+
+    public String getRelShipNotes() {
+        relShipNotes = relShipNotesBox.getText().toString();
+        return relShipNotes;
     }
 }

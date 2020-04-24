@@ -68,13 +68,13 @@ public class ActivityClass extends ActivityScreen {
     }
 
     class Relationship extends ActivityClass {
-        private
+        private String relShipActivity, relShipText;;
 
-        public Relationship(int activityRating, int activityTime) {
+        public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipText) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
-            this.subject = subject;
-            this.withFriends = withFriends;
+            this.relShipActivity = relShipActivity;
+            this.relShipText = relShipText;
         }
 
     }
