@@ -37,6 +37,7 @@ public class RelationshipFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_study, container, false);
         relShipDropdown = v.findViewById(R.id.relShipSpinner);
         relShipNotesBox = v.findViewById(R.id.relShipNotes);
+        saveActivityButton = v.findViewById(R.id.saveActivityButton);
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
