@@ -1,42 +1,59 @@
 <resources>
 
     <string name="app_name">Activity Logger</string>
-    <string name="chooseDayText">Hi! Choose a day you want to edit:</string>
-    <string name="daySelectButton">Confirm</string>
+
+    Universal strings
     <string name="selectedDate">Date: </string>
-    <string name="goBackButton">Back</string>
+    <string name="saveActivityToList">Save this activity</string>
+    <string name="additionalNotes">Additional notes</string>
+
+    Button strings
     <string name="backButton">Back</string>
     <string name="saveButton">Save</string>
     <string name="deleteButton">Delete</string>
-    <string name="chooseActivityText">Add or modify activities</string>
+    <string name="continueButton">Continue</string>
+    <string name="confirmButton">Confirm</string>
+
+    MainActivity strings
+    <string name="chooseDayText">Hi! Choose a day you want to edit:</string>
+
+    DayScreen strings
     <string name="rateDayText">Rate this day:</string>
     <string name="socialTimeText">Social time (h):</string>
-    <string name="SocialTimeAutofill">Hours</string>
-    <string name="rateActivityText">Rate this activity:</string>
-    <string name="chosenActivityText">Chosen activity:</string>
-    <string name="activityTimeText">Time:</string>
     <string name="SleepTimeText">Sleep:</string>
-    <string name="gotoActivityButton">Go to activity</string>
     <string name="newexperienceBoxText">New Experience</string>
     <string name="exerciseBoxText">Exercise</string>
     <string name="newpeopleBoxText">New people</string>
-    <string name="goToActivityScreenButton">Continue</string>
+
+    ActivityScreen strings
+    <string name="rateActivityText">Rate this activity:</string>
+    <string name="chosenActivityText">Chosen activity:</string>
+    <string name="activityTimeText">Time(h):</string>
     <string name="activityScreenInfoMessage">Select activity from the dropdown menu above</string>
+
+    Study strings
     <string name="subjectText">Study subject:</string>
-    <string name="friendsYesNo">Studied alone</string>
+    <string name="friendsYesNo">With friends?</string>
     <string name="subjectInput">Subject</string>
-    <string name="dosesText">Estimate of alcohol doses:</string>
+
+    Drinking strings
+    <string name="dosesText">Number of doses:</string>
     <string name="dosesInput">Doses</string>
-    <string name="passedOut">Passed out</string>
-    <string name="sportType">Exercise type:</string>
-    <string name="sportInput">Sports</string>
+    <string name="passedOut">Passed out?</string>
+
+    Exercise strings
+    <string name="sportType">Type of sports:</string>
+    <string name="sportsInput">Sports</string>
+    <string name="typeOfSports">What sports did you do?</string>
+
+    Friends strings
     <string name="friendText">Number of friends:</string>
     <string name="friendInput">Amount</string>
-    <string name="friendsText">Activity with friends:</string>
-    <string name="relationshipActivityText">What did you do together:</string>
-    <string name="hadsexText">Had sex</string>
-    <string name="nameOfTheDateText">Who were you out with:</string>
-    <string name="ageOfTheDateText">Age of the other person:</string>
+    <string name="friendsText">What did you do with friends?</string>
+
+    Relationship strings
+    <string name="relShipActivity">Relationship activity:</string>
+    <string name="hadSextext">Had sex</string>
 
 
     <string-array name="activities">
@@ -46,7 +63,6 @@
         <item>Drinking</item>
         <item>Friends</item>
         <item>Relationship</item>
-        <item>Add</item>
     </string-array>
 
     <string-array name="subjects">
@@ -57,7 +73,7 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="exercisetypes">
+    <string-array name="exerciseTypes">
         <item> </item>
         <item>Powerlifting</item>
         <item>Jogging</item>
@@ -66,7 +82,7 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="activitywithFriends">
+    <string-array name="activityWithFriends">
         <item> </item>
         <item>Drinking</item>
         <item>Studying</item>
@@ -88,23 +104,5 @@
         <item>Other activity</item>
     </string-array>
 
-    <string-array name="ratingChoices">
-        <item> </item>
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-    </string-array>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

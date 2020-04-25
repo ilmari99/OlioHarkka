@@ -8,30 +8,6 @@
 
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="146dp"
-        android:layout_height="wrap_content"
-        android:text="@string/saveButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="146dp"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
         android:id="@+id/goBackButton"
         android:layout_width="91dp"
         android:layout_height="39dp"
@@ -49,7 +25,7 @@
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:text="@string/chosenActivityText"
-        android:textSize="20sp"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
@@ -62,7 +38,7 @@
         android:layout_width="160dp"
         android:layout_height="39dp"
         android:text="@string/rateActivityText"
-        android:textSize="20sp"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
@@ -71,24 +47,24 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <TextView
-        android:id="@+id/selectedDate"
-        android:layout_width="290dp"
-        android:layout_height="37dp"
+        android:id="@+id/selectedDateText"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
         android:text="@string/selectedDate"
-        android:textSize="28sp"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <TextView
         android:id="@+id/activityTimeText"
         android:layout_width="164dp"
         android:layout_height="41dp"
         android:text="@string/activityTimeText"
-        android:textSize="20sp"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -123,13 +99,13 @@
 
     <FrameLayout
         android:id="@+id/activityFrame"
-        android:layout_width="413dp"
-        android:layout_height="355dp"
+        android:layout_width="404dp"
+        android:layout_height="428dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784">
+        app:layout_constraintVertical_bias="0.994">
 
     </FrameLayout>
 
@@ -180,5 +156,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.254" />
+
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/selectedDate"
+        android:textAppearance="@style/text_in_box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toEndOf="@+id/selectedDateText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.116" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

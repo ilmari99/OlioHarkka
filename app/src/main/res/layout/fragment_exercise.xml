@@ -7,75 +7,74 @@
     android:layout_height="match_parent"
     tools:context=".ExerciseFragment">
 
-    <Button
-        android:id="@+id/saveActivityButton"
-        android:layout_width="137dp"
-        android:layout_height="64dp"
-        android:text="@string/saveActivityToList"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
-
     <TextView
         android:id="@+id/sportType"
-        android:layout_width="164dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/sportType"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.171"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.335" />
 
     <EditText
-        android:id="@+id/notesTextInput"
-        android:layout_width="370dp"
-        android:layout_height="189dp"
+        android:id="@+id/notesTextInputExercise"
+        android:layout_width="276dp"
+        android:layout_height="106dp"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/additionalNotes"
         android:inputType="textMultiLine"
-        android:text="@string/exerciseNotes"
+        android:textColor="#9F9E9E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/sportType"
+        app:layout_constraintVertical_bias="0.37" />
 
-    <EditText
+    <Spinner
         android:id="@+id/sportsTypeInput"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/sportsInput"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="60dp"
+        android:entries="@array/exerciseTypes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/sportType"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.339" />
 
-    <TextView
-        android:id="@+id/sportsTypeText"
-        android:layout_width="308dp"
-        android:layout_height="34dp"
-        android:gravity="center"
-        android:text="@string/typeOfSports"
-        android:textSize="20sp"
+    <Button
+        android:id="@+id/saveActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/saveActivityToList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281" />
+        app:layout_constraintTop_toBottomOf="@+id/notesTextInputExercise"
+        app:layout_constraintVertical_bias="0.855" />
+
+    <Button
+        android:id="@+id/deleteActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/deleteButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toEndOf="@+id/saveActivityButton"
+        app:layout_constraintTop_toBottomOf="@+id/notesTextInputExercise"
+        app:layout_constraintVertical_bias="0.955" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

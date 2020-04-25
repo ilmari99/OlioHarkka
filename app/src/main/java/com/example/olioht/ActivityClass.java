@@ -1,264 +1,152 @@
 package com.example.olioht;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.lang.reflect.Array;
-/*ActivityClassista tulee fragmentti ActivityScreeniin
-ActivityScreenin siis pitäisi olla interface, mutta "lisäkysymykset" tulevat fragmenttina ActivityScreenin päälle
-Entä, jos aukaisee fragmentin, niin pystyykö silloin samaan aikaan muokata interfacessa olevia tietoja?
- */
+import java.util.HashMap;
+import java.util.Hashtable;
 
 public class ActivityClass extends ActivityScreen {
 
-    String rating, hours;
-
-    String[] classnames = {"Drinking", "Studying", "Exercise", "Friends", "Relationship"};
-
-    FragmentManager fragmentManager = getSupportFragmentManager();
-
-
- /*Activity luokat: Kun valitaan Activitetti ActivityScreenissä olevasta activityDropdownlistasta
-    Lisätään ActivityScreeniin valitun aktiviteetin luokan kysymykset esim. valitaan aktiviteetti Studying --> Kysytään dropdown listalla opiskeltu aine, opiskeltiinko yksin, jne.
-    TODO Luo jokaiselle AktivityClass luokan sisäluokalle fragmentti, joka näytetään, kun käyttäjä valitsee aktiviteetin
-    Kun fragmentti avataan, täytyy activiteetin tietojen silti näkyä ja olla muokattavissa.
+    /* Class containing information for one particular activity, which will be added to chosen day's
+    doneActivities-array upon saving.
      */
+
+    protected int activityRating, activityTime;
+
 }
-
     class Drinking extends ActivityClass {
-        String name = "Drinking";
-        String doses;
-        EditText dosesText;
-        Boolean passedOut;
-        CheckBox passedOutCheck;
+        private final String activityName = "Drinking";
+        private int doses;
+        private Boolean passedOut;
+        private HashMap<String,String> activityHashMap= new HashMap<>();
 
-        public Drinking() {
-            Intent intent = this.getIntent();
-            if (intent != null) {
-                dosesText = findViewById(R.id.dosesInput);
-                passedOutCheck = findViewById(R.id.passedOutCheck);
-
-
-                //Annetaan muutoksesta doses -arvo
-                dosesText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        doses = String.valueOf(dosesText.getText());
-                    }
-                });
-
-                //Annetaan muutoksesta passedOut -arvo
-                passedOutCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        passedOut = passedOutCheck.isChecked();
-                    }
-                });
-            }
-
+        public Drinking(int Rating, int Time, int tempDoses, Boolean passedOutBool) {
+            super.activityRating = Rating;
+            super.activityTime = Time;
+            this.doses = tempDoses;
+            this.passedOut = passedOutBool;
+            createActivityHash();
         }
 
-        String getAmountOfDoses() {
-            return doses;
+        private void createActivityHash(){
+            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Rating",String.valueOf(super.activityRating));
+            activityHashMap.put("Time",String.valueOf(super.activityTime));
+            activityHashMap.put("Alcohol doses",String.valueOf(doses));
+            activityHashMap.put("Passed out",String.valueOf(passedOut));
         }
 
-        Boolean getPassedOut() {
-            return passedOut;
+        public HashMap getActivityHashMap(){
+            return activityHashMap;
         }
-
-        String[] getAttributes() {//todo miksi heittää näistä kaikista getAttributes funktioista nullikan
-            String[] attributes = {day.date, name, rating, hours, doses, passedOut.toString()};
-            return attributes;
-        }
-
-
     }
 
     class Studying extends ActivityClass {
-        String name = "Studying";
-        Boolean alone;
-        String subject;
-        private Spinner subjectSpinner;
-        private CheckBox studiedAlone;
-        Activity act;
+        private final String activityName = "Studying";
+        private String subject;
+        private Boolean withFriends;
+        private HashMap<String,String> activityHashMap = new HashMap<String,String>();
 
-        public Studying() {
+        public Studying(int activityRating, int activityTime, String subject, Boolean withFriends) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.subject = subject;
+            this.withFriends = withFriends;
+            createActivityHash();
         }
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            Intent intent = new Intent(this,Studying.class);
-            startActivity(intent);
-
-            studyFrag = new StudyFragment();
+        private void createActivityHash(){
+            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Rating",String.valueOf(super.activityRating));
+            activityHashMap.put("Time",String.valueOf(super.activityTime));
+            activityHashMap.put("Subject",subject);
+            activityHashMap.put("With friends",String.valueOf(withFriends));
         }
 
-
-        Boolean getStudiedAlone() {
-            return alone;
-        }
-
-        public void setSubject(String tempSubject){
-            subject = tempSubject;
-            System.out.println("Subject set succesfully:"+subject);
-        }
-
-        public void setAlone(Boolean tempAlone)
-        {
-            alone = tempAlone;
-            System.out.println("Alone set succesfully:"+alone);
-        }
-
-        public String[] getAttributes() {
-            String[] attributes = new String[] {day.date, name, rating, hours, subject, alone.toString()};
-            return attributes;
+        public HashMap getActivityHashMap(){
+            return activityHashMap;
         }
     }
 
-
     class Exercise extends ActivityClass {
-        String name = "Exercise";
-        String type;
-        Spinner exerciseType;
+        private String sportsType, notes;
+        private final String activityName = "Exercise";
+        private HashMap<String,String> activityHashMap= new HashMap<>();
 
-        public Exercise() {
-            Intent intent = this.getIntent();
-            if (intent != null) {
-                exerciseType = findViewById(R.id.exerciseTypeDropdown);
-                exerciseType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        type = String.valueOf(exerciseType.getSelectedItem());
-                    }
+        public Exercise(int activityRating, int activityTime, String sportsType, String notes) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.sportsType = sportsType;
+            this.notes = notes;
+            createActivityHash();
+        }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+        private void createActivityHash(){
+            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Rating",String.valueOf(super.activityRating));
+            activityHashMap.put("Time",String.valueOf(super.activityTime));
+            activityHashMap.put("Sport type",String.valueOf(sportsType));
+            activityHashMap.put("Additional notes",notes);
+        }
 
-                    }
-                });
-            }
+        public HashMap getActivityHashMap(){
+            return activityHashMap;
 
         }
 
-        String[] getAttributes() {
-            String[] attributes = {day.date, name, rating, hours, type};
-            return attributes;
-        }
     }
 
     class Friends extends ActivityClass {
-        String name = "Friends";
-        String numberofpeople;
-        String activity;
-        Spinner activityWithfriends;
-        EditText amountofpeopleInput;
+        private int friendsNumber;
+        private String friendsText;
+        private final String activityName = "Friends";
+        private HashMap<String, String> activityHashMap = new HashMap<>();
 
-        Friends() {
-            Intent intent = this.getIntent();
-            if (intent != null) {
-                activityWithfriends = findViewById(R.id.activityWithFriendsDropdown);
-                amountofpeopleInput = findViewById(R.id.friendCountInput);
-                activityWithfriends.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        activity = String.valueOf(activityWithfriends.getSelectedItem());
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-                amountofpeopleInput.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        numberofpeople = String.valueOf(amountofpeopleInput.getText());
-                    }
-                });
-            }
+        public Friends(int activityRating, int activityTime, int friendsNumber, String friendsText) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.friendsNumber = friendsNumber;
+            this.friendsText = friendsText;
+            createActivityHash();
         }
 
-        String[] getAttributes() {
-            String[] attributes = {day.date, name, rating, hours, numberofpeople, activity};
-            return attributes;
+        private void createActivityHash() {
+            activityHashMap.put("Activity", activityName);
+            activityHashMap.put("Rating", String.valueOf(super.activityRating));
+            activityHashMap.put("Time", String.valueOf(super.activityTime));
+            activityHashMap.put("Number of friends", String.valueOf(friendsNumber));
+            activityHashMap.put("Additional notes", friendsText);
+        }
+
+        public HashMap getActivityHashMap() {
+            return activityHashMap;
+
         }
     }
 
     class Relationship extends ActivityClass {
-        String name = "Relationship";
-        Boolean had_sex;
-        String activity;
-        Spinner relationshipActivity;
-        CheckBox hadsexBox;
+        private String relShipActivity, relShipText;
+        private final String activityName = "Relationship";
+        private HashMap<String, String> activityHashMap = new HashMap<>();
+        private Boolean had_sex;
 
-        Relationship() {
-            Intent intent = this.getIntent();
-            if (intent != null) {
-                relationshipActivity = findViewById(R.id.relationshipActivityDropdown);
-                hadsexBox = findViewById(R.id.hadSexBox);
-                relationshipActivity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        activity = String.valueOf(relationshipActivity.getSelectedItem());
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-                hadsexBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        had_sex = hadsexBox.isChecked();
-                    }
-                });
-            }
+        public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipText) {
+            super.activityRating = activityRating;
+            super.activityTime = activityTime;
+            this.relShipActivity = relShipActivity;
+            this.relShipText = relShipText;
+            createActivityHash();
         }
 
-        String[] getAttributes() {
-            String[] attributes = {day.date, name, rating, hours, activity, had_sex.toString()};
-            return attributes;
+        private void createActivityHash() {
+            activityHashMap.put("Activity", activityName);
+            activityHashMap.put("Rating", String.valueOf(super.activityRating));
+            activityHashMap.put("Time", String.valueOf(super.activityTime));
+            activityHashMap.put("Relationship activity", relShipActivity);
+            activityHashMap.put("Had sex", String.valueOf(had_sex));
+        }
+
+        public HashMap getActivityHashMap() {
+            return activityHashMap;
+
         }
     }
-

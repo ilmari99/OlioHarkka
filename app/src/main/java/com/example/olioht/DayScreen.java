@@ -1,17 +1,21 @@
 package com.example.olioht;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class DayScreen extends MainActivity {
+
 /*
 In this interface we create a new DayClass or display editable attributes from a day that was already filled.
 In this screen the user can fill or edit information about a particular day. If there is no data about the day, then the EditText -fields will be blank, but if there was data about the day,
@@ -22,175 +26,115 @@ the data will be displayed on the EditText fields and the user can edit the info
 
  In this interface, there will be a list of DoneActivities, where the user can select added activities or select "Add".
  After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
+*/
 
- */
-//Todo tehdään niin, että jos tekstikentässä oleva arvo on tallennettu se näkyy mustalla tekstillä
-//TODO lisää check-boxit boolean tyypin attribuuteille DayClassista.
+    // TODO No new DayCLass-object is created, if info for selected day already exists; information is read from file instead
 
-    public DayClass day;                                               // TODO Muokkaa niin, että ei luoda uutta päivää jos päivämäärällä löytyy tietoja
-    private EditText socialTimeText, sleepTimeText;
-    private int dayRating = -1;
+    // Declaring variables for different UI components and values
+    private int sleepTime, socialTime, dayRating;
+    private Boolean experience, exercise, people;
+    private String date;
+    private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
+    private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
+    private static DayClass day;
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
-        day = DayClass.getInstance();
-        socialTimeText = findViewById(R.id.socialTimeTextBox);
-        sleepTimeText = findViewById(R.id.sleepTimeTextBox);
+
+        TextView selectedDate = findViewById(R.id.selectedDate);
+        date = MainActivity.getDate();
+        selectedDate.setText(date);
+
+        // Changing text boxes for sliders
+        dayRatingText = findViewById(R.id.dayRating);
+        socialTimeText = findViewById(R.id.socialTime);
+        sleepTimeText = findViewById(R.id.sleepTime);
+
+        // The sliders
+        socialTimeSlider = findViewById(R.id.socialSeekBar);
+        sleepTimeSlider = findViewById(R.id.sleepSeekBar);
+        rateDaySlider = findViewById(R.id.rateSeekBar);
+
+        // Checkboxes for boolean values
         exerciseBox = findViewById(R.id.exerciseBox);
         newExperienceBox = findViewById(R.id.newexperienceBox);
         newPeopleBox = findViewById(R.id.newexperienceBox);
 
-        TextView selectedDate = findViewById(R.id.selectedDate);
-        selectedDate.setText(MainActivity.getDate());
+        // Listeners for changing texts
+        socialTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                socialTimeText.setText(progress + " hours");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
+
+        sleepTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sleepTimeText.setText(progress + " hours");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
+
+        rateDaySlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                dayRatingText.setText(progress + "");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        }));
     }
 
-    private int getRating () {
-        Spinner ratingSpinner;
-        ratingSpinner = findViewById(R.id.activityRatingDropdown);
-        ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        dayRating = Integer.parseInt(String.valueOf(ratingSpinner.getSelectedItem()));
-        return dayRating;
-    }
-
-
-    public void goBack (View v){
-        //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
+    public void goBack (View v) {
+        //TODO Warning-screen if going back without saving
         Intent goBackIntent = new Intent(this, MainActivity.class);
         startActivity(goBackIntent);
     }
 
 
-    // Setting general information for chosen day
-    //TODO Arvojen asettaminen toimii, tarvitaan vielä tyhjien arvojen tarkastus ja koko sivun aktuaalinen tallennus
-   public void saveData (View v) {
-       String socialTime = socialTimeText.getText().toString();
-       String sleepTime = sleepTimeText.getText().toString();
-       System.out.println(getRating() + " " + socialTime + " " + sleepTime);
+    // Creating DayClass object for chosen day with all the info asked in DayScreen
+   public void saveDayData (View v) {
+        socialTime = socialTimeSlider.getProgress();
+        sleepTime = sleepTimeSlider.getProgress();
+        dayRating = rateDaySlider.getProgress();
+        experience = getExperienceBool();
+        people = getNewPeopleBool();
+        exercise = getExerciseBool();
 
-        if (socialTime != null) {
-            day.socialTime = Integer.parseInt(socialTime);
-        }
-        if (socialTime != null) {
-            day.sleepTime = Integer.parseInt(sleepTime);
-        }
-        if (getRating() != -1) {
-            day.dayRating = dayRating;
-        }
-        day.newPeople = getNewPeopleBool();
-        day.exercise = getExerciseBool();
-        day.newExperience = getExperienceBool();
-    }
+        day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise);
 
-    // Boolean values for checkboxes
-    protected boolean getExperienceBool(){
-        return newExperienceBox.isChecked();
-    }
-
-    protected boolean getExerciseBool(){
-        return exerciseBox.isChecked();
-    }
-
-    protected boolean getNewPeopleBool(){
-        return newPeopleBox.isChecked();
-    }
-
-
-
-
-    public void saveDayToFile () {
-        //Tallennetaan päivälle kuuluvat tiedot tiedostoon
-    }
-
-    public void addOrEditActivity (View v) {
-        Spinner activitySpinner;
-        activitySpinner = findViewById(R.id.activityDropdown);
-        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-
-    //TODO Kun muokataan aktiviteettia pitää saada suoraan auki kaikki vanhan aktiviteetin tiedot
-    //editActivityssa täytyy siis avata suoraan ActivityScreen ja aktiviteetille kuuluva  fragmentti
-
-    public void editActivity (View v) {
-        // Avataan ActivityScreen ja activityn fragmentti
-        saveData(v);
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
     }
 
-    public void addActivity (View v) {
-        // Avataan ActivityScreen
-        saveData(v);
-        Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
-        startActivity(activityScreenIntent);
-    }
+    // Boolean value getters for checkboxes
+    protected boolean getExperienceBool(){ return newExperienceBox.isChecked(); }
 
-    protected String getActivityFromDayScreen () {
-        Spinner activitySpinner;
-        activitySpinner = findViewById(R.id.activityDropdown);
-        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
+    protected boolean getExerciseBool(){ return exerciseBox.isChecked(); }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+    protected boolean getNewPeopleBool(){return newPeopleBox.isChecked(); }
 
-            }
-        });
-        return String.valueOf(activitySpinner.getSelectedItem());
-    }
-
-
+    public static DayClass getDayObject() { return day; }
 }
-
-
-        /*
-        this.findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData(v,socialTimeText,sleepTimeText);
-            }
-        });
-        */
-
-
-
-
-        /*
-        final Spinner dayRatingSpinner = findViewById(R.id.dayRatingDropdown);
-        ArrayAdapter<String> ratingAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ratingChoices);
-        ratingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayRatingSpinner.setAdapter(ratingAdapter);
-
-        dayRatingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-*/

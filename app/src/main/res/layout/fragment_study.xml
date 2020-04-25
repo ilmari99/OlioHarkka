@@ -9,56 +9,84 @@
 
     <TextView
         android:id="@+id/subjectText"
-        android:layout_width="175dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/subjectText"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.113" />
-
-    <EditText
-        android:id="@+id/subjectInput"
-        android:layout_width="393dp"
-        android:layout_height="60dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/subjectInput"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintVertical_bias="0.31" />
 
     <CheckBox
         android:id="@+id/withFriendsCheck"
-        android:layout_width="183dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/friendsYesNo"
-        android:textSize="24sp"
+        android:textAppearance="@style/text_in_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subjectInput"
+        app:layout_constraintVertical_bias="0.169" />
+
+    <Spinner
+        android:id="@+id/subjectInput"
+        android:layout_width="163dp"
+        android:layout_height="29dp"
+        android:entries="@array/subjects"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintStart_toEndOf="@+id/subjectText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
+        app:layout_constraintVertical_bias="0.313" />
+
+    <EditText
+        android:id="@+id/notesTextInputStudying"
+        android:layout_width="220dp"
+        android:layout_height="122dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/additionalNotes"
+        android:inputType="textMultiLine"
+        android:textColor="#9F9E9E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/withFriendsCheck"
+        app:layout_constraintVertical_bias="0.21" />
 
     <Button
         android:id="@+id/saveActivityButton"
-        android:layout_width="137dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="@string/saveActivityToList"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.221"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884" />
+        app:layout_constraintTop_toBottomOf="@+id/notesTextInputStudying"
+        app:layout_constraintVertical_bias="0.767" />
+
+    <Button
+        android:id="@+id/deleteActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/deleteButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/saveActivityButton"
+        app:layout_constraintTop_toBottomOf="@+id/notesTextInputStudying"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

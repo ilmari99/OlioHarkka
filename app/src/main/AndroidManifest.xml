@@ -19,8 +19,6 @@
         <activity android:name=".DayScreen" />
         <activity android:name=".ActivityScreen" />
         <activity android:name=".ActivityClass" />
-        <activity android:name=".DayClass" />
-        <activity android:name=".StudyFragment" />
     </application>
 
 </manifest>
