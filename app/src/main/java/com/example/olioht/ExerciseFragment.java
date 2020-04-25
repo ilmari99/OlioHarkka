@@ -48,6 +48,8 @@ public class ExerciseFragment extends Fragment {
             rating = dataBundle.getInt("rating");
             time = dataBundle.getInt("time");
 
+            System.out.print(notes);
+
             exercising = new Exercise(rating, time, exercise, notes);
 
             day = DayScreen.getDayObject();
