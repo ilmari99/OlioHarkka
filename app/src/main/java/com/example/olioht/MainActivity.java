@@ -35,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
     private Boolean selected = false;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
     /*
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-    date = sdf.format(new Date(calendarview.getDate()));
-     *///todo Kalenterissa oli ongelma, että jos ei valittu päivää (Mentiin oletuksella eli nykyisellä päivällä) niin päivämäärä oli null. En tajua miks kalenteri antaa nyt ainoastaan nykyisen päivämäärän :D
+    Yritin korjata ongelmaa, mutta nyt en ymmärrä miksi getDate palauttaa aina nykyisen päivän
+    riippumatta siitä, että selected == true
+
+     todo Kalenterissa oli ongelma, että jos ei valittu päivää (Mentiin oletuksella eli nykyisellä päivällä) niin päivämäärä oli null. En tajua miks kalenteri antaa nyt ainoastaan nykyisen päivämäärän :D
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 selected = true;
                 date = dayOfMonth + "." + month + "." + year;
-                System.out.println("Selected");
+                System.out.println("Selected date");
             }
         });
         if(!selected){ //Pitäisi tässä asettaa date arvo vain, jos selected == false
             date = sdf.format(new Date(calendarview.getDate()));
-            System.out.println("Not selected");
+            System.out.println("Not selected date");
         }
     }
     // Start the DayScreen activity

@@ -1,5 +1,9 @@
 package com.example.olioht;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +32,8 @@ public class DayClass extends DayScreen{
         doneActivities = new ArrayList<>();
     }
 
+    //Created a hashtable for day attributes
+    @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
     public void createDayHash(){
         dayAttributes.put("Date",getDate());
         dayAttributes.put("Rating",String.valueOf(dayRating));
@@ -37,11 +43,14 @@ public class DayClass extends DayScreen{
         dayAttributes.put("New people",String.valueOf(newPeople));
         dayAttributes.put("Exercise",String.valueOf(exercise));
     }
-    //This prints the attributes of an activity
+    /*This prints the attributes of an activity
+    Not necessarily necessary in the final product, but helps in developing.
+    Doesn't work for multiple activities, because currently hte app only allows one activity to be added
+     */
 
         public void printAllDayData(){
         System.out.println(dayAttributes);
-            HashMap tempActHash = null;
+        HashMap tempActHash = null;
         int i = 0;
         while(i<doneActivities.size()){
             Object act = doneActivities.get(i);

@@ -27,6 +27,11 @@ public class ActivityClass extends ActivityScreen {
             createActivityHash();
         }
 
+        /*
+        Creating a HashMap for every class
+        I think it is easier to handle and print if necessary
+         */
+
         private void createActivityHash(){
             activityHashMap.put("Activity",activityName);
             activityHashMap.put("Rating",String.valueOf(super.activityRating));

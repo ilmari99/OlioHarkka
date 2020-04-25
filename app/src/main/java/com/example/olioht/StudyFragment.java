@@ -55,7 +55,7 @@ public class StudyFragment extends Fragment {
                 day = DayScreen.getDayObject();
                 day.doneActivities.add(studying);
                 day.createDayHash();
-                day.printAllDayData();
+                day.printAllDayData(); //These are not necessary but demonstrate how saved data works
             }
         });
 
