@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void selectDay(View v) {
         Intent dayScreenIntent = new Intent(this, DayScreen.class);
         startActivity(dayScreenIntent);
+        DayScreen.resetDay(null);
     }
 
 

@@ -1,7 +1,9 @@
 package com.example.olioht;
 
+import android.content.Context;
 import android.os.Build;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class DayClass extends DayScreen{
     ArrayList<ActivityClass> doneActivities;
     HashMap<String,String> dayAttributes = new HashMap<>();
 
-    public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise) {
+    public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise,ArrayList<ActivityClass> activs) {
         this.date = date;
         this.sleepTime = sleepTime;
         this.socialTime = socialTime;
@@ -29,8 +31,10 @@ public class DayClass extends DayScreen{
         this.newExperience = experience;
         this.newPeople = people;
         this.exercise = exercise;
-        doneActivities = new ArrayList<>();
+        doneActivities = activs;
     }
+
+
 
     //Created a hashtable for day attributes
     @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
@@ -70,9 +74,11 @@ public class DayClass extends DayScreen{
             if(act instanceof Drinking){
                 tempActHash = ((Drinking) act).getActivityHashMap();
             }
+            System.out.println(i);
             System.out.println(tempActHash);
             i++;
         }
         }
+
 
 }

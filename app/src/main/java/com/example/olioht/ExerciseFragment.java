@@ -1,7 +1,9 @@
 package com.example.olioht;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -40,6 +42,7 @@ public class ExerciseFragment extends Fragment {
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
             dataBundle = ((ActivityScreen) getActivity()).sendDataToFragment();

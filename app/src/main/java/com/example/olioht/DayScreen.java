@@ -1,5 +1,6 @@
 package com.example.olioht;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import java.util.ArrayList;
 
 public class DayScreen extends MainActivity {
 
@@ -38,9 +41,25 @@ the data will be displayed on the EditText fields and the user can edit the info
     private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
+    ArrayList<ActivityClass> empty = new ArrayList<>();
 
+    /*
+    Kun luetaan tiedostosta johon tallennetaan oliot niin jotenkin näin:
 
+    while(true)
+        if(day[n].date != this.date){
+            n++;
+        }
+        else if(day[n].date == this.date){
+            //Näytetään tallennetun päivän data
+            break;
+        }
+        else if(//valitulta päivältä ei löydy tietoa){
+            //Näytetään tyhjä sivu
+        }
+     */
 
+    @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,29 +123,39 @@ the data will be displayed on the EditText fields and the user can edit the info
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
+        System.out.println("OnCreate suoritettu");
     }
 
 
     public void goBack (View v) {
         //TODO Warning-screen if going back without saving
+        /*
         Intent goBackIntent = new Intent(this, MainActivity.class);
         startActivity(goBackIntent);
+
+         */
+        finish();
     }
 
 
     // Creating DayClass object for chosen day with all the info asked in DayScreen
    public void saveDayData (View v) {
+
         socialTime = socialTimeSlider.getProgress();
         sleepTime = sleepTimeSlider.getProgress();
         dayRating = rateDaySlider.getProgress();
         experience = getExperienceBool();
         people = getNewPeopleBool();
         exercise = getExerciseBool();
-
-        day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise);
+       if(day == null) {
+           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
+       }
+       day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, day.doneActivities);
 
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
+
+       System.out.println("Suoritettu saveDayData");
     }
 
     // Boolean value getters for checkboxes
@@ -137,4 +166,8 @@ the data will be displayed on the EditText fields and the user can edit the info
     protected boolean getNewPeopleBool(){return newPeopleBox.isChecked(); }
 
     public static DayClass getDayObject() { return day; }
+
+    public static void resetDay(DayClass act){
+        day = act;
+    }
 }

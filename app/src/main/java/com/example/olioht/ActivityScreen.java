@@ -1,6 +1,7 @@
 package com.example.olioht;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,10 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class ActivityScreen  extends DayScreen {
 
     /*
@@ -38,6 +41,7 @@ public class ActivityScreen  extends DayScreen {
     private String date = MainActivity.getDate();
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
@@ -55,7 +59,7 @@ public class ActivityScreen  extends DayScreen {
         activityTimeText = findViewById(R.id.activityTimeChanging);
 
         TextView selectedDate = findViewById(R.id.selectedDate);
-        selectedDate.setText("Date: " + date);
+        selectedDate.setText(date);
 
         // Getting the activity and corresponding questions for user
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -148,9 +152,13 @@ public class ActivityScreen  extends DayScreen {
     }
 
     public void goBack (View v){
+        /*
         //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
         Intent goBackIntent = new Intent(this, DayScreen.class);
         startActivity(goBackIntent);
+
+         */
+        finish();
     }
 
     public void saveChanges(View v) {
