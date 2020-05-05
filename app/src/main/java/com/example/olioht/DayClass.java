@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DayClass extends DayScreen{
+public class DayClass{
 
     /*
     In this class we only have the attributes of one day. Changing and setting of values happens in DayScreen.
@@ -39,7 +39,7 @@ public class DayClass extends DayScreen{
     //Created a hashtable for day attributes
     @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
     public void createDayHash(){
-        dayAttributes.put("Date",getDate());
+        dayAttributes.put("Date",MainActivity.getDate());
         dayAttributes.put("Rating",String.valueOf(dayRating));
         dayAttributes.put("Sleep time",String.valueOf(sleepTime));
         dayAttributes.put("Social time",String.valueOf(socialTime));
@@ -49,7 +49,7 @@ public class DayClass extends DayScreen{
     }
     /*This prints the attributes of an activity
     Not necessarily necessary in the final product, but helps in developing.
-    Doesn't work for multiple activities, because currently hte app only allows one activity to be added
+
      */
 
         public void printAllDayData(){

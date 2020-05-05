@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +24,7 @@ public class ExerciseFragment extends Fragment {
     private String exercise, notes;
     private EditText notesBox;
     private Spinner exerciseType;
-    private Button saveActivityButton;
+    private Button saveActivityButton,deleteButton;
     private int rating, time;
     private Bundle dataBundle;
     private ActivityClass exercising;
@@ -40,6 +41,7 @@ public class ExerciseFragment extends Fragment {
         exerciseType = v.findViewById(R.id.sportsTypeInput);
         notesBox = v.findViewById(R.id.notesTextInputExercise);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        deleteButton = v.findViewById(R.id.deleteActivityButton);
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -51,14 +53,23 @@ public class ExerciseFragment extends Fragment {
             rating = dataBundle.getInt("rating");
             time = dataBundle.getInt("time");
 
-            System.out.print(notes);
-
             exercising = new Exercise(rating, time, exercise, notes);
 
             day = DayScreen.getDayObject();
             day.doneActivities.add(exercising);
             day.createDayHash();
             day.printAllDayData();
+            final Toast toast = Toast.makeText(getContext(),"Activity saved", Toast.LENGTH_SHORT);
+            toast.show();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                System.out.println("Called finish method");
             }
         });
 

@@ -6,6 +6,8 @@
     <string name="selectedDate">Date: </string>
     <string name="saveActivityToList">Save this activity</string>
     <string name="additionalNotes">Additional notes</string>
+    <string name="activitySaved">Activity saved</string>
+    <string name="savedWarning">If you leave without saving, the activity will be deleted</string>
 
     Button strings
     <string name="backButton">Back</string>

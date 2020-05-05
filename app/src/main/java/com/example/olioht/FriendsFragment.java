@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +23,7 @@ public class FriendsFragment extends Fragment {
 
     // Declaring variables for UI components and values
     private String friendsText;
-    private Button saveActivityButton;
+    private Button saveActivityButton,deleteButton;
     private int rating, time, friendsNumber;
     private SeekBar friendSlider;
     private EditText friendsTextInput;
@@ -42,6 +43,7 @@ public class FriendsFragment extends Fragment {
         friendSlider = v.findViewById(R.id.friendsSeekBar);
         friendsTextInput = v.findViewById(R.id.notesTextInputFriends);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        deleteButton = v.findViewById(R.id.deleteActivityButton);
         friendstext = v.findViewById(R.id.friendsTextView);
 
         friendSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
@@ -77,6 +79,17 @@ public class FriendsFragment extends Fragment {
             day.doneActivities.add(friends);
             day.createDayHash();
             day.printAllDayData();
+            final Toast toast = Toast.makeText(getContext(),"Activity saved", Toast.LENGTH_SHORT);
+            toast.show();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                System.out.println("Called finish method");
             }
         });
 

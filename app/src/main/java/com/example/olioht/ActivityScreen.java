@@ -3,12 +3,16 @@ package com.example.olioht;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -156,13 +160,16 @@ public class ActivityScreen  extends DayScreen {
         //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
         Intent goBackIntent = new Intent(this, DayScreen.class);
         startActivity(goBackIntent);
-
-         */
+*/
         finish();
     }
 
     public void saveChanges(View v) {
         // TODO Implement the whole method
+    }
+
+    public void deleteActivity(){
+        finish();
     }
 
     //Sends Activity rating and time to the chosen fragment

@@ -132,8 +132,8 @@ the data will be displayed on the EditText fields and the user can edit the info
         /*
         Intent goBackIntent = new Intent(this, MainActivity.class);
         startActivity(goBackIntent);
-
          */
+
         finish();
     }
 

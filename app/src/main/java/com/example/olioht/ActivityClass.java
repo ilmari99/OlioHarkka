@@ -17,13 +17,15 @@ public class ActivityClass extends ActivityScreen {
         private final String activityName = "Drinking";
         private int doses;
         private Boolean passedOut;
+        private String notes;
         private HashMap<String,String> activityHashMap= new HashMap<>();
 
-        public Drinking(int Rating, int Time, int tempDoses, Boolean passedOutBool) {
+        public Drinking(int Rating, int Time, int tempDoses, Boolean passedOutBool,String notez) {
             super.activityRating = Rating;
             super.activityTime = Time;
             this.doses = tempDoses;
             this.passedOut = passedOutBool;
+            this.notes = notez;
             createActivityHash();
         }
 
@@ -38,6 +40,7 @@ public class ActivityClass extends ActivityScreen {
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Alcohol doses",String.valueOf(doses));
             activityHashMap.put("Passed out",String.valueOf(passedOut));
+            activityHashMap.put("Notes",notes);
         }
 
         public HashMap getActivityHashMap(){
@@ -47,15 +50,16 @@ public class ActivityClass extends ActivityScreen {
 
     class Studying extends ActivityClass {
         private final String activityName = "Studying";
-        private String subject;
+        private String subject,notes;
         private Boolean withFriends;
         private HashMap<String,String> activityHashMap = new HashMap<String,String>();
 
-        public Studying(int activityRating, int activityTime, String subject, Boolean withFriends) {
+        public Studying(int activityRating, int activityTime, String subject, Boolean withFriends,String notez) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
             this.subject = subject;
             this.withFriends = withFriends;
+            this.notes = notez;
             createActivityHash();
         }
 
@@ -65,6 +69,7 @@ public class ActivityClass extends ActivityScreen {
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Subject",subject);
             activityHashMap.put("With friends",String.valueOf(withFriends));
+            activityHashMap.put("Notes",notes);
         }
 
         public HashMap getActivityHashMap(){
@@ -90,7 +95,7 @@ public class ActivityClass extends ActivityScreen {
             activityHashMap.put("Rating",String.valueOf(super.activityRating));
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Sport type",String.valueOf(sportsType));
-            activityHashMap.put("Additional notes",notes);
+            activityHashMap.put("Notes",notes);
         }
 
         public HashMap getActivityHashMap(){
@@ -102,15 +107,15 @@ public class ActivityClass extends ActivityScreen {
 
     class Friends extends ActivityClass {
         private int friendsNumber;
-        private String friendsText;
+        private String notes;
         private final String activityName = "Friends";
         private HashMap<String, String> activityHashMap = new HashMap<>();
 
-        public Friends(int activityRating, int activityTime, int friendsNumber, String friendsText) {
+        public Friends(int activityRating, int activityTime, int friendsNumber, String notez) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
             this.friendsNumber = friendsNumber;
-            this.friendsText = friendsText;
+            this.notes = notez;
             createActivityHash();
         }
 
@@ -119,7 +124,7 @@ public class ActivityClass extends ActivityScreen {
             activityHashMap.put("Rating", String.valueOf(super.activityRating));
             activityHashMap.put("Time", String.valueOf(super.activityTime));
             activityHashMap.put("Number of friends", String.valueOf(friendsNumber));
-            activityHashMap.put("Additional notes", friendsText);
+            activityHashMap.put("Notes", notes);
         }
 
         public HashMap getActivityHashMap() {
@@ -129,16 +134,16 @@ public class ActivityClass extends ActivityScreen {
     }
 
     class Relationship extends ActivityClass {
-        private String relShipActivity, relShipText;
+        private String relShipActivity, notes;
         private final String activityName = "Relationship";
         private HashMap<String, String> activityHashMap = new HashMap<>();
         private Boolean had_sex;
 
-        public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipText) {
+        public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipNotes) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
             this.relShipActivity = relShipActivity;
-            this.relShipText = relShipText;
+            this.notes = relShipNotes;
             createActivityHash();
         }
 
@@ -148,6 +153,7 @@ public class ActivityClass extends ActivityScreen {
             activityHashMap.put("Time", String.valueOf(super.activityTime));
             activityHashMap.put("Relationship activity", relShipActivity);
             activityHashMap.put("Had sex", String.valueOf(had_sex));
+            activityHashMap.put("Notes",notes);
         }
 
         public HashMap getActivityHashMap() {

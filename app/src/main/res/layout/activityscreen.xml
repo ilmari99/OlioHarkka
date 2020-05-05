@@ -97,6 +97,7 @@
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <FrameLayout
         android:id="@+id/activityFrame"
         android:layout_width="404dp"
@@ -105,9 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994">
-
-    </FrameLayout>
+        app:layout_constraintVertical_bias="0.994"/>
 
     <SeekBar
         android:id="@+id/activityRatingSeekBar"
@@ -170,5 +169,6 @@
         app:layout_constraintStart_toEndOf="@+id/selectedDateText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.116" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
