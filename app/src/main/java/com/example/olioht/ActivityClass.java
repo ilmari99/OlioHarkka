@@ -52,7 +52,7 @@ public class ActivityClass {
         private final String activityName = "Studying";
         private String subject,notes;
         private Boolean withFriends;
-        private HashMap<String,String> activityHashMap = new HashMap<String,String>();
+        private transient HashMap<String,String> activityHashMap = new HashMap<String,String>();
 
         public Studying(int activityRating, int activityTime, String subject, Boolean withFriends,String notez) {
             super.activityRating = activityRating;

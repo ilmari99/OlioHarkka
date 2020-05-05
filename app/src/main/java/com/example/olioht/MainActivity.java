@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private static String date, today;
     private String dayString, monthString;
     private CalendarView calendarview;
-    private Boolean selected = false;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     /*
@@ -53,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                selected = true;
-                //date = dayOfMonth + "." + month + "." + year;
                 System.out.println("Selected date");
 
                 if (month < 10) {
@@ -79,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         Intent dayScreenIntent = new Intent(this, DayScreen.class);
         startActivity(dayScreenIntent);
     }
-
 
     // getDate-method for other activities needing date
     public static String getDate() {

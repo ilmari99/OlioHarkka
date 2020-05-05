@@ -141,7 +141,7 @@
         android:id="@+id/saveDayButton"
         android:layout_width="170dp"
         android:layout_height="64dp"
-        android:onClick="saveToJSON"
+        android:onClick="saveToFile"
         android:text="@string/saveDayButton"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

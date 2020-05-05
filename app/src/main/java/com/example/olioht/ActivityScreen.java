@@ -50,6 +50,7 @@ public class ActivityScreen  extends DayScreen {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
 
+        // Bundle of data for giving to fragment
         dataBundle = new Bundle();
 
         // Finding UI components
@@ -118,7 +119,6 @@ public class ActivityScreen  extends DayScreen {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -162,10 +162,6 @@ public class ActivityScreen  extends DayScreen {
         startActivity(goBackIntent);
 */
         finish();
-    }
-
-    public void saveChanges(View v) {
-        // TODO Implement the whole method
     }
 
     public void deleteActivity(){

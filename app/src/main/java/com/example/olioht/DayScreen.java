@@ -1,27 +1,31 @@
 package com.example.olioht;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.util.ArrayList;
 
 public class DayScreen extends MainActivity {
@@ -30,12 +34,12 @@ public class DayScreen extends MainActivity {
 In this interface we create a new DayClass or display editable attributes from a day that was already filled.
 In this screen the user can fill or edit information about a particular day. If there is no data about the day, then the EditText -fields will be blank, but if there was data about the day,
 the data will be displayed on the EditText fields and the user can edit the information easily.
- The data is ONLY saved to a file after the user presses the "Save" -button. When overwriting, there will pop-up a "Warning" -fragment.
+The data is ONLY saved to a file after the user presses the "Save" -button. When overwriting, there will pop-up a "Warning" -fragment.
 
- There will only be one instance of DayClass at a time. Others will be stored on the file.
+There will only be one instance of DayClass at a time. Others will be stored on the file.
 
- In this interface, there will be a list of DoneActivities, where the user can select added activities or select "Add".
- After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
+In this interface, there will be a list of DoneActivities, where the user can select added activities or select "Add".
+After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
 */
 
     // TODO No new DayCLass-object is created, if info for selected day already exists; information is read from file instead
@@ -48,6 +52,7 @@ the data will be displayed on the EditText fields and the user can edit the info
     private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
+    Gson gson = new Gson();
     ArrayList<ActivityClass> empty = new ArrayList<>();
 
     /*
@@ -130,9 +135,21 @@ the data will be displayed on the EditText fields and the user can edit the info
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
+
+        if (day == null) {
+            day = checkExistingData(this, date);
+            if (day != null) {
+                socialTimeSlider.setProgress(day.getSocialTime());
+                sleepTimeSlider.setProgress(day.getSleepTime());
+                rateDaySlider.setProgress(day.getDayRating());
+                exerciseBox.setChecked(day.getExercise());
+                newExperienceBox.setChecked(day.getNewExperience());
+                newPeopleBox.setChecked(day.getNewPeople());
+            }
+        }
+
         System.out.println("OnCreate suoritettu");
     }
-
 
     public void goBack (View v) {
         //TODO Warning-screen if going back without saving
@@ -144,7 +161,6 @@ the data will be displayed on the EditText fields and the user can edit the info
         finish();
     }
 
-
     // Creating DayClass object for chosen day with all the info asked in DayScreen
    public void saveDayData (View v) {
 
@@ -154,32 +170,35 @@ the data will be displayed on the EditText fields and the user can edit the info
         experience = getExperienceBool();
         people = getNewPeopleBool();
         exercise = getExerciseBool();
-       if(day == null) {
-           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
-       }
-       day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, day.doneActivities);
+        if(day == null) {
+            day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
+        }
 
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
 
-       System.out.println("Suoritettu saveDayData");
+        System.out.println("Suoritettu saveDayData");
     }
 
-    // Saving the Day, including all the activities, to a JSON file.
-    public void saveToJSON(View v) {
+    // Saving the Day, including all the activities, to a SharedPreferences
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void saveToFile(View v) {
         day = ActivityScreen.getDayObject();
-        System.out.println(day);
-        //Gson gson = new Gson();
-        //String dayString = gson.toJson(day);
-        String filename = "daydata_"+day.dayAttributes.get(date)+".json";
-        try (Writer writer = new FileWriter(filename)) {
-            new Gson().toJson(day, writer);
-            } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String dayJSON = gson.toJson(day);    // Data to save
 
+        SharedPreferences sharedPreferences = getSharedPreferences("dayData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(date, dayJSON);
+        editor.commit();
+        finish();
     }
 
+    public DayClass checkExistingData(Context context, String date) {
+        SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
+        String dayJSON = sh.getString(date, "");
+        day = gson.fromJson(dayJSON, DayClass.class);
+        return day;
+    }
 
     // Boolean value getters for checkboxes
     protected boolean getExperienceBool(){ return newExperienceBox.isChecked(); }
@@ -188,9 +207,13 @@ the data will be displayed on the EditText fields and the user can edit the info
 
     protected boolean getNewPeopleBool(){return newPeopleBox.isChecked(); }
 
+    // Getter for other classes in need of day-object
     public static DayClass getDayObject() { return day; }
 
+    // Resetting day-object when old data is not needed
     public static void resetDay(DayClass act){
         day = act;
     }
 }
+
+

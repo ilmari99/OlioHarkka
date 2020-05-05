@@ -21,9 +21,10 @@ public class DayClass{
     private int sleepTime, socialTime, dayRating;
     private Boolean newExperience, newPeople, exercise;
     ArrayList<ActivityClass> doneActivities;
-    transient HashMap<String,String> dayAttributes = new HashMap<>();
+    transient HashMap<String,String> dayAttributes;
 
-    public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise,ArrayList<ActivityClass> activs) {
+
+    public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise, ArrayList<ActivityClass> activs) {
         this.date = date;
         this.sleepTime = sleepTime;
         this.socialTime = socialTime;
@@ -35,10 +36,10 @@ public class DayClass{
     }
 
 
-
     //Created a hashtable for day attributes
     @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
     public void createDayHash(){
+        dayAttributes = new HashMap<>();
         dayAttributes.put("Date",MainActivity.getDate());
         dayAttributes.put("Rating",String.valueOf(dayRating));
         dayAttributes.put("Sleep time",String.valueOf(sleepTime));
@@ -52,7 +53,7 @@ public class DayClass{
 
      */
 
-        public void printAllDayData(){
+    public void printAllDayData() {
         System.out.println(dayAttributes);
         HashMap tempActHash = null;
         int i = 0;
@@ -78,7 +79,37 @@ public class DayClass{
             System.out.println(tempActHash);
             i++;
         }
-        }
+    }
 
+    public String getDate() {
+        return date;
+    }
 
+    public int getSleepTime() {
+        return sleepTime;
+    }
+
+    public int getSocialTime() {
+        return socialTime;
+    }
+
+    public int getDayRating() {
+        return dayRating;
+    }
+
+    public Boolean getNewExperience() {
+        return newExperience;
+    }
+
+    public Boolean getNewPeople() {
+        return newPeople;
+    }
+
+    public Boolean getExercise() {
+        return exercise;
+    }
+
+    public ArrayList<ActivityClass> getDoneActivities() {
+        return doneActivities;
+    }
 }
