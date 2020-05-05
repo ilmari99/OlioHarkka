@@ -26,6 +26,7 @@
     <string name="newexperienceBoxText">New Experience</string>
     <string name="exerciseBoxText">Exercise</string>
     <string name="newpeopleBoxText">New people</string>
+    <string name="saveDayButton">Save the day</string>
 
     ActivityScreen strings
     <string name="rateActivityText">Rate this activity:</string>

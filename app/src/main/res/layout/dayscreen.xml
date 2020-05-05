@@ -125,16 +125,31 @@
 
     <Button
         android:id="@+id/goToActivityScreenButton"
-        android:layout_width="193dp"
-        android:layout_height="94dp"
+        android:layout_width="170dp"
+        android:layout_height="64dp"
         android:onClick="saveDayData"
         android:text="@string/continueButton"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintVertical_bias="0.898" />
+
+    <Button
+        android:id="@+id/saveDayButton"
+        android:layout_width="170dp"
+        android:layout_height="64dp"
+        android:onClick="saveToJSON"
+        android:text="@string/saveDayButton"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
 
     <SeekBar
         android:id="@+id/sleepSeekBar"

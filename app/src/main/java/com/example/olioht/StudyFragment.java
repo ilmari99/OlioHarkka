@@ -90,6 +90,10 @@ public class StudyFragment extends Fragment {
         return subjectSpinner.getSelectedItem().toString();
     }
 
+    public DayClass getDayObject() {
+        return day;
+    }
+
     public String getFriendsNotes(){return String.valueOf(notesBox.getText());}
 
     public Boolean getSaved(){return saved;}

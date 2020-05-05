@@ -4,7 +4,7 @@ package com.example.olioht;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-public class ActivityClass extends ActivityScreen {
+public class ActivityClass {
 
     /* Class containing information for one particular activity, which will be added to chosen day's
     doneActivities-array upon saving.
@@ -18,7 +18,7 @@ public class ActivityClass extends ActivityScreen {
         private int doses;
         private Boolean passedOut;
         private String notes;
-        private HashMap<String,String> activityHashMap= new HashMap<>();
+        private transient HashMap<String,String> activityHashMap= new HashMap<>();
 
         public Drinking(int Rating, int Time, int tempDoses, Boolean passedOutBool,String notez) {
             super.activityRating = Rating;
@@ -80,7 +80,7 @@ public class ActivityClass extends ActivityScreen {
     class Exercise extends ActivityClass {
         private String sportsType, notes;
         private final String activityName = "Exercise";
-        private HashMap<String,String> activityHashMap= new HashMap<>();
+        private transient HashMap<String,String> activityHashMap= new HashMap<>();
 
         public Exercise(int activityRating, int activityTime, String sportsType, String notes) {
             super.activityRating = activityRating;
@@ -109,7 +109,7 @@ public class ActivityClass extends ActivityScreen {
         private int friendsNumber;
         private String notes;
         private final String activityName = "Friends";
-        private HashMap<String, String> activityHashMap = new HashMap<>();
+        private transient HashMap<String, String> activityHashMap = new HashMap<>();
 
         public Friends(int activityRating, int activityTime, int friendsNumber, String notez) {
             super.activityRating = activityRating;
@@ -136,7 +136,7 @@ public class ActivityClass extends ActivityScreen {
     class Relationship extends ActivityClass {
         private String relShipActivity, notes;
         private final String activityName = "Relationship";
-        private HashMap<String, String> activityHashMap = new HashMap<>();
+        private transient HashMap<String, String> activityHashMap = new HashMap<>();
         private Boolean had_sex;
 
         public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipNotes) {

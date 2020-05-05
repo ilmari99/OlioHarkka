@@ -21,7 +21,7 @@ public class DayClass{
     private int sleepTime, socialTime, dayRating;
     private Boolean newExperience, newPeople, exercise;
     ArrayList<ActivityClass> doneActivities;
-    HashMap<String,String> dayAttributes = new HashMap<>();
+    transient HashMap<String,String> dayAttributes = new HashMap<>();
 
     public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise,ArrayList<ActivityClass> activs) {
         this.date = date;
