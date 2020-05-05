@@ -30,48 +30,64 @@ public class MainActivity extends AppCompatActivity {
      */
 
     // Declaring variables for different UI components and values
-    private static String date;
+    private static String date, today;
+    private String dayString, monthString;
     private CalendarView calendarview;
     private Boolean selected = false;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
     /*
     Yritin korjata ongelmaa, mutta nyt en ymmärrä miksi getDate palauttaa aina nykyisen päivän
     riippumatta siitä, että selected == true
-
-     todo Kalenterissa oli ongelma, että jos ei valittu päivää (Mentiin oletuksella eli nykyisellä päivällä) niin päivämäärä oli null. En tajua miks kalenteri antaa nyt ainoastaan nykyisen päivämäärän :D
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Setting up calendar
         calendarview = findViewById(R.id.calendarView);
+        today = sdf.format(new Date(calendarview.getDate()));
         calendarview.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-            // TODO Set date to current date if it's not changed in calendar
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 selected = true;
-                date = dayOfMonth + "." + month + "." + year;
+                //date = dayOfMonth + "." + month + "." + year;
                 System.out.println("Selected date");
+
+                if (month < 10) {
+                    monthString = "0" + Integer.toString(month + 1);
+                } else {
+                    monthString = Integer.toString(month + 1);
+                }
+                if (dayOfMonth < 10) {
+                    dayString = "0" + Integer.toString(dayOfMonth);
+                } else {
+                    dayString = Integer.toString(dayOfMonth);
+                }
+                date = dayString + "." + monthString + "." + year;
+                System.out.println("Selected date " + date);
             }
         });
-        if(!selected){ //Pitäisi tässä asettaa date arvo vain, jos selected == false
-            date = sdf.format(new Date(calendarview.getDate()));
-            System.out.println("Not selected date");
-        }
     }
+
     // Start the DayScreen activity
     public void selectDay(View v) {
+        DayScreen.resetDay(null);
         Intent dayScreenIntent = new Intent(this, DayScreen.class);
         startActivity(dayScreenIntent);
-        DayScreen.resetDay(null);
     }
 
 
     // getDate-method for other activities needing date
     public static String getDate() {
-        return String.valueOf(date);
+        if (date == null) {
+            return String.valueOf(today);
+        }
+        else {
+            return String.valueOf(date);
+        }
     }
 }

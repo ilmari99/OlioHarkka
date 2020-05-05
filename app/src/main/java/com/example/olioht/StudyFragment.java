@@ -72,6 +72,10 @@ public class StudyFragment extends Fragment {
     public String getSubject() {
         return subjectSpinner.getSelectedItem().toString();
     }
+
+    public DayClass getDayObject() {
+        return day;
+    }
 }
 
 

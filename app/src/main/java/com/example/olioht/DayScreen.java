@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -15,6 +16,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 public class DayScreen extends MainActivity {
@@ -61,7 +68,7 @@ the data will be displayed on the EditText fields and the user can edit the info
 
     @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.N)
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
 
@@ -129,17 +136,14 @@ the data will be displayed on the EditText fields and the user can edit the info
 
     public void goBack (View v) {
         //TODO Warning-screen if going back without saving
-        /*
-        Intent goBackIntent = new Intent(this, MainActivity.class);
-        startActivity(goBackIntent);
+        //Intent goBackIntent = new Intent(this, MainActivity.class);
+        //startActivity(goBackIntent);
 
-         */
-        finish();
+       finish();
     }
 
-
-    // Creating DayClass object for chosen day with all the info asked in DayScreen
-   public void saveDayData (View v) {
+    // Creating DayClass object for chosen day with info asked in DayScreen; transition to ActivityScreen
+   public void goToActivityScreen (View v) {
 
         socialTime = socialTimeSlider.getProgress();
         sleepTime = sleepTimeSlider.getProgress();
@@ -147,15 +151,31 @@ the data will be displayed on the EditText fields and the user can edit the info
         experience = getExperienceBool();
         people = getNewPeopleBool();
         exercise = getExerciseBool();
-       if(day == null) {
-           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
-       }
-       day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, day.doneActivities);
+        if (day == null) {
+           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise);
+            System.out.println("DayClass luotu");
+        }
+        //day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise);
 
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
 
-       System.out.println("Suoritettu saveDayData");
+        System.out.println("Suoritettu saveDayData");
+    }
+
+    // Saving the Day, including all the activities, to a JSON file.
+    public void saveToJSON(View v) {
+        day = ActivityScreen.getDayObject();
+        System.out.println(day);
+        //Gson gson = new Gson();
+        //String dayString = gson.toJson(day);
+        String filename = "daydata_"+day.dayAttributes.get(date)+".json";
+        try (Writer writer = new FileWriter(filename)) {
+            new Gson().toJson(day, writer);
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     // Boolean value getters for checkboxes
