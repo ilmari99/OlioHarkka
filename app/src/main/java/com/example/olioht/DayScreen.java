@@ -61,7 +61,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         selectedDate.setText(date);
 
         // Changing text boxes for sliders
-        dayRatingText = findViewById(R.id.dayRating);
+        dayRatingText = findViewById(R.id.rating);
         socialTimeText = findViewById(R.id.socialTime);
         sleepTimeText = findViewById(R.id.sleepTime);
 

@@ -72,6 +72,14 @@
     <string name="totalUsageDays">Total days used:</string>
     <string name="totalLoggedDays">Total logged days:</string>
 
+    Analyze selected strings
+    <string name="ratingOfTheDay">Rating:</string>
+    <string name="sleepHours">Sleep:</string>
+    <string name="socialHours">Social time:</string>
+    <string name="newExp">New exp:</string>
+    <string name="newPeople">New people:</string>
+    <string name="exercise">Exercised:</string>
+
 
     <string-array name="activities">
         <item> </item>

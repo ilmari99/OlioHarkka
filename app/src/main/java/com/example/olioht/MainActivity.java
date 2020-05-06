@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     After choosing the date and pressing "Confirm" button the user will be redirected to the DayScreen -interface.
      */
 
+    // TODO Pitäsikö tehdä vielä oma classi datan käsittelyä varten? Olsii enemmän oliomaista suunnittelua.
+
     // Declaring variables for different UI components and values
     private static String date, today;
     private String dayString, monthString;
