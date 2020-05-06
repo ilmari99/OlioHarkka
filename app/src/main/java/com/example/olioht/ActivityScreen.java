@@ -196,10 +196,6 @@ public class ActivityScreen  extends DayScreen {
         finish();
     }
 
-    public void deleteActivity() {
-        finish();
-    }
-
     //Sends Activity rating and time to the chosen fragment
     public Bundle sendDataToFragment() {
         activityRating = activityRatingSlider.getProgress();

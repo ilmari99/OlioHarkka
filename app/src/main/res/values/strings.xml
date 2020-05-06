@@ -18,6 +18,9 @@
 
     MainActivity strings
     <string name="chooseDayText">Hi! Choose a day you want to edit:</string>
+    <string name="analyzeAllButton">Analyze data from all days</string>
+    <string name="analyzeChosenButton">Analyze data from chosen day</string>
+    <string name="analyzeTextBox">Analyze data:</string>
 
     DayScreen strings
     <string name="rateDayText">Rate this day:</string>
@@ -57,6 +60,17 @@
     Relationship strings
     <string name="relShipActivity">Relationship activity:</string>
     <string name="hadSextext">Had sex</string>
+
+    AnalyzeAll strings
+    <string name="avgDayRating">Average day rating:</string>
+    <string name="avgSleepTme">Average sleep time:</string>
+    <string name="avgSocialTime">Average social time:</string>
+    <string name="newExpText">Days of new acquired experience:</string>
+    <string name="newPplText">Days of new people met:</string>
+    <string name="exercisedText">Days when exercised:</string>
+    <string name="firstDayOfUsage">First logged day:</string>
+    <string name="totalUsageDays">Total days used:</string>
+    <string name="totalLoggedDays">Total logged days:</string>
 
 
     <string-array name="activities">
@@ -106,6 +120,9 @@
         <item>Outdoors</item>
         <item>Other activity</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

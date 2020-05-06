@@ -2,24 +2,18 @@ package com.example.olioht;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.icu.util.Calendar;
-import android.icu.util.ULocale;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivity extends AppCompatActivity {
@@ -33,12 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private static String date, today;
     private String dayString, monthString;
     private CalendarView calendarview;
+    private Fragment analyzeAllFrag, analyzeChosenFrag;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-
-    /*
-    Yritin korjata ongelmaa, mutta nyt en ymmärrä miksi getDate palauttaa aina nykyisen päivän
-    riippumatta siitä, että selected == true
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +65,19 @@ public class MainActivity extends AppCompatActivity {
         DayScreen.resetDay(null);
         Intent dayScreenIntent = new Intent(this, DayScreen.class);
         startActivity(dayScreenIntent);
+    }
+
+    // Start the fragment with analysed data from all days
+    public void analyzeAll(View d) {
+        DayScreen.resetDay(null);
+        Intent analyzeAllIntent = new Intent(this, AnalyzeAllScreen.class);
+        startActivity(analyzeAllIntent);
+    }
+
+    public void analyseChosen(View c) {
+        DayScreen.resetDay(null);
+        Intent analyzeChosenIntent = new Intent(this, AnalyzeChosenScreen.class);
+        startActivity(analyzeChosenIntent);
     }
 
     // getDate-method for other activities needing date

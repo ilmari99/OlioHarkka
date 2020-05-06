@@ -40,7 +40,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 
     // Declaring variables for different UI components and values
     private Boolean experience, exercise, people;
-    private Boolean dataExists = false;
+    private Boolean dataExists = false, isActivityData = false;
     private String date;
     private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
     private TextView dayRatingText, socialTimeText, sleepTimeText;
@@ -121,7 +121,6 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             } catch (JSONException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            actNumber = 0;
             if (day != null) {
                 actNumber = day.doneActivities.size();
 
@@ -142,6 +141,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
                 newPeopleBox.setChecked(day.getNewPeople());
             }
         }
+        actNumber = 0;
 
         System.out.println("OnCreate suoritettu");
     }
@@ -152,7 +152,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         if (day == null) {
             finish();
         }
-        else if (day.doneActivities.isEmpty() || day.doneActivities == null) {
+        else if (day.doneActivities == null || day.doneActivities.isEmpty()) {
             finish();
         }
         else if (!day.doneActivities.isEmpty() && dataExists == true && noNewData(day)) {
@@ -187,6 +187,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
 
+        isActivityData = true;
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
 
@@ -196,8 +197,21 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     // Saving the Day, including all the activities, to a SharedPreferences XML file in JSON format
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveToFile(View v) {
-        day = ActivityScreen.getDayObject();
-        String dayJSON = gson.toJson(day);    // Data to save
+
+       if (day == null) {
+           socialTime = socialTimeSlider.getProgress();
+           sleepTime = sleepTimeSlider.getProgress();
+           dayRating = rateDaySlider.getProgress();
+           experience = getExperienceBool();
+           people = getNewPeopleBool();
+           exercise = getExerciseBool();
+           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
+       }
+       else {
+           day = ActivityScreen.getDayObject();
+       }
+
+       String dayJSON = gson.toJson(day);    // Data to save
 
         SharedPreferences sharedPreferences = getSharedPreferences("dayData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -214,28 +228,29 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         String dayJSON = sh.getString(date, "");
         System.out.println("#####" + dayJSON + "#######");
 
-        day = gson.fromJson(dayJSON, DayClass.class);
 
-        if (dayJSON == "") {
+        if (dayJSON == "" || dayJSON == "null") {
+            return null;
+        }
+        else {
+            day = gson.fromJson(dayJSON, DayClass.class);
+            dataExists = true;
+            day.doneActivities.clear();
+            JSONObject jsonObject = new JSONObject(dayJSON);
+            JSONArray acts = jsonObject.getJSONArray("doneActivities");
+
+            System.out.print(acts.length());
+            System.out.println(acts);
+
+            for (int i = 0; i < acts.length(); i++) {
+                JSONObject actObj = acts.getJSONObject(i);
+                String activityName = actObj.getString("activityName");
+                System.out.println(actObj);
+                Class cls = Class.forName("com.example.olioht." + activityName);
+                day.doneActivities.add((ActivityClass) gson.fromJson(acts.getString(i), cls));
+            }
             return day;
         }
-
-        dataExists = true;
-        day.doneActivities.clear();
-        JSONObject jsonObject = new JSONObject(dayJSON);
-        JSONArray acts = jsonObject.getJSONArray("doneActivities");
-
-        System.out.print(acts.length());
-        System.out.println(acts);
-
-        for (int i = 0; i < acts.length(); i++) {
-            JSONObject actObj = acts.getJSONObject(i);
-            String activityName = actObj.getString("activityName");
-            System.out.println(actObj);
-            Class cls = Class.forName("com.example.olioht." + activityName);
-            day.doneActivities.add((ActivityClass) gson.fromJson(acts.getString(i), cls));
-        }
-        return day;
     }
 
     // Boolean value getters for checkboxes
@@ -258,7 +273,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     }
 
     public boolean noNewData(DayClass day) {
-        int newActNumber = day.dayAttributes.size();
+        int newActNumber = day.doneActivities.size();
         if (actNumber == 0) {
             return true;
         }

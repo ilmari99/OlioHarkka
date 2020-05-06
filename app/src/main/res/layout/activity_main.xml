@@ -10,7 +10,6 @@
         android:id="@+id/calendarView"
         android:layout_width="404dp"
         android:layout_height="297dp"
-        android:layout_marginTop="28dp"
         android:clickable="false"
         android:firstDayOfWeek="2"
         android:hapticFeedbackEnabled="true"
@@ -26,7 +25,7 @@
         android:id="@+id/chooseDayText"
         android:layout_width="301dp"
         android:layout_height="74dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/chooseDayText"
         android:textSize="28sp"
@@ -36,17 +35,62 @@
 
     <Button
         android:id="@+id/daySelectButton"
-        android:layout_width="166dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="185dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="8dp"
         android:onClick="selectDay"
         android:text="@string/confirmButton"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <TextView
+        android:id="@+id/analyzeTextbox"
+        android:layout_width="345dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/analyzeTextBox"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daySelectButton" />
+
+    <Button
+        android:id="@+id/analyzeChosenButton"
+        android:layout_width="167dp"
+        android:layout_height="85dp"
+        android:onClick="analyseChosen"
+        android:text="@string/analyzeChosenButton"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/analyzeAllButton"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/analyzeTextbox" />
+
+    <Button
+        android:id="@+id/analyzeAllButton"
+        android:layout_width="167dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="32dp"
+        android:onClick="analyzeAll"
+        android:text="@string/analyzeAllButton"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/analyzeTextbox" />
+
+    <FrameLayout
+        android:id="@+id/analyzeLayout"
+        android:layout_width="412dp"
+        android:layout_height="590dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.113">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
