@@ -1,7 +1,9 @@
 package com.example.olioht;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -35,10 +38,7 @@ In this interface, there will be a list of DoneActivities, where the user can se
 After choosing an activity or Add, the user can press "Go to activity" which will open a new Interface "ActivityScreen".
 */
 
-    // TODO No new DayCLass-object is created, if info for selected day already exists; information is read from file instead
-
     // Declaring variables for different UI components and values
-    private int sleepTime, socialTime, dayRating;
     private Boolean experience, exercise, people;
     private Boolean dataExists = false;
     private String date;
@@ -46,6 +46,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
+    private int sleepTime, socialTime, dayRating, actNumber;
     private Gson gson = new Gson();
     ArrayList<ActivityClass> empty = new ArrayList<>();
 
@@ -120,33 +121,62 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             } catch (JSONException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+            actNumber = 0;
             if (day != null) {
+                actNumber = day.doneActivities.size();
+
+                //Setting up alert dialog
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Old data found!");
+                alertDialogBuilder.setMessage("You have already filled this day's information, showing it instead. You can also make changes to it.");
+                alertDialogBuilder.setPositiveButton("OK", null);
+                AlertDialog dialog = alertDialogBuilder.create();
+                dialog.show();
+
+                // Changing values to those found in SharedPreferences
                 socialTimeSlider.setProgress(day.getSocialTime());
                 sleepTimeSlider.setProgress(day.getSleepTime());
                 rateDaySlider.setProgress(day.getDayRating());
                 exerciseBox.setChecked(day.getExercise());
                 newExperienceBox.setChecked(day.getNewExperience());
                 newPeopleBox.setChecked(day.getNewPeople());
-                dataExists = true;
             }
         }
 
         System.out.println("OnCreate suoritettu");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void goBack (View v) {
-        //TODO Warning-screen if going back without saving
-        /*
-        Intent goBackIntent = new Intent(this, MainActivity.class);
-        startActivity(goBackIntent);
-         */
-
-        finish();
+        day = ActivityScreen.getDayObject();
+        if (day == null) {
+            finish();
+        }
+        else if (day.doneActivities.isEmpty() || day.doneActivities == null) {
+            finish();
+        }
+        else if (!day.doneActivities.isEmpty() && dataExists == true && noNewData(day)) {
+            finish();
+        }
+        else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Save your data!");
+            alertDialogBuilder.setMessage("You haven't saved your activity data. Are you sure you don't want save it? You can do it by pressing \"Save the day\" button below.");
+            alertDialogBuilder.setPositiveButton("Yes, I want to lose my data", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alertDialogBuilder.setNegativeButton("No, let's go save it", null);
+            AlertDialog dialog = alertDialogBuilder.create();
+            dialog.show();
+        }
     }
 
-    // Creating DayClass object for chosen day with all the info asked in DayScreen
+    /* Creating DayClass object for chosen day with all the info asked in DayScreen, then continuing
+    to fill information about different activities */
    public void saveDayData (View v) {
-
         socialTime = socialTimeSlider.getProgress();
         sleepTime = sleepTimeSlider.getProgress();
         dayRating = rateDaySlider.getProgress();
@@ -163,7 +193,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         System.out.println("Suoritettu saveDayData");
     }
 
-    // Saving the Day, including all the activities, to a SharedPreferences
+    // Saving the Day, including all the activities, to a SharedPreferences XML file in JSON format
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveToFile(View v) {
         day = ActivityScreen.getDayObject();
@@ -173,9 +203,12 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(date, dayJSON);
         editor.commit();
+        final Toast toast = Toast.makeText(this,"Day saved to a file!", Toast.LENGTH_LONG);
+        toast.show();
         finish();
     }
 
+    // Check if data for selected day exists already
     public DayClass checkExistingData(Context context, String date) throws JSONException, ClassNotFoundException {
         SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
         String dayJSON = sh.getString(date, "");
@@ -187,6 +220,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             return day;
         }
 
+        dataExists = true;
         day.doneActivities.clear();
         JSONObject jsonObject = new JSONObject(dayJSON);
         JSONArray acts = jsonObject.getJSONArray("doneActivities");
@@ -221,7 +255,18 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 
     public Boolean dataExistsBoolean() {
         return dataExists;
-}
+    }
+
+    public boolean noNewData(DayClass day) {
+        int newActNumber = day.dayAttributes.size();
+        if (actNumber == 0) {
+            return true;
+        }
+        else if (actNumber < newActNumber) {
+            return false;
+        }
+        return true;
+    }
 }
 
 

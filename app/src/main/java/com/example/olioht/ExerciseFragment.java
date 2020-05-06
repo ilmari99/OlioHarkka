@@ -43,6 +43,8 @@ public class ExerciseFragment extends Fragment {
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         deleteButton = v.findViewById(R.id.deleteActivityButton);
 
+        // TODO Make UI elements show old data if its found
+
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

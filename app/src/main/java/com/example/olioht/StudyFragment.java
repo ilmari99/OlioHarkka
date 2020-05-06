@@ -40,6 +40,7 @@ public class StudyFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -49,15 +50,8 @@ public class StudyFragment extends Fragment {
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         notesBox = v.findViewById(R.id.notesTextInputStudying);
-        SeekBar actRating = v.findViewById(R.id.activityRatingSeekBar);
-        SeekBar actTime = v.findViewById(R.id.activityTimeSeekBar);
 
-        if (day.doneActivities.contains(studying)) {
-            int index = day.doneActivities.indexOf(studying);
-            ActivityClass oldStudying = day.doneActivities.get(index);
-            actRating.setProgress(oldStudying.activityRating);
-            actTime.setProgress(oldStudying.activityTime);
-        }
+        // TODO Make UI elements show old data if its found
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -85,6 +79,7 @@ public class StudyFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                day.doneActivities.remove(studying);
                 getActivity().finish();
                 System.out.println("Called finish method");
             }

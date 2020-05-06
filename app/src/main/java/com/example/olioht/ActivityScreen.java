@@ -1,6 +1,8 @@
 package com.example.olioht;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,9 +45,7 @@ public class ActivityScreen  extends DayScreen {
     private int activityRating, activityTime;
     private Bundle dataBundle;
     private String date = MainActivity.getDate();
-    private DayClass day = DayScreen.getDayObject();
-    Class<Studying> studying = (Studying.class) ;
-
+    private static DayClass day = DayScreen.getDayObject();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,11 +86,11 @@ public class ActivityScreen  extends DayScreen {
 
                 switch (choice) {
                     case ("Studying"):
-                       for (Object o : day.doneActivities) {
-                           if (o instanceof Studying) {
-                               activityRatingSlider.setProgress(((Studying) o).activityRating);
-                               activityTimeSlider.setProgress(((Studying) o).activityTime);
-                           }
+                        for (Object o : day.doneActivities) {
+                            if (o instanceof Studying) {
+                                activityRatingSlider.setProgress(((Studying) o).activityRating);
+                                activityTimeSlider.setProgress(((Studying) o).activityTime);
+                            }
                         }
                         studyFrag = new StudyFragment();
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -161,14 +161,15 @@ public class ActivityScreen  extends DayScreen {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress == 6) {
                     activityRatingText.setText(progress + "/5");
-                }
-                else {
+                } else {
                     activityRatingText.setText(progress + "");
                 }
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -179,9 +180,11 @@ public class ActivityScreen  extends DayScreen {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 activityTimeText.setText(progress + " hours");
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -189,16 +192,11 @@ public class ActivityScreen  extends DayScreen {
 
     }
 
-    public void goBack (View v){
-        /*
-        //TODO lisätään tähän varoitus -fragmentti, että jos poistut tallentamatta menetät muutokset
-        Intent goBackIntent = new Intent(this, DayScreen.class);
-        startActivity(goBackIntent);
-*/
+    public void goBack(View v) {
         finish();
     }
 
-    public void deleteActivity(){
+    public void deleteActivity() {
         finish();
     }
 
