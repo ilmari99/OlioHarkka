@@ -11,10 +11,10 @@ public class ActivityClass {
      */
 
     protected int activityRating, activityTime;
-    
+    protected String activityName;
+
 }
     class Drinking extends ActivityClass {
-        private final String activityName = "Drinking";
         private int doses;
         private Boolean passedOut;
         private String notes;
@@ -23,6 +23,7 @@ public class ActivityClass {
         public Drinking(int Rating, int Time, int tempDoses, Boolean passedOutBool,String notez) {
             super.activityRating = Rating;
             super.activityTime = Time;
+            super.activityName = "Drinking";
             this.doses = tempDoses;
             this.passedOut = passedOutBool;
             this.notes = notez;
@@ -35,7 +36,7 @@ public class ActivityClass {
          */
 
         private void createActivityHash(){
-            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Activity",super.activityName);
             activityHashMap.put("Rating",String.valueOf(super.activityRating));
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Alcohol doses",String.valueOf(doses));
@@ -49,7 +50,6 @@ public class ActivityClass {
     }
 
     class Studying extends ActivityClass {
-        private final String activityName = "Studying";
         private String subject,notes;
         private Boolean withFriends;
         private transient HashMap<String,String> activityHashMap = new HashMap<String,String>();
@@ -57,6 +57,7 @@ public class ActivityClass {
         public Studying(int activityRating, int activityTime, String subject, Boolean withFriends,String notez) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
+            super.activityName = "Studying";
             this.subject = subject;
             this.withFriends = withFriends;
             this.notes = notez;
@@ -64,7 +65,7 @@ public class ActivityClass {
         }
 
         private void createActivityHash(){
-            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Activity",super.activityName);
             activityHashMap.put("Rating",String.valueOf(super.activityRating));
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Subject",subject);
@@ -79,19 +80,19 @@ public class ActivityClass {
 
     class Exercise extends ActivityClass {
         private String sportsType, notes;
-        private final String activityName = "Exercise";
         private transient HashMap<String,String> activityHashMap= new HashMap<>();
 
         public Exercise(int activityRating, int activityTime, String sportsType, String notes) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
+            super.activityName = "Exercise";
             this.sportsType = sportsType;
             this.notes = notes;
             createActivityHash();
         }
 
         private void createActivityHash(){
-            activityHashMap.put("Activity",activityName);
+            activityHashMap.put("Activity",super.activityName);
             activityHashMap.put("Rating",String.valueOf(super.activityRating));
             activityHashMap.put("Time",String.valueOf(super.activityTime));
             activityHashMap.put("Sport type",String.valueOf(sportsType));
@@ -108,19 +109,19 @@ public class ActivityClass {
     class Friends extends ActivityClass {
         private int friendsNumber;
         private String notes;
-        private final String activityName = "Friends";
         private transient HashMap<String, String> activityHashMap = new HashMap<>();
 
         public Friends(int activityRating, int activityTime, int friendsNumber, String notez) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
+            super.activityName = "Friends";
             this.friendsNumber = friendsNumber;
             this.notes = notez;
             createActivityHash();
         }
 
         private void createActivityHash() {
-            activityHashMap.put("Activity", activityName);
+            activityHashMap.put("Activity", super.activityName);
             activityHashMap.put("Rating", String.valueOf(super.activityRating));
             activityHashMap.put("Time", String.valueOf(super.activityTime));
             activityHashMap.put("Number of friends", String.valueOf(friendsNumber));
@@ -135,20 +136,20 @@ public class ActivityClass {
 
     class Relationship extends ActivityClass {
         private String relShipActivity, notes;
-        private final String activityName = "Relationship";
         private transient HashMap<String, String> activityHashMap = new HashMap<>();
         private Boolean had_sex;
 
         public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipNotes) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
+            super.activityName = "Relationship";
             this.relShipActivity = relShipActivity;
             this.notes = relShipNotes;
             createActivityHash();
         }
 
         private void createActivityHash() {
-            activityHashMap.put("Activity", activityName);
+            activityHashMap.put("Activity", super.activityName);
             activityHashMap.put("Rating", String.valueOf(super.activityRating));
             activityHashMap.put("Time", String.valueOf(super.activityTime));
             activityHashMap.put("Relationship activity", relShipActivity);

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class StudyFragment extends Fragment {
     private CheckBox friendsCheckBox;
     private Button saveActivityButton,deleteButton;
     private ActivityClass studying;
-    private DayClass day;
+    private DayClass day = DayScreen.getDayObject();;
     private Boolean saved = false;
 
     public StudyFragment() {
@@ -48,6 +49,15 @@ public class StudyFragment extends Fragment {
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         notesBox = v.findViewById(R.id.notesTextInputStudying);
+        SeekBar actRating = v.findViewById(R.id.activityRatingSeekBar);
+        SeekBar actTime = v.findViewById(R.id.activityTimeSeekBar);
+
+        if (day.doneActivities.contains(studying)) {
+            int index = day.doneActivities.indexOf(studying);
+            ActivityClass oldStudying = day.doneActivities.get(index);
+            actRating.setProgress(oldStudying.activityRating);
+            actTime.setProgress(oldStudying.activityTime);
+        }
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -61,9 +71,8 @@ public class StudyFragment extends Fragment {
                 rating = dataBundle.getInt("rating");
                 time = dataBundle.getInt("time");
 
-                studying = new Studying(rating, time, subject, withFriends,notes);
+                studying = new Studying(rating, time, subject, withFriends, notes);
 
-                day = DayScreen.getDayObject();
                 day.doneActivities.add(studying);
                 day.createDayHash();
                 day.printAllDayData(); //These are not necessary but demonstrate how saved data works

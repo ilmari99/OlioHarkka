@@ -1,5 +1,6 @@
 package com.example.olioht;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +35,6 @@ public class ActivityScreen  extends DayScreen {
      */
 
     // Declaring variables for UI components and values
-    private ActivityClass activity = null;
     private Spinner activitySpinner;
     private Fragment drinkingFrag, exerciseFrag, friendsFrag, relationFrag, studyFrag;
     private String choice;
@@ -43,6 +43,8 @@ public class ActivityScreen  extends DayScreen {
     private int activityRating, activityTime;
     private Bundle dataBundle;
     private String date = MainActivity.getDate();
+    private DayClass day = DayScreen.getDayObject();
+    Class<Studying> studying = (Studying.class) ;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -68,6 +70,7 @@ public class ActivityScreen  extends DayScreen {
 
         // Getting the activity and corresponding questions for user
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -83,30 +86,60 @@ public class ActivityScreen  extends DayScreen {
 
                 switch (choice) {
                     case ("Studying"):
+                       for (Object o : day.doneActivities) {
+                           if (o instanceof Studying) {
+                               activityRatingSlider.setProgress(((Studying) o).activityRating);
+                               activityTimeSlider.setProgress(((Studying) o).activityTime);
+                           }
+                        }
                         studyFrag = new StudyFragment();
                         infoTextBox.setVisibility(View.INVISIBLE);
                         studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
                         break;
                     case ("Exercise"):
+                        for (Object o : day.doneActivities) {
+                            if (o instanceof Exercise) {
+                                activityRatingSlider.setProgress(((Exercise) o).activityRating);
+                                activityTimeSlider.setProgress(((Exercise) o).activityTime);
+                            }
+                        }
                         infoTextBox.setVisibility(View.INVISIBLE);
                         exerciseFrag = new ExerciseFragment();
                         exerciseFragmentTransaction.replace(R.id.activityFrame, exerciseFrag);
                         exerciseFragmentTransaction.commit();
                         break;
                     case ("Drinking"):
+                        for (Object o : day.doneActivities) {
+                            if (o instanceof Drinking) {
+                                activityRatingSlider.setProgress(((Drinking) o).activityRating);
+                                activityTimeSlider.setProgress(((Drinking) o).activityTime);
+                            }
+                        }
                         infoTextBox.setVisibility(View.INVISIBLE);
                         drinkingFrag = new DrinkingFragment();
                         drinkingFragmentTransaction.replace(R.id.activityFrame, drinkingFrag);
                         drinkingFragmentTransaction.commit();
                         break;
                     case ("Friends"):
+                        for (Object o : day.doneActivities) {
+                            if (o instanceof Friends) {
+                                activityRatingSlider.setProgress(((Friends) o).activityRating);
+                                activityTimeSlider.setProgress(((Friends) o).activityTime);
+                            }
+                        }
                         infoTextBox.setVisibility(View.INVISIBLE);
                         friendsFrag = new FriendsFragment();
                         friendsFragmentTransaction.replace(R.id.activityFrame, friendsFrag);
                         friendsFragmentTransaction.commit();
                         break;
                     case ("Relationship"):
+                        for (Object o : day.doneActivities) {
+                            if (o instanceof Relationship) {
+                                activityRatingSlider.setProgress(((Relationship) o).activityRating);
+                                activityTimeSlider.setProgress(((Relationship) o).activityTime);
+                            }
+                        }
                         infoTextBox.setVisibility(View.INVISIBLE);
                         relationFrag = new RelationshipFragment();
                         relationFragmentTransaction.replace(R.id.activityFrame, relationFrag);
@@ -153,6 +186,7 @@ public class ActivityScreen  extends DayScreen {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
+
     }
 
     public void goBack (View v){

@@ -15,17 +15,10 @@ import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class DayScreen extends MainActivity {
@@ -47,29 +40,14 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     // Declaring variables for different UI components and values
     private int sleepTime, socialTime, dayRating;
     private Boolean experience, exercise, people;
+    private Boolean dataExists = false;
     private String date;
     private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
     private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
     ArrayList<ActivityClass> empty = new ArrayList<>();
-
-    /*
-    Kun luetaan tiedostosta johon tallennetaan oliot niin jotenkin näin:
-
-    while(true)
-        if(day[n].date != this.date){
-            n++;
-        }
-        else if(day[n].date == this.date){
-            //Näytetään tallennetun päivän data
-            break;
-        }
-        else if(//valitulta päivältä ei löydy tietoa){
-            //Näytetään tyhjä sivu
-        }
-     */
 
     @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -137,7 +115,11 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         }));
 
         if (day == null) {
-            day = checkExistingData(this, date);
+            try {
+                day = checkExistingData(this, date);
+            } catch (JSONException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             if (day != null) {
                 socialTimeSlider.setProgress(day.getSocialTime());
                 sleepTimeSlider.setProgress(day.getSleepTime());
@@ -145,6 +127,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
                 exerciseBox.setChecked(day.getExercise());
                 newExperienceBox.setChecked(day.getNewExperience());
                 newPeopleBox.setChecked(day.getNewPeople());
+                dataExists = true;
             }
         }
 
@@ -193,10 +176,31 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         finish();
     }
 
-    public DayClass checkExistingData(Context context, String date) {
+    public DayClass checkExistingData(Context context, String date) throws JSONException, ClassNotFoundException {
         SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
         String dayJSON = sh.getString(date, "");
+        System.out.println("#####" + dayJSON + "#######");
+
         day = gson.fromJson(dayJSON, DayClass.class);
+
+        if (dayJSON == "") {
+            return day;
+        }
+
+        day.doneActivities.clear();
+        JSONObject jsonObject = new JSONObject(dayJSON);
+        JSONArray acts = jsonObject.getJSONArray("doneActivities");
+
+        System.out.print(acts.length());
+        System.out.println(acts);
+
+        for (int i = 0; i < acts.length(); i++) {
+            JSONObject actObj = acts.getJSONObject(i);
+            String activityName = actObj.getString("activityName");
+            System.out.println(actObj);
+            Class cls = Class.forName("com.example.olioht." + activityName);
+            day.doneActivities.add((ActivityClass) gson.fromJson(acts.getString(i), cls));
+        }
         return day;
     }
 
@@ -214,6 +218,10 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     public static void resetDay(DayClass act){
         day = act;
     }
+
+    public Boolean dataExistsBoolean() {
+        return dataExists;
+}
 }
 
 
