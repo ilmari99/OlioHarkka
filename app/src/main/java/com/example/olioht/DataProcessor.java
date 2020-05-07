@@ -171,6 +171,12 @@ public class DataProcessor {
     }
 
 
+    public void deleteDayFromFile(Context context, String key) {
+        SharedPreferences sh = context.getSharedPreferences("dayData", context.MODE_PRIVATE);
+        sh.edit().remove(key).commit();
+    }
+
+
     // For making this class singleton
     public static DataProcessor getInstance() {
         if (dataProcessor == null) {
