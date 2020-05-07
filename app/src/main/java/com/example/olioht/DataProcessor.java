@@ -37,7 +37,7 @@ public class DataProcessor {
         String dayJSON = sh.getString(date, "");
 
         // If no existing data is found, returns null. Else proceeds to construct a DayClass object
-        if (dayJSON == "" || dayJSON == "null") {
+        if (dayJSON == "" || dayJSON == "null" || gson.fromJson(dayJSON, DayClass.class) == null) {
             return null;
         }
         else {

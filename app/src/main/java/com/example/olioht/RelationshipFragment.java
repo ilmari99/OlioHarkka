@@ -27,7 +27,7 @@ public class RelationshipFragment extends Fragment {
     private ActivityClass relationship;
     private DayClass day;
     private CheckBox had_sex;
-    private Boolean sex;
+    private Boolean sex = false;
 
     public RelationshipFragment() {
         // Required empty public constructor
@@ -63,7 +63,7 @@ public class RelationshipFragment extends Fragment {
                 rating = dataBundle.getInt("rating");
                 time = dataBundle.getInt("time");
 
-                relationship = new Relationship(rating, time, relShipActivity, getSexBool(), relShipNotes);
+                relationship = new Relationship(rating, time, relShipActivity, sex, relShipNotes);
 
                 day = DayScreen.getDayObject();
                 day.doneActivities.add(relationship);
