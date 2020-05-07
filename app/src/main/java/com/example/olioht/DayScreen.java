@@ -29,7 +29,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 */
 
     // Declaring variables for different UI components and values
-    private Boolean experience, exercise, people;
+    private Boolean experience=false, exercise=false, people=false;
     private Boolean oldDataExists, visitedActScreen ;
     private String date;
     private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
@@ -188,21 +188,20 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     // Saving the Day, including all the activities, to a SharedPreferences XML file in JSON format
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveToFile(View v) {
+        socialTime = socialTimeSlider.getProgress();
+        sleepTime = sleepTimeSlider.getProgress();
+        dayRating = rateDaySlider.getProgress();
+        experience = getExperienceBool();
+        people = getNewPeopleBool();
+        exercise = getExerciseBool();
 
         if (day == null) {
-            socialTime = socialTimeSlider.getProgress();
-            sleepTime = sleepTimeSlider.getProgress();
-            dayRating = rateDaySlider.getProgress();
-            experience = getExperienceBool();
-            people = getNewPeopleBool();
-            exercise = getExerciseBool();
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
+        }else{
+            day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, day.doneActivities);
         }
-        else {
-            if (visitedActScreen) {
-                day = ActivityScreen.getDayObject();
-            }
-        }
+
+
         if (oldDataExists) {
             dataProcessor.deleteDayFromFile(this, date);
         }

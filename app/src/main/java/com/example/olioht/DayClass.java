@@ -15,7 +15,7 @@ public class DayClass{
 
     private String date;
     private int sleepTime, socialTime, dayRating;
-    private Boolean newExperience, newPeople, exercise;
+    private Boolean newExperience = false, newPeople = false, exercise = false;
     ArrayList<ActivityClass> doneActivities;
     transient HashMap<String,String> dayAttributes;
 
