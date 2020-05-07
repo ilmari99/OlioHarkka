@@ -37,10 +37,10 @@ public class DayClass{
 
 
     //Created a hashtable for day attributes
-    @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void createDayHash(){
         dayAttributes = new HashMap<>();
-        dayAttributes.put("Date",MainActivity.getDate());
+        dayAttributes.put("Date", date);
         dayAttributes.put("Rating",String.valueOf(dayRating));
         dayAttributes.put("Sleep time",String.valueOf(sleepTime));
         dayAttributes.put("Social time",String.valueOf(socialTime));
@@ -48,9 +48,9 @@ public class DayClass{
         dayAttributes.put("New people",String.valueOf(newPeople));
         dayAttributes.put("Exercise",String.valueOf(exercise));
     }
+
     /*This prints the attributes of an activity
     Not necessarily necessary in the final product, but helps in developing.
-
      */
 
     public void printAllDayData() {
@@ -81,9 +81,6 @@ public class DayClass{
         }
     }
 
-    public String getDate() {
-        return date;
-    }
 
     public int getSleepTime() {
         return sleepTime;

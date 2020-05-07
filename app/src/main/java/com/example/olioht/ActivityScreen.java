@@ -90,7 +90,6 @@ public class ActivityScreen  extends DayScreen {
                             if (o instanceof Studying) {
                                 activityRatingSlider.setProgress(((Studying) o).activityRating);
                                 activityTimeSlider.setProgress(((Studying) o).activityTime);
-                                ((Studying) o).getActivityHashMap();
                             }
                         }
                         studyFrag = new StudyFragment();
