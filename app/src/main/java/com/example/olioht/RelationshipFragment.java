@@ -60,6 +60,7 @@ public class RelationshipFragment extends Fragment {
                 dataBundle = ((ActivityScreen) getActivity()).sendDataToFragment();
                 relShipActivity = getRelShipActivity();
                 relShipNotes = getRelShipNotes();
+                sex = getSexBool();
                 rating = dataBundle.getInt("rating");
                 time = dataBundle.getInt("time");
 
@@ -112,7 +113,7 @@ public class RelationshipFragment extends Fragment {
             relShipDropdown.setSelection(spinnerPosition);
         }
 
-        had_sex.setSelected(sex);
+        had_sex.setChecked(sex);
         relShipNotesBox.setText(notes);
     }
 }
