@@ -10,11 +10,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static java.lang.StrictMath.round;
 
 public class DataProcessor {
 
@@ -80,8 +83,10 @@ public class DataProcessor {
     // Method for analysing all day data. Returns string[] with analysed data inside.
     public String[] analyseAllData(Context context) {
         DayClass day;
+        DecimalFormat f = new DecimalFormat("##.00");
         String[] analyzedData = new String[8];
-        int avgRating = 0, avgSocial = 0, avgSleep = 0, expDays = 0, pplDays = 0,exerciseDays = 0,daysTotal = 0;
+        double avgRating = 0, avgSocial = 0, avgSleep = 0;
+        int daysTotal = 0, expDays = 0, pplDays = 0, exerciseDays = 0;
 
         // Getting SharedPreferences XML
         SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
@@ -109,9 +114,9 @@ public class DataProcessor {
         // Adding analysed data to array
         analyzedData[0] = firstDay;
         analyzedData[1] = daysTotal + " days";
-        analyzedData[2] = avgRating / daysTotal + " hours";
-        analyzedData[3] = avgSocial / daysTotal + " hours";
-        analyzedData[4] = avgSleep / daysTotal + " hours";
+        analyzedData[2] = f.format(avgRating / daysTotal);
+        analyzedData[3] = f.format(avgSocial / daysTotal) + " h";
+        analyzedData[4] = f.format(avgSleep / daysTotal) + " h";
         analyzedData[5] = expDays + " days";
         analyzedData[6] = pplDays + " days";
         analyzedData[7] = exerciseDays + " days";
@@ -122,6 +127,7 @@ public class DataProcessor {
 
     // Method for analyzing user chosen day. Returns string[] with analysed data inside.
     public String[] analyzeChosen(Context context, String date) {
+        DecimalFormat f = new DecimalFormat("##.00");
         StringBuilder builder = new StringBuilder();
         DayClass day;
         final String[] analyzedData = new String[8];
