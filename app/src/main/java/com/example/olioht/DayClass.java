@@ -103,6 +103,11 @@ public class DayClass{
         return exercise;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public String setDate() {
+        return MainActivity.getDate();
+    }
+
     public ArrayList<ActivityClass> getDoneActivities() {
         return doneActivities;
     }

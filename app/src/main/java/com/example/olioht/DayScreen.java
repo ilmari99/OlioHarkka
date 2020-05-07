@@ -30,7 +30,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 
     // Declaring variables for different UI components and values
     private Boolean experience, exercise, people;
-    private Boolean oldDataExists = false;
+    private Boolean oldDataExists, visitedActScreen ;
     private String date;
     private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
     private TextView dayRatingText, socialTimeText, sleepTimeText;
@@ -45,6 +45,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
 
+        visitedActScreen = false;
         TextView selectedDate = findViewById(R.id.selectedDate);
         date = MainActivity.getDate();
         selectedDate.setText(date);
@@ -107,6 +108,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         // Getting existing data if possible
         if (day == null) {
             actNumber = 0;
+            oldDataExists = false;
             day = dataProcessor.checkExistingData(this, date);
             if (day != null) {
 
@@ -176,6 +178,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
 
+        visitedActScreen = true;
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
 
@@ -196,7 +199,12 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
         else {
-            day = ActivityScreen.getDayObject();
+            if (visitedActScreen) {
+                day = ActivityScreen.getDayObject();
+            }
+        }
+        if (oldDataExists) {
+            dataProcessor.deleteDayFromFile(this, date);
         }
         dataProcessor.saveDayToFile(this, date, day);
         finish();
