@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -40,6 +41,12 @@ public class StudyFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public StudyFragment(String subj,boolean wFriends,String tempNotes){
+        subject = subj;
+        withFriends = wFriends;
+        notes = tempNotes;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +58,9 @@ public class StudyFragment extends Fragment {
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         notesBox = v.findViewById(R.id.notesTextInputStudying);
 
-        // TODO Make UI elements show old data if its found
+        if(subject != null){
+            setStudyData(subject,withFriends,notes);
+        }
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -79,9 +88,10 @@ public class StudyFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                day = DayScreen.getDayObject();
                 day.doneActivities.remove(studying);
                 getActivity().finish();
-                System.out.println("Called finish method");
+
             }
         });
             // Inflate the layout for this fragment
@@ -101,6 +111,19 @@ public class StudyFragment extends Fragment {
     public String getFriendsNotes(){return String.valueOf(notesBox.getText());}
 
     public Boolean getSaved(){return saved;}
+
+    public void setStudyData(String subj,boolean wFriends,String notes){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        subjectSpinner.setAdapter(adapter);
+        if (subj != null) {
+            int spinnerPosition = adapter.getPosition(subj);
+            subjectSpinner.setSelection(spinnerPosition);
+        }
+
+        friendsCheckBox.setSelected(wFriends);
+        notesBox.setText(notes);
+    }
 }
 
 

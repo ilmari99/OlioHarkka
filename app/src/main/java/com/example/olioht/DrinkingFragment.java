@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -47,6 +48,12 @@ public class DrinkingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public DrinkingFragment(int tempDoses,Boolean passed,String tempNotes){
+        doses = tempDoses;
+        passedOut = passed;
+        notes = tempNotes;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,6 +64,10 @@ public class DrinkingFragment extends Fragment {
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         passedOutCheckBox = v.findViewById(R.id.passedOutCheck);
         notesEditText = v.findViewById(R.id.notesTextInputDrinking);
+
+        if(notes != null){
+            setDrinkingData(doses,passedOut,notes);
+        }
 
         doseSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -122,4 +133,13 @@ public class DrinkingFragment extends Fragment {
     public Boolean getPassedOutBool() { return passedOutCheckBox.isChecked(); }
 
     public String getDrinkingNotes(){return String.valueOf(notesEditText.getText());}
+
+    public void setDrinkingData(int doses,boolean passedout,String notes){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        doseSlider.setProgress(doses);
+
+        passedOutCheckBox.setSelected(passedout);
+        notesEditText.setText(notes);
+    }
 }

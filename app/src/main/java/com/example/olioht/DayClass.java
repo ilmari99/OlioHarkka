@@ -48,6 +48,7 @@ public class DayClass{
         dayAttributes.put("New people",String.valueOf(newPeople));
         dayAttributes.put("Exercise",String.valueOf(exercise));
     }
+
     /*This prints the attributes of an activity
     Not necessarily necessary in the final product, but helps in developing.
 

@@ -101,9 +101,15 @@ public class ActivityClass {
 
         public HashMap getActivityHashMap(){
             return activityHashMap;
-
         }
 
+        public String getSportsType() {
+            return sportsType;
+        }
+
+        public String getNotes() {
+            return notes;
+        }
     }
 
     class Friends extends ActivityClass {
@@ -132,6 +138,14 @@ public class ActivityClass {
             return activityHashMap;
 
         }
+
+        public String getNotes() {
+            return notes;
+        }
+
+        public int getFriendsNumber() {
+            return friendsNumber;
+        }
     }
 
     class Relationship extends ActivityClass {
@@ -139,12 +153,13 @@ public class ActivityClass {
         private transient HashMap<String, String> activityHashMap = new HashMap<>();
         private Boolean had_sex;
 
-        public Relationship(int activityRating, int activityTime, String relShipActivity, String relShipNotes) {
+        public Relationship(int activityRating, int activityTime, String relShipActivity,Boolean sex, String relShipNotes) {
             super.activityRating = activityRating;
             super.activityTime = activityTime;
             super.activityName = "Relationship";
             this.relShipActivity = relShipActivity;
             this.notes = relShipNotes;
+            this.had_sex = sex;
             createActivityHash();
         }
 
@@ -160,5 +175,17 @@ public class ActivityClass {
         public HashMap getActivityHashMap() {
             return activityHashMap;
 
+        }
+
+        public String getNotes() {
+            return notes;
+        }
+
+        public Boolean getHad_sex() {
+            return had_sex;
+        }
+
+        public String getRelShipActivity() {
+            return relShipActivity;
         }
     }

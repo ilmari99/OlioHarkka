@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
@@ -48,13 +49,14 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     private static DayClass day;
     private int sleepTime, socialTime, dayRating, actNumber;
     private Gson gson = new Gson();
-    ArrayList<ActivityClass> empty = new ArrayList<>();
+    ArrayList<ActivityClass> empty;
 
     @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
+        empty = new ArrayList<>();
 
         TextView selectedDate = findViewById(R.id.selectedDate);
         date = MainActivity.getDate();
@@ -116,6 +118,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         }));
 
         if (day == null) {
+            actNumber = 0;
             try {
                 day = checkExistingData(this, date);
             } catch (JSONException | ClassNotFoundException e) {
@@ -141,9 +144,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
                 newPeopleBox.setChecked(day.getNewPeople());
             }
         }
-        actNumber = 0;
 
-        System.out.println("OnCreate suoritettu");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -153,9 +154,10 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             finish();
         }
         else if (day.doneActivities == null || day.doneActivities.isEmpty()) {
+
             finish();
         }
-        else if (!day.doneActivities.isEmpty() && dataExists == true && noNewData(day)) {
+        else if (!day.doneActivities.isEmpty() && dataExists && noNewData(day)) {
             finish();
         }
         else {
@@ -172,6 +174,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             AlertDialog dialog = alertDialogBuilder.create();
             dialog.show();
         }
+        resetDay(null);
     }
 
     /* Creating DayClass object for chosen day with all the info asked in DayScreen, then continuing
@@ -186,6 +189,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         if(day == null) {
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
+        this.day = new DayClass(date,sleepTime,socialTime,dayRating,experience,people,exercise,day.doneActivities);
 
         isActivityData = true;
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
@@ -219,6 +223,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         editor.commit();
         final Toast toast = Toast.makeText(this,"Day saved to a file!", Toast.LENGTH_LONG);
         toast.show();
+        resetDay(null);
         finish();
     }
 
@@ -274,13 +279,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 
     public boolean noNewData(DayClass day) {
         int newActNumber = day.doneActivities.size();
-        if (actNumber == 0) {
-            return true;
-        }
-        else if (actNumber < newActNumber) {
-            return false;
-        }
-        return true;
+        return actNumber >= newActNumber;
     }
 }
 

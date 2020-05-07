@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -36,6 +37,11 @@ public class FriendsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public FriendsFragment(int friends,String tempNotes){
+        friendsNumber = friends;
+        friendsText = tempNotes;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -45,6 +51,10 @@ public class FriendsFragment extends Fragment {
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         friendstext = v.findViewById(R.id.friendsTextView);
+
+        if(friendsText != null){
+            setFriendsData(friendsNumber,friendsText);
+        }
 
         friendSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -90,6 +100,8 @@ public class FriendsFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                day = DayScreen.getDayObject();
+                day.doneActivities.remove(friends);
                 getActivity().finish();
                 System.out.println("Called finish method");
             }
@@ -107,5 +119,13 @@ public class FriendsFragment extends Fragment {
     public String getFriendsText() {
         friendsText = friendsTextInput.getText().toString();
         return friendsText;
+    }
+
+    public void setFriendsData(int numberoffriends,String notes){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        friendSlider.setProgress(numberoffriends);
+
+        friendsTextInput.setText(notes);
     }
 }

@@ -26,12 +26,13 @@ public class AnalyzeChosenScreen extends AppCompatActivity {
     private String date = MainActivity.getDate();
     private DayClass day;
     private TextView dateText, dayRating, sleep, socialTime, activityText, exp, ppl, exerc;
-    private ArrayList<String> activities = new ArrayList<>();
+    private ArrayList<String> activities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analyze_chosen_screen);
+        activities = new ArrayList<>();
 
         dateText = findViewById(R.id.dateText);
         dayRating = findViewById(R.id.dayRating);
@@ -78,11 +79,10 @@ public class AnalyzeChosenScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // TODO Nämä tekstit toimimaan!!! Sit on hyvin
         dateText.setText(date);
-        dayRating.setText(day.getDayRating());
-        sleep.setText(day.getSleepTime());
-        socialTime.setText(day.getSocialTime());
+        dayRating.setText(String.valueOf(day.getDayRating()));
+        sleep.setText(String.valueOf(day.getSleepTime()));
+        socialTime.setText(String.valueOf(day.getSocialTime()));
         exp.setText(day.getNewExperience() ? "Yes" : "No");
         ppl.setText(day.getNewPeople() ? "Yes" : "No");
         exerc.setText(day.getExercise() ? "Yes" : "No");
