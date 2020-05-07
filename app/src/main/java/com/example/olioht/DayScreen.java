@@ -210,7 +210,9 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     protected boolean getNewPeopleBool(){return newPeopleBox.isChecked(); }
 
     // Getter for other classes in need of day-object
-    public static DayClass getDayObject() { return day; }
+    public static DayClass getDayObject() {
+        System.out.println(day);
+        return day; }
 
     // Resetting day-object when old data is not needed
     public static void resetDay(DayClass act){

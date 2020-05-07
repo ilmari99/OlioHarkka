@@ -16,15 +16,16 @@ import java.util.Arrays;
 public class AnalyzeChosenScreen extends MainActivity {
 
     // Declaring variables for different UI components and values
-    private String date = MainActivity.getDate();
+    private String date;
     private TextView dateText, dayRating, sleep, socialTime, activityText, exp, ppl, exerc;
-    private String activities;
     private String[] analyzedData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analyze_chosen_screen);
+
+        date = MainActivity.getDate();
 
         // Finding text boxes
         dateText = findViewById(R.id.dateText);

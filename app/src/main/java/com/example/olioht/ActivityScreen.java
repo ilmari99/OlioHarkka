@@ -19,12 +19,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class ActivityScreen extends DayScreen {
+public class ActivityScreen extends AppCompatActivity {
 
     /*
     In this interface user can add different activities to selected date. Activities are saved as objects into an array.
@@ -44,13 +45,15 @@ public class ActivityScreen extends DayScreen {
     private SeekBar activityRatingSlider, activityTimeSlider;
     private int activityRating, activityTime;
     private Bundle dataBundle;
-    private String date = MainActivity.getDate();
-    private static DayClass day = DayScreen.getDayObject();
+    private String date;
+    private static DayClass day;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
+
+        date = MainActivity.getDate();
 
         // Bundle of data for giving to fragment
         dataBundle = new Bundle();
@@ -76,6 +79,8 @@ public class ActivityScreen extends DayScreen {
 
                 choice = String.valueOf(activitySpinner.getSelectedItem());
 
+                day = DayScreen.getDayObject();
+
                 // Setting up usage of fragments
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction drinkingFragmentTransaction = fragmentManager.beginTransaction();
@@ -90,6 +95,7 @@ public class ActivityScreen extends DayScreen {
                             if (o instanceof Studying) {
                                 activityRatingSlider.setProgress(((Studying) o).activityRating);
                                 activityTimeSlider.setProgress(((Studying) o).activityTime);
+                                break;
                             }
                         }
                         studyFrag = new StudyFragment();
@@ -102,6 +108,7 @@ public class ActivityScreen extends DayScreen {
                             if (o instanceof Exercise) {
                                 activityRatingSlider.setProgress(((Exercise) o).activityRating);
                                 activityTimeSlider.setProgress(((Exercise) o).activityTime);
+                                break;
                             }
                         }
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -114,6 +121,7 @@ public class ActivityScreen extends DayScreen {
                             if (o instanceof Drinking) {
                                 activityRatingSlider.setProgress(((Drinking) o).activityRating);
                                 activityTimeSlider.setProgress(((Drinking) o).activityTime);
+                                break;
                             }
                         }
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -126,6 +134,7 @@ public class ActivityScreen extends DayScreen {
                             if (o instanceof Friends) {
                                 activityRatingSlider.setProgress(((Friends) o).activityRating);
                                 activityTimeSlider.setProgress(((Friends) o).activityTime);
+                                break;
                             }
                         }
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -138,6 +147,7 @@ public class ActivityScreen extends DayScreen {
                             if (o instanceof Relationship) {
                                 activityRatingSlider.setProgress(((Relationship) o).activityRating);
                                 activityTimeSlider.setProgress(((Relationship) o).activityTime);
+                                break;
                             }
                         }
                         infoTextBox.setVisibility(View.INVISIBLE);
@@ -205,4 +215,7 @@ public class ActivityScreen extends DayScreen {
         return dataBundle;
     }
 
+    public static DayClass getDayObject() {
+        return day;
+    }
 }
