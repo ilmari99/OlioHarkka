@@ -16,15 +16,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 
 public class FriendsFragment extends Fragment {
 
     // Declaring variables for UI components and values
     private String friendsText;
-    private Button saveActivityButton,deleteButton;
     private int rating, time, friendsNumber;
     private SeekBar friendSlider;
     private EditText friendsTextInput;
@@ -48,8 +44,8 @@ public class FriendsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
         friendSlider = v.findViewById(R.id.friendsSeekBar);
         friendsTextInput = v.findViewById(R.id.notesTextInputFriends);
-        saveActivityButton = v.findViewById(R.id.saveActivityButton);
-        deleteButton = v.findViewById(R.id.deleteActivityButton);
+        Button saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        Button deleteButton = v.findViewById(R.id.deleteActivityButton);
         friendstext = v.findViewById(R.id.friendsTextView);
 
         if(friendsText != null){
@@ -72,8 +68,6 @@ public class FriendsFragment extends Fragment {
 
             }
         }));
-
-        // TODO Make UI elements show old data if its found
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -126,6 +120,7 @@ public class FriendsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         friendSlider.setProgress(numberoffriends);
 
+        friendstext.setText(String.valueOf(numberoffriends));
         friendsTextInput.setText(notes);
     }
 }

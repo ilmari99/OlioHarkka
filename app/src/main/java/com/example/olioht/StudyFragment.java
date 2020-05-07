@@ -1,26 +1,20 @@
 package com.example.olioht;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
-/*
- * A simple {@link Fragment} subclass.
- */
+//#######################################THIS FRAGMENT CONTAINS THE COMMENTS FOR FRAGMENTS. THEY ARE ALL THE SAME########################
 
 public class StudyFragment extends Fragment {
 
@@ -32,7 +26,6 @@ public class StudyFragment extends Fragment {
     private EditText notesBox;
     private Spinner subjectSpinner;
     private CheckBox friendsCheckBox;
-    private Button saveActivityButton,deleteButton;
     private ActivityClass studying;
     private DayClass day = DayScreen.getDayObject();;
     private Boolean saved = false;
@@ -41,6 +34,7 @@ public class StudyFragment extends Fragment {
         // Required empty public constructor
     }
 
+    //This is called if we already have data about the day
     public StudyFragment(String subj,boolean wFriends,String tempNotes){
         subject = subj;
         withFriends = wFriends;
@@ -54,8 +48,8 @@ public class StudyFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_study, container, false);
         subjectSpinner = v.findViewById(R.id.subjectInput);
         friendsCheckBox = v.findViewById(R.id.withFriendsCheck);
-        saveActivityButton = v.findViewById(R.id.saveActivityButton);
-        deleteButton = v.findViewById(R.id.deleteActivityButton);
+        Button saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        Button deleteButton = v.findViewById(R.id.deleteActivityButton);
         notesBox = v.findViewById(R.id.notesTextInputStudying);
 
         if(subject != null){
@@ -112,6 +106,7 @@ public class StudyFragment extends Fragment {
 
     public Boolean getSaved(){return saved;}
 
+    //This sets the components to the values found in storage.
     public void setStudyData(String subj,boolean wFriends,String notes){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.subjects, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

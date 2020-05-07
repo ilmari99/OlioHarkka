@@ -1,13 +1,9 @@
 package com.example.olioht;
-
-import android.content.Context;
 import android.os.Build;
-
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 public class DayClass{
 
@@ -24,6 +20,7 @@ public class DayClass{
     transient HashMap<String,String> dayAttributes;
 
 
+
     public DayClass(String date, int sleepTime, int socialTime, int dayRating, Boolean experience, Boolean people, Boolean exercise, ArrayList<ActivityClass> activs) {
         this.date = date;
         this.sleepTime = sleepTime;
@@ -37,10 +34,10 @@ public class DayClass{
 
 
     //Created a hashtable for day attributes
-    @RequiresApi(api = Build.VERSION_CODES.N) //TÄMÄ vitun outo tuli kun käytin SimpleDateFormattia
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void createDayHash(){
         dayAttributes = new HashMap<>();
-        dayAttributes.put("Date",MainActivity.getDate());
+        dayAttributes.put("Date", date);
         dayAttributes.put("Rating",String.valueOf(dayRating));
         dayAttributes.put("Sleep time",String.valueOf(sleepTime));
         dayAttributes.put("Social time",String.valueOf(socialTime));
@@ -51,7 +48,6 @@ public class DayClass{
 
     /*This prints the attributes of an activity
     Not necessarily necessary in the final product, but helps in developing.
-
      */
 
     public void printAllDayData() {
@@ -82,9 +78,6 @@ public class DayClass{
         }
     }
 
-    public String getDate() {
-        return date;
-    }
 
     public int getSleepTime() {
         return sleepTime;

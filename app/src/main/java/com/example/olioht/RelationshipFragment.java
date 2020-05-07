@@ -16,10 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-
 public class RelationshipFragment extends Fragment {
 
     // Declaring variables for UI components and values
@@ -27,7 +23,6 @@ public class RelationshipFragment extends Fragment {
     private int rating, time;
     private Spinner relShipDropdown;
     private EditText relShipNotesBox;
-    private Button saveActivityButton,deleteButton;
     private Bundle dataBundle;
     private ActivityClass relationship;
     private DayClass day;
@@ -50,8 +45,8 @@ public class RelationshipFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_relationship, container, false);
         relShipDropdown = v.findViewById(R.id.relShipSpinner);
         relShipNotesBox = v.findViewById(R.id.notesTextInputRelationship);
-        saveActivityButton = v.findViewById(R.id.saveActivityButton);
-        deleteButton = v.findViewById(R.id.deleteActivityButton);
+        Button saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        Button deleteButton = v.findViewById(R.id.deleteActivityButton);
         had_sex = v.findViewById(R.id.hadSexCheck);
 
         if(relShipNotes != null){

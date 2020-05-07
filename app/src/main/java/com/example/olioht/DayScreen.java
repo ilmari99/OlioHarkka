@@ -2,28 +2,17 @@ package com.example.olioht;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+
 
 public class DayScreen extends MainActivity {
 
@@ -41,22 +30,20 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
 
     // Declaring variables for different UI components and values
     private Boolean experience, exercise, people;
-    private Boolean dataExists = false, isActivityData = false;
+    private Boolean oldDataExists = false;
     private String date;
     private SeekBar sleepTimeSlider, socialTimeSlider, rateDaySlider;
     private TextView dayRatingText, socialTimeText, sleepTimeText;
     private CheckBox exerciseBox, newExperienceBox, newPeopleBox;
     private static DayClass day;
     private int sleepTime, socialTime, dayRating, actNumber;
-    private Gson gson = new Gson();
-    ArrayList<ActivityClass> empty;
+    ArrayList<ActivityClass> empty = new ArrayList<>();
 
     @SuppressLint("CutPasteId")
     @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dayscreen);
-        empty = new ArrayList<>();
 
         TextView selectedDate = findViewById(R.id.selectedDate);
         date = MainActivity.getDate();
@@ -75,7 +62,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         // Checkboxes for boolean values
         exerciseBox = findViewById(R.id.exerciseBox);
         newExperienceBox = findViewById(R.id.newexperienceBox);
-        newPeopleBox = findViewById(R.id.newexperienceBox);
+        newPeopleBox = findViewById(R.id.newpeopleBox);
 
         // Listeners for changing texts
         socialTimeSlider.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
@@ -117,14 +104,13 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             }
         }));
 
+        // Getting existing data if possible
         if (day == null) {
             actNumber = 0;
-            try {
-                day = checkExistingData(this, date);
-            } catch (JSONException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            day = dataProcessor.checkExistingData(this, date);
             if (day != null) {
+
+                oldDataExists = true;
                 actNumber = day.doneActivities.size();
 
                 //Setting up alert dialog
@@ -145,8 +131,10 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             }
         }
 
+        System.out.println("OnCreate suoritettu");
     }
 
+    //Go back to calendar and show warning message if needed.
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void goBack (View v) {
         day = ActivityScreen.getDayObject();
@@ -154,13 +142,12 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             finish();
         }
         else if (day.doneActivities == null || day.doneActivities.isEmpty()) {
-
             finish();
         }
-        else if (!day.doneActivities.isEmpty() && dataExists && noNewData(day)) {
+        else if (oldDataExists && noNewData(day)) {
             finish();
         }
-        else {
+        else {  // Showing warning dialogue if about to leave without saving
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Save your data!");
             alertDialogBuilder.setMessage("You haven't saved your activity data. Are you sure you don't want save it? You can do it by pressing \"Save the day\" button below.");
@@ -174,7 +161,6 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             AlertDialog dialog = alertDialogBuilder.create();
             dialog.show();
         }
-        resetDay(null);
     }
 
     /* Creating DayClass object for chosen day with all the info asked in DayScreen, then continuing
@@ -189,9 +175,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         if(day == null) {
             day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
-        this.day = new DayClass(date,sleepTime,socialTime,dayRating,experience,people,exercise,day.doneActivities);
 
-        isActivityData = true;
         Intent activityScreenIntent = new Intent(this, ActivityScreen.class);
         startActivity(activityScreenIntent);
 
@@ -202,60 +186,20 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveToFile(View v) {
 
-       if (day == null) {
-           socialTime = socialTimeSlider.getProgress();
-           sleepTime = sleepTimeSlider.getProgress();
-           dayRating = rateDaySlider.getProgress();
-           experience = getExperienceBool();
-           people = getNewPeopleBool();
-           exercise = getExerciseBool();
-           day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
-       }
-       else {
-           day = ActivityScreen.getDayObject();
-       }
-
-       String dayJSON = gson.toJson(day);    // Data to save
-
-        SharedPreferences sharedPreferences = getSharedPreferences("dayData", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(date, dayJSON);
-        editor.commit();
-        final Toast toast = Toast.makeText(this,"Day saved to a file!", Toast.LENGTH_LONG);
-        toast.show();
-        resetDay(null);
-        finish();
-    }
-
-    // Check if data for selected day exists already
-    public DayClass checkExistingData(Context context, String date) throws JSONException, ClassNotFoundException {
-        SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
-        String dayJSON = sh.getString(date, "");
-        System.out.println("#####" + dayJSON + "#######");
-
-
-        if (dayJSON == "" || dayJSON == "null") {
-            return null;
+        if (day == null) {
+            socialTime = socialTimeSlider.getProgress();
+            sleepTime = sleepTimeSlider.getProgress();
+            dayRating = rateDaySlider.getProgress();
+            experience = getExperienceBool();
+            people = getNewPeopleBool();
+            exercise = getExerciseBool();
+            day = new DayClass(date, sleepTime, socialTime, dayRating, experience, people, exercise, empty);
         }
         else {
-            day = gson.fromJson(dayJSON, DayClass.class);
-            dataExists = true;
-            day.doneActivities.clear();
-            JSONObject jsonObject = new JSONObject(dayJSON);
-            JSONArray acts = jsonObject.getJSONArray("doneActivities");
-
-            System.out.print(acts.length());
-            System.out.println(acts);
-
-            for (int i = 0; i < acts.length(); i++) {
-                JSONObject actObj = acts.getJSONObject(i);
-                String activityName = actObj.getString("activityName");
-                System.out.println(actObj);
-                Class cls = Class.forName("com.example.olioht." + activityName);
-                day.doneActivities.add((ActivityClass) gson.fromJson(acts.getString(i), cls));
-            }
-            return day;
+            day = ActivityScreen.getDayObject();
         }
+        dataProcessor.saveDayToFile(this, date, day);
+        finish();
     }
 
     // Boolean value getters for checkboxes
@@ -266,20 +210,22 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
     protected boolean getNewPeopleBool(){return newPeopleBox.isChecked(); }
 
     // Getter for other classes in need of day-object
-    public static DayClass getDayObject() { return day; }
+    public static DayClass getDayObject() {
+        System.out.println(day);
+        return day; }
 
     // Resetting day-object when old data is not needed
     public static void resetDay(DayClass act){
         day = act;
     }
 
-    public Boolean dataExistsBoolean() {
-        return dataExists;
-    }
-
+    //Check whether there are added activities
     public boolean noNewData(DayClass day) {
         int newActNumber = day.doneActivities.size();
-        return actNumber >= newActNumber;
+        if (actNumber == 0) {
+            return true;
+        }
+        else return actNumber >= newActNumber;
     }
 }
 

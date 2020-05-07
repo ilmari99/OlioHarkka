@@ -16,9 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 
 public class ExerciseFragment extends Fragment {
 
@@ -26,7 +23,6 @@ public class ExerciseFragment extends Fragment {
     private String exercise, notes;
     private EditText notesBox;
     private Spinner exerciseType;
-    private Button saveActivityButton, deleteButton;
     private int rating, time;
     private Bundle dataBundle;
     private ActivityClass exercising;
@@ -49,8 +45,8 @@ public class ExerciseFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_exercise, container, false);
         exerciseType = v.findViewById(R.id.sportsTypeInput);
         notesBox = v.findViewById(R.id.notesTextInputExercise);
-        saveActivityButton = v.findViewById(R.id.saveActivityButton);
-        deleteButton = v.findViewById(R.id.deleteActivityButton);
+        Button saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        Button deleteButton = v.findViewById(R.id.deleteActivityButton);
 
         if(exercise != null){
             setExerciseData(exercise,notes);

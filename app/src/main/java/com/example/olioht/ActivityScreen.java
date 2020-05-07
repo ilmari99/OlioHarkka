@@ -1,21 +1,12 @@
 package com.example.olioht;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -25,8 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.HashMap;
-
-import javax.security.auth.Subject;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class ActivityScreen extends AppCompatActivity {
@@ -47,7 +36,6 @@ public class ActivityScreen extends AppCompatActivity {
     private String choice;
     private TextView infoTextBox, activityRatingText, activityTimeText;
     private SeekBar activityRatingSlider, activityTimeSlider;
-    private int activityRating, activityTime;
     private Bundle dataBundle;
     private String date;
     private static DayClass day;
@@ -56,6 +44,7 @@ public class ActivityScreen extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityscreen);
+
         date = MainActivity.getDate();
 
         // Bundle of data for giving to fragment
@@ -95,9 +84,11 @@ public class ActivityScreen extends AppCompatActivity {
                     case ("Studying"):
                         activityRatingSlider.setProgress(0);
                         activityTimeSlider.setProgress(0);
+                        studyFrag = new StudyFragment();
                         int i = 1;
+                        //Check if there are selected ActivityClass -objects already in the day -object
                         for (Object o : day.doneActivities) {
-                            if (o instanceof Studying) {
+                            if (o instanceof Studying) { //If there are, set the UI components to the corresponding values
                                 activityRatingSlider.setProgress(((Studying) o).activityRating);
                                 activityTimeSlider.setProgress(((Studying) o).activityTime);
                                 String tempSub = ((Studying) o).getSubject();
@@ -106,7 +97,6 @@ public class ActivityScreen extends AppCompatActivity {
                                 studyFrag = new StudyFragment(tempSub, tempWFriends, tempNotes);
                                 break;
                             } else if (i == day.doneActivities.size()) {
-                                studyFrag = new StudyFragment();
                                 break;
                             }
                             i++;
@@ -115,10 +105,10 @@ public class ActivityScreen extends AppCompatActivity {
                         studyFragmentTransaction.replace(R.id.activityFrame, studyFrag);
                         studyFragmentTransaction.commit();
                         break;
-
                     case ("Exercise"):
                         activityRatingSlider.setProgress(0);
                         activityTimeSlider.setProgress(0);
+                        exerciseFrag = new ExerciseFragment();
                         i = 1;
                         for (Object o : day.doneActivities) {
                             if (o instanceof Exercise) {
@@ -129,7 +119,6 @@ public class ActivityScreen extends AppCompatActivity {
                                 exerciseFrag = new ExerciseFragment(tempType,tempNotes);
                                 break;
                             } else if (i == day.doneActivities.size()) {
-                                exerciseFrag = new ExerciseFragment();
                                 break;
                             }
                             i++;
@@ -138,11 +127,10 @@ public class ActivityScreen extends AppCompatActivity {
                         exerciseFragmentTransaction.replace(R.id.activityFrame, exerciseFrag);
                         exerciseFragmentTransaction.commit();
                         break;
-
-
                     case ("Drinking"):
                         activityRatingSlider.setProgress(0);
                         activityTimeSlider.setProgress(0);
+                        drinkingFrag = new DrinkingFragment();
                         i = 1;
                         for (Object o : day.doneActivities) {
                             if (o instanceof Drinking) {
@@ -154,7 +142,6 @@ public class ActivityScreen extends AppCompatActivity {
                                 drinkingFrag = new DrinkingFragment(tempDoses,tempPassed,tempNotes);
                                 break;
                             } else if (i == day.doneActivities.size()) {
-                                drinkingFrag = new DrinkingFragment();
                                 break;
                             }
                             i++;
@@ -163,11 +150,10 @@ public class ActivityScreen extends AppCompatActivity {
                         drinkingFragmentTransaction.replace(R.id.activityFrame, drinkingFrag);
                         drinkingFragmentTransaction.commit();
                         break;
-
-
                     case ("Friends"):
                         activityRatingSlider.setProgress(0);
                         activityTimeSlider.setProgress(0);
+                        friendsFrag = new FriendsFragment();
                         i = 1;
                         for (Object o : day.doneActivities) {
                             if (o instanceof Friends) {
@@ -178,7 +164,6 @@ public class ActivityScreen extends AppCompatActivity {
                                 friendsFrag = new FriendsFragment(numberOfFriends,tempNotes);
                                 break;
                             } else if (i == day.doneActivities.size()) {
-                                friendsFrag = new FriendsFragment();
                                 break;
                             }
                             i++;
@@ -187,12 +172,10 @@ public class ActivityScreen extends AppCompatActivity {
                         friendsFragmentTransaction.replace(R.id.activityFrame, friendsFrag);
                         friendsFragmentTransaction.commit();
                         break;
-
-
-
                     case ("Relationship"):
                         activityRatingSlider.setProgress(0);
                         activityTimeSlider.setProgress(0);
+                        relationFrag = new RelationshipFragment();
                         i = 1;
                         for (Object o : day.doneActivities) {
                             if (o instanceof Relationship) {
@@ -205,7 +188,6 @@ public class ActivityScreen extends AppCompatActivity {
                                 relationFrag = new RelationshipFragment(tempAct, seks, tempNotes);
                                 break;
                             } else if (i == day.doneActivities.size()) {
-                                relationFrag = new RelationshipFragment();
                                 break;
                             }
                             i++;
@@ -214,7 +196,6 @@ public class ActivityScreen extends AppCompatActivity {
                         relationFragmentTransaction.replace(R.id.activityFrame, relationFrag);
                         relationFragmentTransaction.commit();
                         break;
-
                     default:
                         break;
                 }
@@ -262,14 +243,15 @@ public class ActivityScreen extends AppCompatActivity {
 
     }
 
+    //Automatically gets user input data from the DayScreen.
     public void goBack(View v) {
         finish();
     }
 
     //Sends Activity rating and time to the chosen fragment
     public Bundle sendDataToFragment() {
-        activityRating = activityRatingSlider.getProgress();
-        activityTime = activityTimeSlider.getProgress();
+        int activityRating = activityRatingSlider.getProgress();
+        int activityTime = activityTimeSlider.getProgress();
         dataBundle.putInt("rating", activityRating);
         dataBundle.putInt("time", activityTime);
         return dataBundle;

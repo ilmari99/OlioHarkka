@@ -1,6 +1,6 @@
 package com.example.olioht;
 
-import android.content.Context;
+
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,16 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 
 public class DrinkingFragment extends Fragment {
 
@@ -35,13 +31,9 @@ public class DrinkingFragment extends Fragment {
     private SeekBar doseSlider;
     private TextView dosesText;
     private CheckBox passedOutCheckBox;
-    private Button saveActivityButton,deleteButton;
     private Bundle dataBundle;
     private ActivityClass drinking;
     private DayClass day;
-
-
-
 
 
     public DrinkingFragment() {
@@ -58,10 +50,11 @@ public class DrinkingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_drinking, container, false);
+
         doseSlider = v.findViewById(R.id.doseSeekBar);
-        saveActivityButton = v.findViewById(R.id.saveActivityButton);
+        Button saveActivityButton = v.findViewById(R.id.saveActivityButton);
         dosesText = v.findViewById(R.id.dosesTextChanging);
-        deleteButton = v.findViewById(R.id.deleteActivityButton);
+        Button deleteButton = v.findViewById(R.id.deleteActivityButton);
         passedOutCheckBox = v.findViewById(R.id.passedOutCheck);
         notesEditText = v.findViewById(R.id.notesTextInputDrinking);
 
@@ -86,8 +79,6 @@ public class DrinkingFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
-
-        // TODO Make UI elements show old data if its found
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -139,6 +130,7 @@ public class DrinkingFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doseSlider.setProgress(doses);
 
+        dosesText.setText(String.valueOf(doses));
         passedOutCheckBox.setSelected(passedout);
         notesEditText.setText(notes);
     }

@@ -2,9 +2,6 @@ package com.example.olioht;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Build;
@@ -23,14 +20,12 @@ public class MainActivity extends AppCompatActivity {
     After choosing the date and pressing "Confirm" button the user will be redirected to the DayScreen -interface.
      */
 
-    // TODO Pitäsikö tehdä vielä oma classi datan käsittelyä varten? Olsii enemmän oliomaista suunnittelua.
-
     // Declaring variables for different UI components and values
     private static String date, today;
     private String dayString, monthString;
     private CalendarView calendarview;
-    private Fragment analyzeAllFrag, analyzeChosenFrag;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+    public DataProcessor dataProcessor = DataProcessor.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(analyzeAllIntent);
     }
 
+    //Show stored values for the day
     public void analyseChosen(View c) {
         DayScreen.resetDay(null);
         Intent analyzeChosenIntent = new Intent(this, AnalyzeChosenScreen.class);

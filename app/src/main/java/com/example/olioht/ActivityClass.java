@@ -2,7 +2,7 @@ package com.example.olioht;
 
 
 import java.util.HashMap;
-import java.util.Hashtable;
+
 
 public class ActivityClass {
 
@@ -47,6 +47,18 @@ public class ActivityClass {
         public HashMap getActivityHashMap(){
             return activityHashMap;
         }
+
+        public String getNotes() {
+            return notes;
+        }
+
+        public int getDoses() {
+            return doses;
+        }
+
+        public Boolean getPassedOut() {
+            return passedOut;
+        }
     }
 
     class Studying extends ActivityClass {
@@ -75,6 +87,18 @@ public class ActivityClass {
 
         public HashMap getActivityHashMap(){
             return activityHashMap;
+        }
+
+        public String getNotes() {
+            return notes;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public Boolean getWithFriends() {
+            return withFriends;
         }
     }
 
