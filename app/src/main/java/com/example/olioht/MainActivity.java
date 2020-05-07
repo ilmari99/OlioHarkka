@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        date = null;
 
         // Setting up calendar
         calendarview = findViewById(R.id.calendarView);
