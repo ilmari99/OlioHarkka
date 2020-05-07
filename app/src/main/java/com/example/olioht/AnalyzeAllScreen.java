@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -69,33 +70,7 @@ public class AnalyzeAllScreen extends AppCompatActivity {
         daysLogged.setText(daysTotal + " days");
     }
 
-
-    /*public DayClass checkExistingData(Context context, String date) throws JSONException, ClassNotFoundException {
-        SharedPreferences sh = context.getSharedPreferences("dayData", Context.MODE_PRIVATE);
-        String dayJSON = sh.getString(date, "");
-        System.out.println("#####" + dayJSON + "#######");
-
-        day = gson.fromJson(dayJSON, DayClass.class);
-
-        if (dayJSON == "") {
-            return day;
-        }
-
-        dataExists = true;
-        day.doneActivities.clear();
-        JSONObject jsonObject = new JSONObject(dayJSON);
-        JSONArray acts = jsonObject.getJSONArray("doneActivities");
-
-        System.out.print(acts.length());
-        System.out.println(acts);
-
-        for (int i = 0; i < acts.length(); i++) {
-            JSONObject actObj = acts.getJSONObject(i);
-            String activityName = actObj.getString("activityName");
-            System.out.println(actObj);
-            Class cls = Class.forName("com.example.olioht." + activityName);
-            day.doneActivities.add((ActivityClass) gson.fromJson(acts.getString(i), cls));
-        }
-        return day;
-    }*/
+    public void goBack(View v) {
+        finish();
+    }
 }

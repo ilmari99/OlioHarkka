@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -79,13 +80,18 @@ public class AnalyzeChosenScreen extends AppCompatActivity {
         }
 
         // TODO Nämä tekstit toimimaan!!! Sit on hyvin
+
         dateText.setText(date);
-        dayRating.setText(day.getDayRating());
-        sleep.setText(day.getSleepTime());
-        socialTime.setText(day.getSocialTime());
+        dayRating.setText(Integer.toString(day.getDayRating()));
+        sleep.setText(Integer.toString(day.getSleepTime()));
+        socialTime.setText(Integer.toString(day.getSocialTime()));
         exp.setText(day.getNewExperience() ? "Yes" : "No");
         ppl.setText(day.getNewPeople() ? "Yes" : "No");
         exerc.setText(day.getExercise() ? "Yes" : "No");
         activityText.setText("Done activities: " + Arrays.toString(activities.toArray()));
+    }
+
+    public void goBack(View v) {
+        finish();
     }
 }

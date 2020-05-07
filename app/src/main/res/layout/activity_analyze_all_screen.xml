@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".AnalyzeAllScreen">
 
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="goBack"
+        android:text="@string/backButton"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercisedNumber" />
+
     <TextView
         android:id="@+id/exercisedNumber"
         android:layout_width="277dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/exercisedText"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,24 +32,36 @@
         app:layout_constraintTop_toBottomOf="@+id/newPplNumber" />
 
     <TextView
+        android:id="@+id/exercised"
+        android:layout_width="108dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exercisedNumber"
+        app:layout_constraintTop_toBottomOf="@+id/ppl" />
+
+    <TextView
         android:id="@+id/avgRating"
         android:layout_width="108dp"
         android:layout_height="44dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="12dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/avgDayRating"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/totalLogged" />
 
     <TextView
         android:id="@+id/firstLogged"
         android:layout_width="160dp"
         android:layout_height="42dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@+id/firstUsageDay"
@@ -47,7 +72,7 @@
         android:layout_width="122dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +84,7 @@
         android:id="@+id/newExpNumber"
         android:layout_width="262dp"
         android:layout_height="82dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/newExpText"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +96,7 @@
         android:id="@+id/avgDayRating"
         android:layout_width="249dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
         android:text="@string/avgDayRating"
         android:textSize="28sp"
@@ -79,19 +104,6 @@
         app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loggedDays" />
-
-    <TextView
-        android:id="@+id/exercised"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toEndOf="@+id/exercisedNumber"
-        app:layout_constraintTop_toBottomOf="@+id/ppl" />
 
     <TextView
         android:id="@+id/exp"
@@ -110,11 +122,11 @@
         android:layout_width="108dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="52dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/newPplNumber"
         app:layout_constraintTop_toBottomOf="@+id/exp" />
 
@@ -122,11 +134,11 @@
         android:id="@+id/avgSocial"
         android:layout_width="108dp"
         android:layout_height="44dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toEndOf="@+id/avgSleepTime"
         app:layout_constraintTop_toBottomOf="@+id/avgRating" />
 
@@ -134,11 +146,11 @@
         android:id="@+id/newPplNumber"
         android:layout_width="265dp"
         android:layout_height="75dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/newPplText"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newExpNumber" />
 
@@ -146,7 +158,7 @@
         android:id="@+id/avgSleepTime"
         android:layout_width="253dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/avgSleepTme"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +170,7 @@
         android:id="@+id/avgSocialTime"
         android:layout_width="255dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:text="@string/avgSocialTime"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +182,7 @@
         android:id="@+id/avgSleep"
         android:layout_width="108dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="12dp"
         android:gravity="center"
         android:textSize="28sp"
@@ -184,7 +196,7 @@
         android:layout_width="232dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
         android:text="@string/totalLoggedDays"
         android:textSize="28sp"
@@ -196,10 +208,11 @@
         android:layout_width="208dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/firstDayOfUsage"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
