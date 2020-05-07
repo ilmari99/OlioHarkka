@@ -2,7 +2,7 @@ package com.example.olioht;
 
 
 import java.util.HashMap;
-import java.util.Hashtable;
+
 
 public class ActivityClass {
 
