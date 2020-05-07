@@ -1,39 +1,32 @@
 package com.example.olioht;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class AnalyzeChosenScreen extends AppCompatActivity {
+public class AnalyzeChosenScreen extends MainActivity {
 
+    // Declaring variables for different UI components and values
     private String date = MainActivity.getDate();
-    private DayClass day;
     private TextView dateText, dayRating, sleep, socialTime, activityText, exp, ppl, exerc;
-    private ArrayList<String> activities = new ArrayList<>();
+    private String activities;
+    private String[] analyzedData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analyze_chosen_screen);
 
+        // Finding text boxes
         dateText = findViewById(R.id.dateText);
         dayRating = findViewById(R.id.dayRating);
         sleep = findViewById(R.id.sleep);
@@ -43,18 +36,13 @@ public class AnalyzeChosenScreen extends AppCompatActivity {
         ppl = findViewById(R.id.ppl);
         exerc = findViewById(R.id.exerc);
 
-        Gson gson = new Gson();
-
-        SharedPreferences sh = this.getSharedPreferences("dayData", Context.MODE_PRIVATE);
-        String dayJSON = sh.getString(date, "");
-
-        System.out.println("#####" + dayJSON + "#######");
-
-        if (dayJSON == "") {
+        // Getting data for selected day. If no data is available,
+        analyzedData = dataProcessor.analyzeChosen(this, date);
+        if (analyzedData == null || analyzedData.length == 0) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("No data available!");
             alertDialogBuilder.setMessage("No data available for selected day. Please select other day.");
-            alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
@@ -63,35 +51,23 @@ public class AnalyzeChosenScreen extends AppCompatActivity {
             AlertDialog dialog = alertDialogBuilder.create();
             dialog.show();
         }
-
-        day = gson.fromJson(dayJSON, DayClass.class);
-        day.doneActivities.clear();
-        JSONObject jsonObject;
-        try {
-            jsonObject = new JSONObject(dayJSON);
-            JSONArray acts = jsonObject.getJSONArray("doneActivities");
-            for (int i = 0; i < acts.length(); i++) {
-                JSONObject actObj = acts.getJSONObject(i);
-                String activityName = actObj.getString("activityName");
-                activities.add(activityName);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        else {
+            dateText.setText(analyzedData[0]);
+            dayRating.setText(analyzedData[1]);
+            sleep.setText(analyzedData[2]);
+            socialTime.setText(analyzedData[3]);
+            exp.setText(analyzedData[4]);
+            ppl.setText(analyzedData[5]);
+            exerc.setText(analyzedData[6]);
+            activityText.setText("Done activities: " + analyzedData[7]);
         }
-
-        // TODO Nämä tekstit toimimaan!!! Sit on hyvin
-
-        dateText.setText(date);
-        dayRating.setText(Integer.toString(day.getDayRating()));
-        sleep.setText(Integer.toString(day.getSleepTime()));
-        socialTime.setText(Integer.toString(day.getSocialTime()));
-        exp.setText(day.getNewExperience() ? "Yes" : "No");
-        ppl.setText(day.getNewPeople() ? "Yes" : "No");
-        exerc.setText(day.getExercise() ? "Yes" : "No");
-        activityText.setText("Done activities: " + Arrays.toString(activities.toArray()));
     }
 
     public void goBack(View v) {
+        finish();
+    }
+
+    private void endActivity() {
         finish();
     }
 }

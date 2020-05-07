@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class ActivityScreen  extends DayScreen {
+public class ActivityScreen extends DayScreen {
 
     /*
     In this interface user can add different activities to selected date. Activities are saved as objects into an array.

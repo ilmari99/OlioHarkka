@@ -18,6 +18,8 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass.
  */
 
+// TODO Make UI elements show old data if its found
+
 public class RelationshipFragment extends Fragment {
 
     // Declaring variables for UI components and values
@@ -42,8 +44,6 @@ public class RelationshipFragment extends Fragment {
         relShipNotesBox = v.findViewById(R.id.notesTextInputRelationship);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         deleteButton = v.findViewById(R.id.deleteActivityButton);
-
-        // TODO Make UI elements show old data if its found
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

@@ -105,6 +105,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
             }
         }));
 
+        // Getting existing data if possible
         if (day == null) {
             actNumber = 0;
             day = dataProcessor.checkExistingData(this, date);
@@ -146,7 +147,7 @@ After choosing an activity or Add, the user can press "Go to activity" which wil
         else if (!day.doneActivities.isEmpty() && oldDataExists == true && noNewData(day)) {
             finish();
         }
-        else {
+        else {  // Showing warning dialogue if about to leave without saving
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Save your data!");
             alertDialogBuilder.setMessage("You haven't saved your activity data. Are you sure you don't want save it? You can do it by pressing \"Save the day\" button below.");

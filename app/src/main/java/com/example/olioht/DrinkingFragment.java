@@ -1,6 +1,6 @@
 package com.example.olioht;
 
-import android.content.Context;
+
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +22,8 @@ import com.google.android.material.snackbar.Snackbar;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+// TODO Make UI elements show old data if its found
 
 public class DrinkingFragment extends Fragment {
 
@@ -40,9 +41,6 @@ public class DrinkingFragment extends Fragment {
     private DayClass day;
 
 
-
-
-
     public DrinkingFragment() {
         // Required empty public constructor
     }
@@ -51,6 +49,7 @@ public class DrinkingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_drinking, container, false);
+
         doseSlider = v.findViewById(R.id.doseSeekBar);
         saveActivityButton = v.findViewById(R.id.saveActivityButton);
         dosesText = v.findViewById(R.id.dosesTextChanging);
@@ -75,8 +74,6 @@ public class DrinkingFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         }));
-
-        // TODO Make UI elements show old data if its found
 
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

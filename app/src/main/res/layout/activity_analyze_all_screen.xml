@@ -33,21 +33,21 @@
 
     <TextView
         android:id="@+id/exercised"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="122dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="29dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/exercisedNumber"
         app:layout_constraintTop_toBottomOf="@+id/ppl" />
 
     <TextView
         android:id="@+id/avgRating"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:gravity="center"
         android:textSize="28sp"
@@ -69,14 +69,15 @@
 
     <TextView
         android:id="@+id/totalLogged"
-        android:layout_width="122dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="158dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/loggedDays"
         app:layout_constraintTop_toBottomOf="@+id/firstLogged" />
 
@@ -107,38 +108,36 @@
 
     <TextView
         android:id="@+id/exp"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="136dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/newExpNumber"
         app:layout_constraintTop_toBottomOf="@+id/avgSleep" />
 
     <TextView
         android:id="@+id/ppl"
-        android:layout_width="108dp"
+        android:layout_width="140dp"
         android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/newPplNumber"
         app:layout_constraintTop_toBottomOf="@+id/exp" />
 
     <TextView
         android:id="@+id/avgSocial"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="135dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toEndOf="@+id/avgSleepTime"
         app:layout_constraintTop_toBottomOf="@+id/avgRating" />
 
@@ -180,10 +179,10 @@
 
     <TextView
         android:id="@+id/avgSleep"
-        android:layout_width="108dp"
+        android:layout_width="135dp"
         android:layout_height="44dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"

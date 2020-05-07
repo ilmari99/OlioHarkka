@@ -1,6 +1,6 @@
 package com.example.olioht;
 
-import android.content.Intent;
+
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,13 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.SeekBar;
+
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/*
+/**
  * A simple {@link Fragment} subclass.
  */
+
+// TODO Make UI elements show old data if its found
 
 public class StudyFragment extends Fragment {
 
@@ -34,7 +36,6 @@ public class StudyFragment extends Fragment {
     private Button saveActivityButton,deleteButton;
     private ActivityClass studying;
     private DayClass day = DayScreen.getDayObject();;
-    private Boolean saved = false;
 
     public StudyFragment() {
         // Required empty public constructor
@@ -51,13 +52,10 @@ public class StudyFragment extends Fragment {
         deleteButton = v.findViewById(R.id.deleteActivityButton);
         notesBox = v.findViewById(R.id.notesTextInputStudying);
 
-        // TODO Make UI elements show old data if its found
-
         saveActivityButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                saved = true;
                 dataBundle = ((ActivityScreen) getActivity()).sendDataToFragment();
                 subject = getSubject();
                 withFriends = getFriendsBool();
@@ -94,13 +92,8 @@ public class StudyFragment extends Fragment {
         return subjectSpinner.getSelectedItem().toString();
     }
 
-    public DayClass getDayObject() {
-        return day;
-    }
-
     public String getFriendsNotes(){return String.valueOf(notesBox.getText());}
 
-    public Boolean getSaved(){return saved;}
 }
 
 
